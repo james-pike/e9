@@ -73,7 +73,7 @@ export default component$(() => {
       items: [
         {
           title: "Instagram",
-          href: "https://www.instagram.com/earthenvesselsgathering/",
+                  href: "https://www.instagram.com/earthenvesselspottery_/",
           icon: LuInstagram,
         },
         {

@@ -217,7 +217,7 @@ export default component$(() => {
                   <LuFacebook class="h-7 w-7" />
                 </a>
                 <a
-                  href="https://www.instagram.com/earthenvesselsgathering/"
+                  href="https://www.instagram.com/earthenvesselspottery_/"
                   target="_blank"
                   rel="noopener noreferrer"
                   class="text-gray-600 dark:text-gray-200 hover:text-secondary-800 dark:hover:text-primary-400 transition-colors"
