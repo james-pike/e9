@@ -122,7 +122,6 @@ const CustomAccordion = component$(({ items, show }: { items: any[]; show: Signa
 
 export default component$(() => {
   const show = useSignal(false);
-  const banners = useBannerLoader(); // Ensure the banner loader is invoked
 
   const menuItems = [
       {
