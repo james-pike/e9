@@ -129,7 +129,7 @@ export default component$<CarouselProps>(({ workshops = [] }) => {
                           Book
                         </span>
                       </div>
-                      <p class="text-sm md:text-base text-primary-700 dark:text-primary-300 line-clamp-3 flex-1">
+                      <p class="text-sm md:text-base text-primary-700 dark:text-primary-300 line-clamp-4 flex-1">
                         {workshop.description}
                       </p>
                     </div>
@@ -168,7 +168,7 @@ export default component$<CarouselProps>(({ workshops = [] }) => {
             >
               <div class="h-48 w-full overflow-hidden">
                 <img
-                  src="/images/corporate.png"
+                  src="/images/corporate.webp"
                   alt="Corporate Events"
                   class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                 />

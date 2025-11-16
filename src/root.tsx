@@ -43,6 +43,10 @@ export default component$(() => {
         {/* Image preloads with correct types */}
         <link rel="preload" href="/images/logo22.svg" as="image" type="image/svg+xml" />
         <link rel="preload" href="/images/hero.webp" as="image" type="image/webp" />
+                <link rel="preload" href="/images/corporate.webp" as="image" type="image/webp" />
+                                <link rel="preload" href="/images/private.jpeg" as="image" type="image/webp" />
+
+
         <link rel="preload" href="/images/logo2-cropped.svg" as="image" type="image/svg+xml" />
       </head>
       <body class=" antialiased ">

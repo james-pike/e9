@@ -53,25 +53,18 @@ export default component$(() => {
         </div>
 
         {/* Desktop Right Column: Image */}
-        <div class="hidden md:block relative order-3 md:order-2 py-12 pr-16">
-          <img
+        <div class="hidden md:block relative order-3 md:order-2 py-12 pr-12">
+          <Image
             src="/images/hero.webp"
             alt="earthen vessels Pottery"
-            class="w-full  object-contain rounded-2xl shadow-xl border-2 border-primary-300"
+            widths={[400, 800, 1200, 1600]}
+            layout="constrained"
+            class="w-full object-contain rounded-2xl shadow-xl border-2 border-primary-300"
+            placeholder="blur"
+            blurDataURL="/images/hero.webp?blur=10&w=20" // Optional low-res blur for instant preview
           />
         </div>
       </div>
     </section>
   );
 });
-
-
-
-
-
-
-
-
-
-
-
