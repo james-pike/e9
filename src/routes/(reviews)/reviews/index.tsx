@@ -39,6 +39,45 @@ export default component$(() => {
   const carouselRef = useSignal<HTMLElement | undefined>();
   const location = useLocation();
   const isHomePage = location.url.pathname === "/";
+  const scrollingReviews = useSignal<Set<number>>(new Set());
+
+  const handleReviewClick = $((reviewId: number, event: any) => {
+    const element = event.currentTarget as HTMLElement;
+    const scrollHeight = element.scrollHeight;
+    const clientHeight = element.clientHeight;
+    
+    if (scrollHeight > clientHeight) {
+      const newScrolling = new Set(scrollingReviews.value);
+      if (!newScrolling.has(reviewId)) {
+        newScrolling.add(reviewId);
+        scrollingReviews.value = newScrolling;
+        
+        // Auto-scroll to bottom
+        const scrollDistance = scrollHeight - clientHeight;
+        const scrollDuration = Math.min(scrollDistance * 15, 8000); // 15ms per pixel, max 8s
+        
+        let startTime: number | null = null;
+        const scroll = (timestamp: number) => {
+          if (!startTime) startTime = timestamp;
+          const progress = (timestamp - startTime) / scrollDuration;
+          
+          if (progress < 1) {
+            element.scrollTop = scrollDistance * progress;
+            requestAnimationFrame(scroll);
+          } else {
+            element.scrollTop = scrollDistance;
+            // Remove from scrolling set after animation
+            setTimeout(() => {
+              const updated = new Set(scrollingReviews.value);
+              updated.delete(reviewId);
+              scrollingReviews.value = updated;
+            }, 500);
+          }
+        };
+        requestAnimationFrame(scroll);
+      }
+    }
+  });
 
   // Load reviews data
   useVisibleTask$(() => {
@@ -69,8 +108,41 @@ export default component$(() => {
       display: none;
     }
     .scrollbar-invisible {
-      -ms-overflow-style: none; /* IE and Edge */
-      scrollbar-width: none; /* Firefox */
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    .review-content {
+      max-height: 350px;
+      overflow: hidden;
+      line-height: 1.5;
+      position: relative;
+      transition: max-height 0.3s ease;
+      cursor: pointer;
+    }
+    .review-content.scrolling {
+      overflow-y: auto;
+      animation: autoScroll 8s linear;
+      cursor: default;
+    }
+    @keyframes autoScroll {
+      0% {
+        scroll-behavior: smooth;
+      }
+      100% {
+        scroll-behavior: smooth;
+      }
+    }
+    .review-content::-webkit-scrollbar {
+      display: none;
+    }
+    .review-content {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    .review-card-container {
+      min-height: 420px;
+      display: flex;
+      flex-direction: column;
     }
   `);
 
@@ -80,7 +152,7 @@ export default component$(() => {
 
   const nextSlide = $(() => {
     if (carouselRef.value) {
-      const cardWidth = 320; // w-80 = 320px
+      const cardWidth = 320;
       const newScrollLeft = carouselRef.value.scrollLeft + cardWidth;
       carouselRef.value.scrollTo({ left: newScrollLeft, behavior: "smooth" });
       currentIndex.value = Math.min(currentIndex.value + 1, numSlides - 1);
@@ -89,7 +161,7 @@ export default component$(() => {
 
   const prevSlide = $(() => {
     if (carouselRef.value) {
-      const cardWidth = 320; // w-80 = 320px
+      const cardWidth = 320;
       const newScrollLeft = carouselRef.value.scrollLeft - cardWidth;
       carouselRef.value.scrollTo({ left: newScrollLeft, behavior: "smooth" });
       currentIndex.value = Math.max(currentIndex.value - 1, 0);
@@ -145,7 +217,37 @@ export default component$(() => {
     ));
   };
 
-  // Loading state
+  // Mock media articles data - replace with your actual data source
+  const mediaArticles = [
+    {
+      id: 1,
+      title: "Why earthen vessels is a story worth telling",
+      publication: "Kitchissippi Times",
+      date: "2024-10-15",
+      excerpt: "Why earthen vessels is a story worth telling",
+      url: "https://kitchissippi.com/why-earthen-vessels-is-a-story-worth-telling/",
+      image: "/images/kitchissippi.webp"
+    },
+    // {
+    //   id: 2,
+    //   title: "Success Stories: Transforming Careers",
+    //   publication: "Business Weekly",
+    //   date: "2024-09-28",
+    //   excerpt: "Alumni share their journey and the impact of the program on their professional lives...",
+    //   url: "#",
+    //   image: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=250&fit=crop"
+    // },
+    // {
+    //   id: 3,
+    //   title: "Industry Leader Spotlight",
+    //   publication: "Professional Development Journal",
+    //   date: "2024-09-10",
+    //   excerpt: "Recognition for excellence in training and development programs...",
+    //   url: "#",
+    //   image: "https://images.unsplash.com/photo-1557804506-669a67965ba0?w=400&h=250&fit=crop"
+    // }
+  ];
+
   if (safeReviews.length === 0) {
     return (
       <section class="relative overflow-hidden py-12 md:py-16">
@@ -157,139 +259,194 @@ export default component$(() => {
               </span>
             </h2>
           </div>
-          {/* <div class="text-center py-12 text-primary-600 text-lg">
-            Loading reviews...
-          </div> */}
         </div>
       </section>
     );
   }
 
   return (
-    <section class="relative overflow-hidden py-12 md:py-16">
-      <div class="relative max-w-7xl mx-auto px-1 sm:px-6">
-        <div class="text-center mb-12">
-          <h2 class="!text-5xl md:text-6xl px-4 font-bold mb-6">
-            <span class="bg-gradient-to-r xdxd from-primary-600 via-tertiary-600 to-primary-600 bg-clip-text text-transparent">
-              Participant Reviews
-            </span>
-          </h2>
-        </div>
+    <>
+      <section class="relative overflow-hidden py-12 md:py-16">
+        <div class="relative max-w-7xl mx-auto px-1 sm:px-6">
+          <div class="text-center mb-12">
+            <h2 class="!text-5xl md:text-6xl px-4 font-bold mb-6">
+              <span class="bg-gradient-to-r xdxd from-primary-600 via-tertiary-600 to-primary-600 bg-clip-text text-transparent">
+                Participant Reviews
+              </span>
+            </h2>
+          </div>
 
-        <div class="relative max-w-6xl mx-auto">
-          {safeReviews.length === 0 ? (
-            <div class="text-center py-12 text-primary-600 text-lg">
-              No reviews available yet.
-            </div>
-          ) : isHomePage ? (
-            <>
-              <div
-                class="overflow-x-auto snap-x snap-mandatory md:px-6 scrollbar-invisible"
-                ref={carouselRef}
-              >
-                <div class="flex gap-6">
-                  {safeReviews.map((review: Review) => (
-                    <div key={review.id} class="flex-shrink-0 w-80 snap-center">
-                      <div class="bg-gradient-to-br from-white/70 via-primary-50/70 to-secondary-50/70 dark:from-gray-800/90 dark:via-primary-900/30 dark:to-secondary-900/30 backdrop-blur-sm rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden hover:border-secondary-200 border-2 border-primary-100 dark:border-secondary-700">
-                        <div class="flex justify-center mb-4 pt-6">
-                          <div class="flex space-x-1">{renderStars(review.rating)}</div>
-                        </div>
-                        <blockquote class="text-md text-secondary-900 dark:text-secondary-100 mb-6 px-6">
-                          "{review.review}"
-                        </blockquote>
-                        <div class="flex items-center space-x-3 mb-4 px-6">
-                          <div class="text-left">
-                            <h4 class=" font-bold text-secondary-900 dark:text-secondary-100">
-                              {review.name}
-                            </h4>
-                            {review.role && (
-                              <p class="text-primary-600 dark:text-primary-400 text-xs">{review.role}</p>
-                            )}
-                          </div>
-                        </div>
-                        <p class="text-primary-500 dark:text-primary-400 text-xs mt-3 pb-6 px-6">
-                          {formatRelativeDate(review.date)}
-                        </p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
+          <div class="relative max-w-6xl mx-auto">
+            {safeReviews.length === 0 ? (
+              <div class="text-center py-12 text-primary-600 text-lg">
+                No reviews available yet.
               </div>
-              {safeReviews.length > 1 && (
-                <div class="flex justify-center mt-4 space-x-2">
-                  <button
-                    onClick$={prevSlide}
-                    class="p-2 rounded-full bg-primary-600 text-white hover:bg-primary-700"
-                    aria-label="Previous slide"
-                  >
-                    <svg
-                      class="w-5 h-5"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M15 19l-7-7 7-7"
-                      ></path>
-                    </svg>
-                  </button>
-                  <button
-                    onClick$={nextSlide}
-                    class="p-2 rounded-full bg-primary-600 text-white hover:bg-primary-700"
-                    aria-label="Next slide"
-                  >
-                    <svg
-                      class="w-5 h-5"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M9 5l7 7-7 7"
-                      ></path>
-                    </svg>
-                  </button>
-                </div>
-              )}
-            </>
-          ) : (
-            <div class="multi-column-grid">
-              {safeReviews.map((review: Review) => (
-                <div key={review.id} class="review-card">
-                  <div class="bg-gradient-to-br from-white/50 via-primary-50/30 to-secondary-50/30 dark:from-gray-800/90 dark:via-primary-900/30 dark:to-secondary-900/30 backdrop-blur-sm rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden hover:border-secondary-200 border-2 border-primary-100 dark:border-secondary-700">
-                    <div class="flex justify-center mb-4 pt-6">
-                      <div class="flex space-x-1">{renderStars(review.rating)}</div>
-                    </div>
-                    <blockquote class="!text-lg  text-secondary-900 dark:text-secondary-100 mb-6 px-6">
-                      "{review.review}"
-                    </blockquote>
-                    <div class="flex items-center space-x-3 mb-4 px-6">
-                      <div class="text-left">
-                        <h4 class=" font-bold text-secondary-900 dark:text-secondary-100">
-                          {review.name}
-                        </h4>
-                        {/* Role commented out as in original - uncomment if needed */}
-                        {/* {review.role && (
-                          <p class="text-primary-600 dark:text-primary-400 text-xs">{review.role}</p>
-                        )} */}
+            ) : isHomePage ? (
+              <>
+                <div
+                  class="overflow-x-auto snap-x snap-mandatory md:px-6 scrollbar-invisible"
+                  ref={carouselRef}
+                >
+                  <div class="flex gap-6">
+                    {safeReviews.map((review: Review) => (
+                      <div key={review.id} class="flex-shrink-0 w-80 snap-center">
+                        <div class="review-card-container bg-gradient-to-br from-white/70 via-primary-50/70 to-secondary-50/70 dark:from-gray-800/90 dark:via-primary-900/30 dark:to-secondary-900/30 backdrop-blur-sm rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden hover:border-secondary-200 border-2 border-primary-100 dark:border-secondary-700">
+                          <div class="flex justify-center mb-4 pt-6">
+                            <div class="flex space-x-1">{renderStars(review.rating)}</div>
+                          </div>
+                          <blockquote 
+                            class={`review-content text-md text-secondary-900 dark:text-secondary-100 mb-4 px-6 ${scrollingReviews.value.has(review.id) ? 'scrolling' : ''}`}
+                            onClick$={(event) => handleReviewClick(review.id, event)}
+                          >
+                            "{review.review}"
+                          </blockquote>
+                          <div class="flex items-center space-x-3 mb-2 px-6">
+                            <div class="text-left">
+                              <h4 class=" font-bold text-secondary-900 dark:text-secondary-100">
+                                {review.name}
+                              </h4>
+                              {review.role && (
+                                <p class="text-primary-600 dark:text-primary-400 text-xs">{review.role}</p>
+                              )}
+                            </div>
+                          </div>
+                          <p class="text-primary-500 dark:text-primary-400 text-xs pb-6 px-6">
+                            {formatRelativeDate(review.date)}
+                          </p>
+                        </div>
                       </div>
-                    </div>
-                    <p class="text-primary-500 dark:text-primary-400 text-xs mt-3 pb-6 px-6">
-                      {formatRelativeDate(review.date)}
-                    </p>
+                    ))}
                   </div>
                 </div>
-              ))}
-            </div>
-          )}
+                {safeReviews.length > 1 && (
+                  <div class="flex justify-center mt-4 space-x-2">
+                    <button
+                      onClick$={prevSlide}
+                      class="p-2 rounded-full bg-primary-600 text-white hover:bg-primary-700"
+                      aria-label="Previous slide"
+                    >
+                      <svg
+                        class="w-5 h-5"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M15 19l-7-7 7-7"
+                        ></path>
+                      </svg>
+                    </button>
+                    <button
+                      onClick$={nextSlide}
+                      class="p-2 rounded-full bg-primary-600 text-white hover:bg-primary-700"
+                      aria-label="Next slide"
+                    >
+                      <svg
+                        class="w-5 h-5"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M9 5l7 7-7 7"
+                        ></path>
+                      </svg>
+                    </button>
+                  </div>
+                )}
+              </>
+            ) : (
+                              <div class="multi-column-grid">
+                {safeReviews.map((review: Review) => (
+                  <div key={review.id} class="review-card">
+                    <div class="review-card-container bg-gradient-to-br from-white/50 via-primary-50/30 to-secondary-50/30 dark:from-gray-800/90 dark:via-primary-900/30 dark:to-secondary-900/30 backdrop-blur-sm rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden hover:border-secondary-200 border-2 border-primary-100 dark:border-secondary-700">
+                      <div class="flex justify-center mb-4 pt-6">
+                        <div class="flex space-x-1">{renderStars(review.rating)}</div>
+                      </div>
+                      <blockquote 
+                        class={`review-content !text-lg text-secondary-900 dark:text-secondary-100 mb-4 px-6 ${scrollingReviews.value.has(review.id) ? 'scrolling' : ''}`}
+                        onClick$={(event) => handleReviewClick(review.id, event)}
+                      >
+                        "{review.review}"
+                      </blockquote>
+                      <div class="flex items-center space-x-3 mb-2 px-6">
+                        <div class="text-left">
+                          <h4 class=" font-bold text-secondary-900 dark:text-secondary-100">
+                            {review.name}
+                          </h4>
+                        </div>
+                      </div>
+                      <p class="text-primary-500 dark:text-primary-400 text-xs pb-6 px-6">
+                        {formatRelativeDate(review.date)}
+                      </p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+
+      {/* Media Articles Section */}
+      <section id="news" class="relative overflow-hidden py-12 md:py-16 bg-gradient-to-br from-primary-50/30 to-secondary-50/30 dark:from-gray-900/50 dark:to-gray-800/50">
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6">
+          <div class="text-center mb-12">
+            <h2 class="!text-5xl md:text-6xl font-bold mb-6">
+              <span class="bg-gradient-to-r from-primary-600 via-tertiary-600 to-primary-600 bg-clip-text text-transparent">
+                In The News
+              </span>
+            </h2>
+           
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            {mediaArticles.map((article) => (
+              <a
+                key={article.id}
+                href={article.url}
+                class="group bg-white dark:bg-gray-800 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border-2 border-primary-100 dark:border-secondary-700 hover:border-primary-300 dark:hover:border-primary-600"
+              >
+                <div class="aspect-video overflow-hidden">
+                  <img
+                    src={article.image}
+                    alt={article.title}
+                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                  />
+                </div>
+                <div class="p-6">
+                  <div class="flex items-center justify-between mb-3">
+                    <span class="text-sm font-semibold text-primary-600 dark:text-primary-400">
+                      {article.publication}
+                    </span>
+                    <span class="text-xs text-gray-500 dark:text-gray-400">
+                      {formatRelativeDate(article.date)}
+                    </span>
+                  </div>
+                  <h3 class="text-xl font-bold text-secondary-900 dark:text-secondary-100 mb-3 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
+                    {article.title}
+                  </h3>
+                  <p class="text-secondary-600 dark:text-secondary-400 text-sm line-clamp-3">
+                    {article.excerpt}
+                  </p>
+                  {/* <div class="mt-4 flex items-center text-primary-600 dark:text-primary-400 font-semibold text-sm">
+                    Read More
+                    <svg class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                    </svg>
+                  </div> */}
+                </div>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+    </>
   );
 });

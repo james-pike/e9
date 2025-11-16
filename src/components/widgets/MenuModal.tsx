@@ -125,7 +125,16 @@ export default component$(() => {
   const banners = useBannerLoader(); // Ensure the banner loader is invoked
 
   const menuItems = [
-    { title: "This Is Us", href: "/team/", hasSubmenu: false },
+      {
+      title: "This Is Us",
+      href: "/team/",
+      hasSubmenu: true,
+      subitems: [
+        { title: "Facilitators", href: "/team" },
+            { title: "Our Logo", href: "/team/#logo", badge: null },
+
+      ],
+    },
     {
       title: "About",
       href: "/about/",
@@ -140,16 +149,32 @@ export default component$(() => {
       ],
     },
     {
-      title: "Classes",
-      href: "/classes/",
+      title: "Our Offerings",
+      href: "/offerings/",
       hasSubmenu: true,
       subitems: [
-        { title: "Our Offerings", href: "/classes" },
-        { title: "Gift Cards", href: "https://bookeo.com/earthenvessels/buyvoucher" },
+        { title: "Classes & Workshops", href: "/offerings" },
+                { title: "Corporate Events", href: "/offerings/#events" },
+                                { title: "Private Events", href: "/offerings/#events" },
+
+                        { title: "Gift Cards", href: "https://bookeo.com/earthenvessels/buyvoucher" },
+
+
       ],
     },
-    { title: "Reviews", href: "/reviews/", badge: null },
-    { title: "Connections", href: "/connections/", badge: null },
+      {
+      title: "Reviews",
+      href: "/reviews/",
+      hasSubmenu: true,
+      subitems: [
+        { title: "Reviews", href: "/reviews" },
+                { title: "In The News", href: "/reviews/#news" },
+                                
+
+      ],
+    },
+        { title: "Connections", href: "/connections/", badge: null },
+
         { title: "Contact", href: "/contact/", badge: null },
 
   ];
@@ -228,23 +253,7 @@ export default component$(() => {
             </div>
             {/* Banner with Added Border */}
             {/* Dynamic Open House Banner */}
-        {banners.value && (
-          <div class="mt-4 pt-5 px-5 border-t border-primary-200">
-            <div class="w-full px-5 py-4 text-sm font-medium text-gray-800 dark:text-gray-200 bg-gradient-to-r from-white/40 via-tertiary-100/40 to-white/40 dark:from-gray-900/40 dark:via-tertiary-900/40 dark:to-gray-900/40 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 flex flex-col gap-2">
-              <div class="text-center">
-                <h3 class="text-base font-bold text-gray-800 dark:text-gray-200">
-                  {banners.value.title || "Open House"}
-                </h3>
-                <p class="text-sm font-medium text-gray-600 dark:text-gray-300">
-                  {banners.value.subtitle}
-                </p>
-                <p class="text-sm mt-1">{banners.value.message}</p>
-              </div>
-              {/* Uncomment if you add a "More Info" link */}
-              {/* <a href="mailto:hello@earthenvessels.ca" ... >More Info</a> */}
-            </div>
-          </div>
-        )}
+
       </div>
 
           <Modal.Close

@@ -3,7 +3,7 @@ import { Image } from "@unpic/qwik";
 
 export default component$(() => {
   return (
-    <section class="relative overflow-hidden">
+    <section class="relative overflow-hidden shadow-sm pb-8">
       {/* Background with pottery texture */}
       <div class="absolute inset-0 opacity-20" aria-hidden="true"></div>
 
@@ -22,7 +22,7 @@ export default component$(() => {
         />
 
         {/* Left Column (Desktop) / Text Content (Mobile) */}
-        <div class="relative z-10 order-1 flex items-center justify-center px-4 pt-4 pb-10 md:px-8 md:py-12 md:order-1">
+        <div class="relative z-10 order-1 flex items-center justify-center px-4 pt-4 pb-10 md:pl-16 md:py-12 md:order-1">
           <div class="text-center md:text-left px-2">
             {/* Headline (Desktop only) */}
             <h1 class=" md:block text-5.5xl md:text-7xl font-bold tracking-tight md:mb-4 mb-8 md:-mt-0 -mt-10 ">
@@ -53,11 +53,11 @@ export default component$(() => {
         </div>
 
         {/* Desktop Right Column: Image */}
-        <div class="hidden md:block relative order-3 md:order-2 py-12 pr-8">
+        <div class="hidden md:block relative order-3 md:order-2 py-12 pr-16">
           <img
             src="/images/hero.webp"
             alt="earthen vessels Pottery"
-            class="w-full max-h-96 object-contain rounded-2xl shadow-xl border-2 border-primary-300"
+            class="w-full  object-contain rounded-2xl shadow-xl border-2 border-primary-300"
           />
         </div>
       </div>

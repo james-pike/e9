@@ -3,39 +3,35 @@ import { useLocation } from "@builder.io/qwik-city";
 import IconChevronDown from "../icons/IconChevronDown";
 import MenuModal from "./MenuModal";
 import { useBannerLoader } from "~/routes/layout";
+import { 
+  LuUsers, 
+  LuImage, 
+  LuHome, 
+  LuEye, 
+  LuNewspaper, 
+  LuHelpCircle,
+  LuCalendarDays,
+  LuBuilding2,
+  LuPartyPopper,
+  LuGift
+} from "@qwikest/icons/lucide";
 
 export default component$(() => {
   const store = useStore({
     isScrolling: false,
     isMobile: false,
-    showBanner: true, // Track banner visibility
+    showBanner: true,
   });
 
   const isInitialized = useSignal(false);
   const location = useLocation();
   const isHomeRoute = location.url.pathname === "/";
 
-  const bannerMessages = useBannerLoader(); // Ensure the banner loader is invoked
+  const bannerMessages = useBannerLoader();
   const hasBannerMessages = useSignal<boolean>(false);
-  
-
-  // Hardcoded banner data for testing - array for multiple messages
-  // const bannerMessages = [
-  //   {
-  //     title: "🎉 Important Announcement",
-  //     subtitle: "New Feature Launch",
-  //     message: "Check out our latest updates and improvements!"
-  //   },
-  //   {
-  //     title: "✨ Special Offer",
-  //     subtitle: "Limited Time",
-  //     message: "Join us for a pottery workshop this weekend!"
-  //   }
-  // ];
 
   const currentMessageIndex = useSignal(0);
 
-  
   useVisibleTask$(() => {
     const mediaQuery = window.matchMedia("(max-width: 767px)");
     store.isMobile = mediaQuery.matches;
@@ -45,11 +41,9 @@ export default component$(() => {
     };
     mediaQuery.addEventListener("change", handler);
 
-    // Check if banner messages exist and are valid
     hasBannerMessages.value = !!(bannerMessages.value && 
       (Array.isArray(bannerMessages.value) ? bannerMessages.value.length > 0 : !!bannerMessages.value));
 
-    // Cycle through banner messages every 4 seconds (only if there are multiple messages)
     let interval: NodeJS.Timeout | undefined;
     if (bannerMessages.value && Array.isArray(bannerMessages.value) && bannerMessages.value.length > 1) {
       interval = setInterval(() => {
@@ -65,28 +59,47 @@ export default component$(() => {
 
   const menu = {
     items: [
-      { text: "This Is Us", href: "/team" },
+      { 
+        text: "This Is Us", 
+        href: "/team",
+        items: [
+          { text: "Facilitators", href: "/team", icon: LuUsers },
+          { text: "Our Logo", href: "/team#logo", icon: LuImage },
+        ]
+      },
       {
         text: "About",
         href: "/about",
         items: [
-          { text: "Our Space", href: "/about" },
-          { text: "What To Expect", href: "/about#what-to-expect" },
-          { text: "Newsletter", href: "/newsletter" },
-          { text: "Gallery", href: "/gallery" },
-          { text: "FAQ", href: "/faq" },
+          { text: "Our Space", href: "/about", icon: LuHome },
+          { text: "What To Expect", href: "/about#what-to-expect", icon: LuEye },
+          { text: "Newsletter", href: "/newsletter", icon: LuNewspaper },
+          { text: "Gallery", href: "/gallery", icon: LuImage },
+          { text: "FAQ", href: "/faq", icon: LuHelpCircle },
         ],
       },
       {
-        text: "Classes",
+        text: "Our Offerings",
         href: "/classes",
         items: [
-          { text: "Our Offerings", href: "/classes" },
-          { text: "Gift Cards", href: "https://bookeo.com/earthenvessels/buyvoucher" },
+          { text: "Classes & Workshops", href: "/classes", icon: LuCalendarDays },
+          { text: "Corporate Events", href: "/classes#events", icon: LuBuilding2 },
+          { text: "Private Events", href: "/classes#events", icon: LuPartyPopper },
+          { text: "Gift Cards", href: "https://bookeo.com/earthenvessels/buyvoucher", icon: LuGift },
         ],
       },
-      { text: "Reviews", href: "/reviews" },
-      { text: "Connections", href: "/connections" },
+         {
+        text: "Reviews",
+        href: "/reviews",
+        items: [
+          { text: "Reviews", href: "/reviews", icon: LuCalendarDays },
+          { text: "In The News", href: "/reviews#news", icon: LuNewspaper },
+       
+        ],
+      },
+            { text: "Connections", href: "/connections" },
+
+    
       { text: "Contact", href: "/contact" },
     ],
   };
@@ -98,12 +111,12 @@ export default component$(() => {
         <div
           class={`
             bg-primary-200/70 max-w-7xl md:mx-auto px-0.5
-             shadow-md
+             shadow-sm
             transition-all duration-100 ease-in-out
             ${store.showBanner ? 'h-auto py-0.5 opacity-100' : 'h-0 py-0 opacity-0 overflow-hidden'}
           `}
         >
-          <div class="mx-auto px-0 md:px-6 max-w-7xl">
+          <div class="mx-auto px-0 md:px-6 max-w-7xl shadow-sm">
             <div class="flex items-center justify-between gap-2">
               <div class="flex-1 min-w-0 overflow-hidden">
                 {/* Mobile: Scrolling text */}
@@ -168,7 +181,7 @@ export default component$(() => {
       <header
         id="header"
         class={`
-          sticky top-0 z-40 flex-none mx-auto max-w-7xl border-primary-200 
+          sticky top-0 z-40 flex-none mx-auto max-w-7xl border-primary-200 shadow-sm
           transition-all duration-300 ease-in-out
           ${store.isScrolling
             ? "bg-primary-100/95 md:bg-primary-100/80 dark:bg-primary-900/80 md:backdrop-blur-sm"
@@ -239,7 +252,7 @@ export default component$(() => {
           >
             {menu && menu.items ? (
               <ul class="flex flex-col md:flex-row text-primary-600 md:self-center w-full md:w-auto text-xl md:text-xl tracking-[0.01rem] font-medium">
-                {menu.items.map(({ text, href, items }, key) => {
+                {menu.items.map(({ text, href, items,  }, key) => {
                   const isActive = location.url.pathname === href;
                   return (
                     <li key={key} class={items?.length ? "dropdown" : ""}>
@@ -296,7 +309,7 @@ export default component$(() => {
                               py-2
                             `}
                           >
-                            {items.map(({ text: text2, href: href2 }, key2) => {
+                            {items.map(({ text: text2, href: href2, icon: ItemIcon }, key2) => {
                               const isDropdownActive = location.url.pathname === href2;
                               const isFirst = key2 === 0;
                               const isLast = key2 === items.length - 1;
@@ -307,7 +320,7 @@ export default component$(() => {
                                       hover:bg-muted
                                       hover:text-secondary-800
                                       py-2 px-5
-                                      block
+                                      flex items-center gap-2
                                       whitespace-no-wrap
                                       transition-all duration-200
                                       relative
@@ -342,6 +355,7 @@ export default component$(() => {
                                       }
                                     }}
                                   >
+                                    {ItemIcon && <ItemIcon class="w-4 h-4 flex-shrink-0" />}
                                     {text2}
                                   </a>
                                 </li>
@@ -387,7 +401,7 @@ export default component$(() => {
             <div class="items-center flex justify-between w-full md:w-auto">
               <a
                 href="https://bookeo.com/earthenvessels"
-                class="w-full sm:w-auto bg-gradient-to-r from-primary-400 via-primary-500 to-primary-400 group relative inline-flex items-center justify-center px-3 pl-5 py-2.5 text-xl font-semibold text-white rounded-xl shadow-lg hover:shadow-[0_0_12px_rgba(255,255,255,0.4)] transition-all duration-300 overflow-hidden focus:outline-none focus:ring-2 focus:ring-secondary-600 before:content-[''] before:absolute before:bottom-0 before:left-0 before:h-0.5 before:w-full before:bg-white before:opacity-0 before:transform before:-translate-x-full group-hover:before:opacity-100 group-hover:before:translate-x-0 before:transition-all before:duration-500 hover:scale-102 hover:bg-gradient-to-r hover:from-primary-400 hover:via-primary-400 hover:to-primary-300"
+                class="w-full sm:w-auto mr-2 bg-gradient-to-r from-primary-400 via-primary-500 to-primary-400 group relative inline-flex items-center justify-center px-3 pl-5 py-2.5 text-xl font-semibold text-white rounded-xl shadow-lg hover:shadow-[0_0_12px_rgba(255,255,255,0.4)] transition-all duration-300 overflow-hidden focus:outline-none focus:ring-2 focus:ring-secondary-600 before:content-[''] before:absolute before:bottom-0 before:left-0 before:h-0.5 before:w-full before:bg-white before:opacity-0 before:transform before:-translate-x-full group-hover:before:opacity-100 group-hover:before:translate-x-0 before:transition-all before:duration-500 hover:scale-102 hover:bg-gradient-to-r hover:from-primary-400 hover:via-primary-400 hover:to-primary-300"
                 role="button"
                 aria-label="Book a workshop"
               >

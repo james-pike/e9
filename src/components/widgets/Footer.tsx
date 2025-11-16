@@ -86,7 +86,7 @@ export default component$(() => {
   ];
 
   return (
-    <footer class="relative border-t pl-1 border-half border-primary-200 dark:border-secondary-700 overflow-hidden">
+    <footer class="relative border-t pl-1 mt-2 md:pb-2 border-half border-primary-200 dark:border-secondary-700 overflow-hidden">
       {/* Background with pottery textures */}
       <div class="absolute inset-0 bg-pottery-texture opacity-10" aria-hidden="true"></div>
       {/* Gradient background */}
@@ -96,7 +96,7 @@ export default component$(() => {
         <div class="grid grid-cols-12 gap-4 gap-y-4 sm:gap-4 py-8 md:pt-12 md:pb-2">
           {/* First Column: Logo, Description, Newsletter */}
           <div class="col-span-12 lg:col-span-5 md:pr-8">
-            <div class="mb-4">
+            <div class="mb-4 mt-2 md:mt-0">
               <Link class="inline-block xdxd font-bold !text-3xl" href={"/"}>
                 <span class="bg-gradient-to-r from-primary-600 via-tertiary-600 to-primary-600 bg-clip-text text-transparent">
                   earthen vessels
@@ -128,7 +128,7 @@ export default component$(() => {
                       <input
                         type="email"
                         name="EMAIL"
-                        class="required email flex-1 px-4 py-2 !text-sm border border-primary-200 dark:border-secondary-800 rounded-l-xl bg-white/50 dark:bg-secondary-800/80 backdrop-blur-sm text-primary-900 dark:text-primary-100 placeholder-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500"
+                        class="required email flex-1 px-4  !text-sm border border-primary-200 dark:border-secondary-800 rounded-l-xl bg-white/50 dark:bg-secondary-800/80 backdrop-blur-sm text-primary-900 dark:text-primary-100 placeholder-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500"
                         id="mce-EMAIL"
                         placeholder="Enter your email"
                         aria-label="Enter email for newsletter"
@@ -204,18 +204,24 @@ export default component$(() => {
           ))}
         </div>
         <div class="flex flex-col md:flex-row md:items-center md:justify-between -mt-6 md:pt-8 pb-3 md:pb-4 border-t border-half border-secondary-200/50 dark:border-secondary-700/50">
-          <div class="inline-flex pb-2 items-center text-sm text-primary-700 mt-2 dark:text-primary-300 order-2 md:order-1">
-            <img
-              src="/images/logo22.svg"
-              alt="earthen vessels Logo"
-              class="w-20 h-20 md:w-120 md:h-30 mr-4 rounded-sm"
-              width={80}
-              height={80}
-            />
-            <span>
-              © 2025 earthen vessels · All rights reserved.
-            </span>
+          <div class="flex flex-col md:flex-row md:items-center text-sm text-primary-700 dark:text-primary-300 order-2 md:order-1 w-full md:w-auto">
+            <div class="flex items-center pb-2 md:pb-2 mt-2">
+              <img
+                src="/images/logo22.svg"
+                alt="earthen vessels Logo"
+                class="w-16 h-16 md:w-120 md:h-30 mr-4 rounded-sm"
+                width={80}
+                height={80}
+              />
+              <div class="flex flex-col md:flex-row md:items-center md:gap-0">
+               <a href="mailto:james@webdev.ca"><span class="block underline md:hidden mb-1">Web Design by James</span></a> 
+                <span class="block">© 2025 earthen vessels · All rights reserved.</span>
+              </div>
+            </div>
           </div>
+          <span class="hidden underline md:block text-sm text-primary-700 dark:text-primary-300 order-1 md:order-2">
+          <a href="mailto:james@webdev.ca"> Web Design by James</a> 
+          </span>
         </div>
       </div>
     </footer>

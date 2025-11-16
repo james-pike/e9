@@ -45,13 +45,7 @@ const TEAM_MEMBERS: TeamMember[] = [
       "Diane Black is a Kingston artist who began her training in the field of book illustration and spent many years in the commercial art world. She now has a full time studio practice with a focus on figurative clay sculpture, painting, drawing and teaching. Diane’s work is exhibited in Galleries and shows throughout Ontario and can be found in private collections both in Canada and internationally. She teaches workshops in drawing, painting and sculpture and has coordinated art workshops which attract participants internationally. In addition to her regular studio practice, Diane runs an art program for adults with disabilities.",
     image: "/images/diane.webp",
   },
-  {
-    name: "Jojo",
-    role: "Facilitator",
-    description:
-      "Jojo offers clay and creative making as invitations to slow down, listen inward and discover the self - while also fostering meaningful connections with others. Jojo has been expressing emotion through art since childhood, when creativity became her first language. They are a mixed media artist with a Fine Arts Diploma with many years of experience in facilitation. Jojo brings their clay experience and gently weaves mindfulness, peer support and creative exploration into earthen vessels. Whether guiding playful children's programs or reflective adult sessions, Jojo invites connection with our inner voice through making - offering art as a path toward self discovery and community.",
-    image: "/images/jojo.webp",
-  },
+
   {
     name: "Kandis",
     role: "Facilitator",
@@ -85,12 +79,11 @@ export default component$(() => {
             </span>
           </h1>
           <p class="text-xl text-primary-700 dark:text-primary-300 max-w-3xl mx-auto">
-            Our dedicated professionals bring expertise and passion to every experience.
-          </p>
+With skilled hands and creative  presence, our facilitators bring expertise and passion, and infuse meaning to every experience.           </p>
         </div>
 
         {/* 🧱 MASONRY COLUMN LAYOUT */}
-        <div class="columns-1 sm:columns-2 lg:columns-4 gap-3 space-y-4">
+        <div class="columns-1 sm:columns-2 lg:columns-3 gap-4 space-y-4">
           {TEAM_MEMBERS.map((member) => (
             <div
               key={member.name}
@@ -162,6 +155,8 @@ export default component$(() => {
             </div>
           ))}
         </div>
+
+        <div id="logo"></div>Our facilitators and friends gathered to share their creative vision for earthen vessels.  Diane Black worked with these visions to create our rich logo. Together from our shared imaginations Diane designed a pinch pot holding water to remind us of the life that flows through clay, hands, and community.
       </div>
     </section>
   );
