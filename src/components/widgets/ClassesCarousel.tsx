@@ -83,11 +83,13 @@ export default component$<CarouselProps>(({ workshops = [] }) => {
           <Carousel.Root
             class="carousel-root p-1"
             slidesPerView={slidesPerViewSig.value}
-            gap={20}
+            gap={25}
             autoPlayIntervalMs={3500}
             bind:autoplay={isPlaying}
             draggable={true}
             align="start"
+                        sensitivity={{ mouse: 2.5, touch: 2.0 }} // Increased sensitivity for more responsive drag/scroll (defaults: mouse=1.5, touch=1.25)
+
             onMouseEnter$={handleMouseEnter$}
             onMouseLeave$={handleMouseLeave$}
           >

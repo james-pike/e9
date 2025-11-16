@@ -70,7 +70,7 @@ export default component$(() => {
     }
     .review-card {
       flex-shrink: 0;
-      width: 450px;
+      width: 400px;
     }
     .scrollbar-invisible::-webkit-scrollbar {
       display: none;
@@ -238,7 +238,7 @@ export default component$(() => {
                         <div key={review.id} class="flex-shrink-0 w-full sm:w-80 snap-center">
                           <div 
                             class={[
-                              "review-card-container bg-gradient-to-br from-white/70 via-primary-50/70 to-secondary-50/70 dark:from-gray-800/90 dark:via-primary-900/30 dark:to-secondary-900/30 backdrop-blur-sm rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden border-2 border-primary-100 dark:border-secondary-700",
+                              "review-card-container bg-gradient-to-br from-white/70 via-primary-50/70 to-secondary-50/70 dark:from-gray-800/90 dark:via-primary-900/30 dark:to-secondary-900/30 backdrop-blur-sm rounded-2xl shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden border-2 border-primary-100 dark:border-secondary-700",
                               expandedReview.value === review.id ? "expanded border-secondary-200" : "hover:border-secondary-200"
                             ]}
                             onClick$={() => {
@@ -287,7 +287,7 @@ export default component$(() => {
                     <div key={idx} class="review-card">
                       <div 
                         class={[
-                          "review-card-container bg-gradient-to-br from-white/50 via-primary-50/30 to-secondary-50/30 dark:from-gray-800/90 dark:via-primary-900/30 dark:to-secondary-900/30 backdrop-blur-sm rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden border-2 border-primary-100 dark:border-secondary-700",
+                          "review-card-container bg-gradient-to-br from-white/50 via-primary-50/30 to-secondary-50/30 dark:from-gray-800/90 dark:via-primary-900/30 dark:to-secondary-900/30 backdrop-blur-sm rounded-2xl shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden border-2 border-primary-100 dark:border-secondary-700",
                           expandedReview.value === review.id ? "expanded border-secondary-200" : "hover:border-secondary-200"
                         ]}
                         onClick$={() => {
@@ -355,7 +355,7 @@ export default component$(() => {
               <a
                 key={article.id}
                 href={article.url}
-                class="group bg-white/30 dark:bg-gray-800 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border-2 border-primary-100 dark:border-secondary-700 hover:border-primary-300 dark:hover:border-primary-600"
+                class="group bg-white/30 dark:bg-gray-800 rounded-2xl shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden border-2 border-primary-100 dark:border-secondary-700 hover:border-primary-300 dark:hover:border-primary-600"
               >
                 <div class="aspect-video overflow-hidden">
                   <img
