@@ -5,7 +5,6 @@ import { useLocation } from "@builder.io/qwik-city";
 import { Modal } from "../ui/Modal";
 import IconHamburger from "../icons/IconHamburger";
 import { buttonVariants } from "../ui/Button";
-import { useBannerLoader } from "~/routes/layout";
 
 const CustomAccordion = component$(({ items, show }: { items: any[]; show: Signal<boolean> }) => {
   const openIndex = useSignal<number | null>(null);

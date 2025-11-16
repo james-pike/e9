@@ -156,7 +156,7 @@ With skilled hands and creative  presence, our facilitators bring expertise and 
           ))}
         </div>
 
-        <div id="logo"></div>Our facilitators and friends gathered to share their creative vision for earthen vessels.  Diane Black worked with these visions to create our rich logo. Together from our shared imaginations Diane designed a pinch pot holding water to remind us of the life that flows through clay, hands, and community.
+        <div id="logo">Our facilitators and friends gathered to share their creative vision for earthen vessels.  Diane Black worked with these visions to create our rich logo. Together from our shared imaginations Diane designed a pinch pot holding water to remind us of the life that flows through clay, hands, and community. </div>
       </div>
     </section>
   );
