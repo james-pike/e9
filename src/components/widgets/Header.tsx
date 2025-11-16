@@ -80,11 +80,11 @@ export default component$(() => {
       },
       {
         text: "Our Offerings",
-        href: "/classes",
+        href: "/offerings",
         items: [
-          { text: "Classes & Workshops", href: "/classes", icon: LuCalendarDays },
-          { text: "Corporate Events", href: "/classes#events", icon: LuBuilding2 },
-          { text: "Private Events", href: "/classes#events", icon: LuPartyPopper },
+          { text: "Classes & Workshops", href: "/offerings", icon: LuCalendarDays },
+          { text: "Corporate Events", href: "/offerings#events", icon: LuBuilding2 },
+          { text: "Private Events", href: "/offerings#events", icon: LuPartyPopper },
           { text: "Gift Cards", href: "https://bookeo.com/earthenvessels/buyvoucher", icon: LuGift },
         ],
       },
@@ -282,7 +282,7 @@ export default component$(() => {
                             `}
                             onClick$={(event) => {
                               // Only "Our Offerings" has the special home-page scroll behaviour
-                              if (href === "/classes" && location.url.pathname === "/") {
+                              if (href === "/offerings" && location.url.pathname === "/") {
                                 event.preventDefault();
                                 const servicesSection = document.getElementById("services");
                                 if (servicesSection) {
