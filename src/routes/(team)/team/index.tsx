@@ -157,7 +157,7 @@ With skilled hands and creative  presence, our facilitators bring expertise and 
         </div>
 
 {/* Logo section */}
-<div class="mt-12 flex  p-5 py-6 flex-col bg-white/30 rounded-xl md:flex-row items-center md:items-start gap-6">
+<div class="mt-5 md:mt-2 flex  p-5 py-6 flex-col bg-white/30 rounded-xl md:flex-row items-center md:items-start gap-6">
   {/* Left: Logo image (1/4 width on md+) */}
   <div class="w-full md:w-1/4 flex justify-center md:justify-start">
     <img

@@ -93,12 +93,12 @@ export default component$<CarouselProps>(({ workshops = [] }) => {
           >
             <Carousel.Scroller class="carousel-scroller">
               {workshops.map((workshop) => (
-                <Carousel.Slide key={workshop.id} class="">
+                <Carousel.Slide key={workshop.id} class="h-auto">
                   <a
                     href={workshop.url || "https://bookeo.com/earthenvessels"}
                     target="_blank"
                     rel="noopener noreferrer"
-                    class="group backdrop-blur-sm border-2 rounded-2xl transition-all duration-300 ease-in-out hover:shadow-xl hover:border-secondary-200 hover:bg-white/45 cursor-pointer bg-white/35 border-primary-200 dark:border-secondary-700 overflow-hidden block h-full"
+                    class="group backdrop-blur-sm border-2 rounded-2xl transition-all duration-300 ease-in-out hover:shadow-xl hover:border-secondary-200 hover:bg-white/45 cursor-pointer bg-white/35 border-primary-200 dark:border-secondary-700 overflow-hidden block"
                   >
                     <img
                       src={workshop.image}
@@ -106,15 +106,17 @@ export default component$<CarouselProps>(({ workshops = [] }) => {
                       alt={workshop.name}
                     />
                     <div class="p-4">
-                      <h3 class="text-lg font-bold text-secondary-900 dark:text-secondary-100 mb-2 line-clamp-2">
-                        {workshop.name}
-                      </h3>
-                      <p class="text-sm md:text-md text-primary-700 dark:text-primary-300 line-clamp-4 mb-4">
+                      <div class="flex items-center justify-between mb-2">
+                        <h3 class="text-lg font-bold text-secondary-900 dark:text-secondary-100 line-clamp-2 flex-1 pr-2">
+                          {workshop.name}
+                        </h3>
+                        <span class="flex-none w-1/6 min-w-[80px] px-3 py-1 text-sm bg-gradient-to-r from-primary-500 to-primary-600 text-white font-medium rounded-lg hover:from-primary-700 hover:to-primary-800 transition-all duration-200 whitespace-nowrap">
+                          Book
+                        </span>
+                      </div>
+                      <p class="text-sm md:text-md text-primary-700 dark:text-primary-300 line-clamp-4">
                         {workshop.description}
                       </p>
-                      <span class="inline-block w-full px-4 py-2 bg-gradient-to-r from-primary-500 to-primary-600 text-white font-medium rounded-xl hover:from-primary-700 hover:to-primary-800 transition-all duration-200">
-                        Book 
-                      </span>
                     </div>
                   </a>
                 </Carousel.Slide>
@@ -124,7 +126,7 @@ export default component$<CarouselProps>(({ workshops = [] }) => {
         )}
 
         {/* Events Section with ID */}
-        <div id="#events" class="text-center mt-16 mb-2">
+        <div id="events" class="text-center mt-16 mb-2">
           <p class="text-2xl text-primary-700 dark:text-primary-300 max-w-3xl mx-auto mb-10">
             Book Private & Corporate Events
           </p>
@@ -136,7 +138,7 @@ export default component$<CarouselProps>(({ workshops = [] }) => {
               href="mailto:hello@earthenvessels.ca"
               target="_blank"
               rel="noopener noreferrer"
-              class="group backdrop-blur-sm border-2 rounded-2xl transition-all duration-300 ease-in-out hover:shadow-xl hover:border-secondary-200 hover:bg-white/45 cursor-pointer bg-white/35 border-primary-200 dark:border-secondary-700 overflow-hidden"
+              class="group backdrop-blur-sm border-2 rounded-2xl transition-all duration-300 ease-in-out hover:shadow-xl hover:border-secondary-200 hover:bg-white/45 cursor-pointer bg-white/35 border-primary-200 dark:border-secondary-700 overflow-hidden self-start"
             >
               <div class="h-64 w-full overflow-hidden">
                 <img
@@ -146,15 +148,17 @@ export default component$<CarouselProps>(({ workshops = [] }) => {
                 />
               </div>
               <div class="p-6">
-                <h3 class="text-xl font-bold text-secondary-900 dark:text-secondary-100 mb-3">
-                  Corporate Events
-                </h3>
+                <div class="flex items-center justify-between mb-3">
+                  <h3 class="text-xl font-bold text-secondary-900 dark:text-secondary-100 flex-1 pr-2">
+                    Corporate Events
+                  </h3>
+                  <span class="flex-none w-1/6 min-w-[80px] px-3 py-1 text-sm bg-gradient-to-r from-primary-500 to-primary-600 text-white font-medium rounded-lg hover:from-primary-700 hover:to-primary-800 transition-all duration-200 whitespace-nowrap">
+                    Book
+                  </span>
+                </div>
                 <p class="text-primary-700 dark:text-primary-300 mb-4">
                   We offer creative, hands-on clay experiences designed to foster connection, reflection, and collaboration. Perfect for corporate retreats or staff appreciation gatherings. Contact us to discuss what might work for your group.
                 </p>
-                {/* <span class="inline-block px-4 py-2 bg-gradient-to-r from-primary-500 to-primary-600 text-white font-medium rounded-xl hover:from-primary-700 hover:to-primary-800 transition-all duration-200">
-                  Book Corporate Event
-                </span> */}
               </div>
             </a>
 
@@ -163,7 +167,7 @@ export default component$<CarouselProps>(({ workshops = [] }) => {
               href="mailto:hello@earthenvessels.ca"
               target="_blank"
               rel="noopener noreferrer"
-              class="group backdrop-blur-sm border-2 rounded-2xl transition-all duration-300 ease-in-out hover:shadow-xl hover:border-secondary-200 hover:bg-white/45 cursor-pointer bg-white/35 border-primary-200 dark:border-secondary-700 overflow-hidden"
+              class="group backdrop-blur-sm border-2 rounded-2xl transition-all duration-300 ease-in-out hover:shadow-xl hover:border-secondary-200 hover:bg-white/45 cursor-pointer bg-white/35 border-primary-200 dark:border-secondary-700 overflow-hidden self-start"
             >
               <div class="h-64 w-full overflow-hidden">
                 <img
@@ -172,16 +176,18 @@ export default component$<CarouselProps>(({ workshops = [] }) => {
                   class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                 />
               </div>
-              <div class="p-6">
-                <h3 class="text-xl font-bold text-secondary-900 dark:text-secondary-100 mb-3">
-                  Private Events
-                </h3>
+              <div class="p-4">
+                <div class="flex items-center justify-between mb-3">
+                  <h3 class="text-xl font-bold text-secondary-900 dark:text-secondary-100 flex-1 pr-2">
+                    Private Events
+                  </h3>
+                  <span class="flex-none w-1/6 min-w-[80px] px-3 py-1 text-sm bg-gradient-to-r from-primary-500 to-primary-600 text-white font-medium rounded-lg hover:from-primary-700 hover:to-primary-800 transition-all duration-200 whitespace-nowrap">
+                    Book
+                  </span>
+                </div>
                 <p class="text-primary-700 dark:text-primary-300 mb-4">
                   Celebrate life's special moments. Gather around our large creative table to celebrate one another, play, and make something beautiful together. Think about hosting your next birthday, book club, family gathering or evening out with friends at earthen vessels. Contact us to discuss the opportunities!
                 </p>
-                {/* <span class="inline-block px-4 py-2 bg-gradient-to-r from-primary-500 to-primary-600 text-white font-medium rounded-xl hover:from-primary-700 hover:to-primary-800 transition-all duration-200">
-                  Book Private Event
-                </span> */}
               </div>
             </a>
           </div>

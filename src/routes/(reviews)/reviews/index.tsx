@@ -86,14 +86,12 @@ export default component$(() => {
       transition: max-height 500ms cubic-bezier(0.4, 0, 0.2, 1);
     }
     .review-content.collapsed {
-      max-height: 12em;
+      max-height: 18em;
     }
     .review-content.expanded {
       max-height: 2000px;
     }
     .review-card-container {
-      min-height: 550px;
-      height: 100%;
       display: flex;
       flex-direction: column;
       transition: transform 300ms ease-in-out, box-shadow 300ms ease-in-out, border-color 300ms ease-in-out;
@@ -180,7 +178,7 @@ export default component$(() => {
   if (safeReviews.length === 0) {
     return (
       <section class="relative overflow-hidden py-12 md:py-16">
-        <div class="relative max-w-7xl mx-auto px-1 sm:px-6">
+        <div class="relative max-w-7xl mx-0 px-1 sm:px-0">
           <div class="text-center mb-12">
             <h2 class="!text-5xl md:text-6xl px-4 font-bold mb-6">
               <span class="bg-gradient-to-r xdxd from-primary-600 via-tertiary-600 to-primary-600 bg-clip-text text-transparent">
@@ -205,7 +203,7 @@ export default component$(() => {
             </h2>
           </div>
 
-          <div class="relative max-w-6xl mx-auto">
+          <div class="relative max-w-7xl mx-auto">
             {safeReviews.length === 0 ? (
               <div class="text-center py-12 text-primary-600 text-lg">
                 No reviews available yet.
@@ -252,23 +250,9 @@ export default component$(() => {
                               )}
                             </div>
                           </div>
-                          <p class="text-primary-500 dark:text-primary-400 text-xs pb-4 px-6">
+                          <p class="text-primary-500 dark:text-primary-400 text-xs pb-2 px-6">
                             {formatRelativeDate(review.date)}
                           </p>
-                          <div class="flex justify-center pb-4">
-                            <svg
-                              class={[
-                                "w-4 h-4 text-primary-600 transition-transform duration-300",
-                                expandedReview.value === review.id && "transform rotate-180"
-                              ]}
-                              fill="none"
-                              stroke="currentColor"
-                              viewBox="0 0 24 24"
-                              xmlns="http://www.w3.org/2000/svg"
-                            >
-                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                            </svg>
-                          </div>
                         </div>
                       </div>
                     ))}
@@ -354,23 +338,9 @@ export default component$(() => {
                               </h4>
                             </div>
                           </div>
-                          <p class="text-primary-500 dark:text-primary-400 text-xs pb-4 px-6">
+                          <p class="text-primary-500 dark:text-primary-400 text-xs pb-2 px-6">
                             {formatRelativeDate(review.date)}
                           </p>
-                          <div class="flex justify-center pb-6">
-                            <svg
-                              class={[
-                                "w-4 h-4 text-primary-600 transition-transform duration-300",
-                                expandedReview.value === review.id && "transform rotate-180"
-                              ]}
-                              fill="none"
-                              stroke="currentColor"
-                              viewBox="0 0 24 24"
-                              xmlns="http://www.w3.org/2000/svg"
-                            >
-                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                            </svg>
-                          </div>
                         </div>
                       </div>
                     </div>
@@ -409,23 +379,9 @@ export default component$(() => {
                               </h4>
                             </div>
                           </div>
-                          <p class="text-primary-500 dark:text-primary-400 text-xs pb-4 px-6">
+                          <p class="text-primary-500 dark:text-primary-400 text-xs pb-2 px-6">
                             {formatRelativeDate(review.date)}
                           </p>
-                          <div class="flex justify-center pb-6">
-                            <svg
-                              class={[
-                                "w-4 h-4 text-primary-600 transition-transform duration-300",
-                                expandedReview.value === review.id + 1000 && "transform rotate-180"
-                              ]}
-                              fill="none"
-                              stroke="currentColor"
-                              viewBox="0 0 24 24"
-                              xmlns="http://www.w3.org/2000/svg"
-                            >
-                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                            </svg>
-                          </div>
                         </div>
                       </div>
                     </div>

@@ -166,7 +166,7 @@ export default component$(() => {
       hasSubmenu: true,
       subitems: [
         { title: "Reviews", href: "/reviews" },
-                { title: "In The News", href: "/reviews/#news" },
+                { title: "In The News", href: "/reviews#news" },
                                 
 
       ],

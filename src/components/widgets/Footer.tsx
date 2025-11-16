@@ -28,6 +28,8 @@ export default component$(() => {
         { title: "Our Space", href: "/about" },
         { title: "What To Expect", href: "/about#what-to-expect" },
         { title: "Benefits Of Clay", href: "/about#clay" },
+        { title: "Our Logo", href: "/team#logo" },
+
         { title: "Gallery", href: "/gallery" },
         { title: "FAQs", href: "/faq" },
       ],
@@ -35,9 +37,13 @@ export default component$(() => {
     {
       title: "Community",
       items: [
-        { title: "Classes", href: "/classes" },
-        { title: "Facilitators", href: "/team" },
+                { title: "Facilitators", href: "/team" },
+
+        { title: "Classes & Workshops", href: "/offerings" },
+                        { title: "Corporate Events", href: "/offerings#events" },
+
         { title: "Connections", href: "/connections" },
+
         { title: "Reviews", href: "/reviews" },
         { title: "Contact", href: "/contact" },
       ],
