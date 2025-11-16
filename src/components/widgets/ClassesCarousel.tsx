@@ -84,7 +84,7 @@ export default component$<CarouselProps>(({ workshops = [] }) => {
             class="carousel-root p-1"
             slidesPerView={slidesPerViewSig.value}
             gap={25}
-            autoPlayIntervalMs={3500}
+            autoPlayIntervalMs={4000}
             bind:autoplay={isPlaying}
             draggable={true}
             align="start"
