@@ -443,12 +443,12 @@ export default component$(() => {
           <div class="text-center mb-12">
             <h2 class="!text-5xl md:text-6xl font-bold mb-6">
               <span class="bg-gradient-to-r from-primary-600 via-tertiary-600 to-primary-600 bg-clip-text text-transparent">
-                Featured in Media
+                In The News
               </span>
             </h2>
-            <p class="text-lg text-secondary-600 dark:text-secondary-400 max-w-2xl mx-auto">
+            {/* <p class="text-lg text-secondary-600 dark:text-secondary-400 max-w-2xl mx-auto">
               See what leading publications are saying about us
-            </p>
+            </p> */}
           </div>
 
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
