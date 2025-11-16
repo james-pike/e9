@@ -153,7 +153,7 @@ export default component$(() => {
       subitems: [
         { title: "Classes & Workshops", href: "/offerings" },
                 { title: "Corporate Events", href: "/offerings/#events" },
-                                { title: "Private Events", href: "/offerings/#events" },
+                                { title: "Private Events", href: "/offerings/#private-events" },
 
                         { title: "Gift Cards", href: "https://bookeo.com/earthenvessels/buyvoucher" },
 

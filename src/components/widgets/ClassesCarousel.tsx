@@ -62,7 +62,7 @@ export default component$<CarouselProps>(({ workshops = [] }) => {
 
   return (
     <>
-      <div class="p-3 mt-6 md:p-8 bg-white/20 rounded-2xl max-w-7xl md:mx-auto ">
+      <div class="p-5 mt-0 md:px-16 bg-white/20 rounded-2xl max-w-7xl md:mx-auto ">
         {/* Header and Subtitle */}
         <div class="text-center mt-12 mb-8">
           <h1 class="!text-5xl md:!text-5xl xdxd font-bold mb-6">
@@ -126,7 +126,7 @@ export default component$<CarouselProps>(({ workshops = [] }) => {
         )}
 
         {/* Events Section with ID */}
-        <div id="events" class="text-center mt-16 mb-2">
+        <div id="events" class="text-center mt-16 mb-8">
           <p class="text-2xl text-primary-700 dark:text-primary-300 max-w-3xl mx-auto mb-10">
             Book Private & Corporate Events
           </p>
@@ -176,7 +176,7 @@ export default component$<CarouselProps>(({ workshops = [] }) => {
                   class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                 />
               </div>
-              <div class="p-4">
+              <div id='private-events' class="p-4">
                 <div class="flex items-center justify-between mb-3">
                   <h3 class="text-xl font-bold text-secondary-900 dark:text-secondary-100 flex-1 pr-2">
                     Private Events

@@ -89,7 +89,20 @@ export default component$(() => {
       max-height: 18em;
     }
     .review-content.expanded {
-      max-height: 2000px;
+      max-height: 30em;
+      overflow-y: auto;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(0,0,0,0.2) transparent;
+    }
+    .review-content.expanded::-webkit-scrollbar {
+      width: 4px;
+    }
+    .review-content.expanded::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    .review-content.expanded::-webkit-scrollbar-thumb {
+      background-color: rgba(0,0,0,0.2);
+      border-radius: 2px;
     }
     .review-card-container {
       display: flex;
@@ -101,27 +114,18 @@ export default component$(() => {
       transform: scale(1.02);
       box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
     }
+    .carousel-container {
+      -webkit-overflow-scrolling: touch;
+      overscroll-behavior-x: contain;
+    }
   `);
 
-  const REVIEWS_PER_SLIDE = 3;
   const safeReviews = reviews.value;
-  const numSlides = Math.max(0, Math.ceil(safeReviews.length / REVIEWS_PER_SLIDE));
 
   const nextSlide = $(() => {
     if (carouselRef.value) {
-      const cardWidth = 320;
-      const newScrollLeft = carouselRef.value.scrollLeft + cardWidth;
-      carouselRef.value.scrollTo({ left: newScrollLeft, behavior: "smooth" });
-      currentIndex.value = Math.min(currentIndex.value + 1, numSlides - 1);
-    }
-  });
-
-  const prevSlide = $(() => {
-    if (carouselRef.value) {
-      const cardWidth = 320;
-      const newScrollLeft = carouselRef.value.scrollLeft - cardWidth;
-      carouselRef.value.scrollTo({ left: newScrollLeft, behavior: "smooth" });
-      currentIndex.value = Math.max(currentIndex.value - 1, 0);
+      const containerWidth = carouselRef.value.clientWidth;
+      carouselRef.value.scrollBy({ left: containerWidth, behavior: "smooth" });
     }
   });
 
@@ -136,6 +140,20 @@ export default component$(() => {
       cleanup(() => clearInterval(interval));
     }
   });
+
+  // Fixed typing issue with Intl.DateTimeFormatOptions
+  function formatDate(dateString: string) {
+    const date = new Date(dateString);
+    if (isNaN(date.getTime())) {
+      return "Invalid date";
+    }
+    const options: Intl.DateTimeFormatOptions = {
+      year: "numeric",
+      month: "long",
+      day: "numeric"
+    };
+    return date.toLocaleDateString("en-US", options);
+  }
 
   function formatRelativeDate(dateString: string) {
     const now = new Date();
@@ -178,7 +196,7 @@ export default component$(() => {
   if (safeReviews.length === 0) {
     return (
       <section class="relative overflow-hidden py-12 md:py-16">
-        <div class="relative max-w-7xl mx-0 px-1 sm:px-0">
+        <div class="relative max-w-7xl mx-auto px-1 sm:px-6">
           <div class="text-center mb-12">
             <h2 class="!text-5xl md:text-6xl px-4 font-bold mb-6">
               <span class="bg-gradient-to-r xdxd from-primary-600 via-tertiary-600 to-primary-600 bg-clip-text text-transparent">
@@ -210,103 +228,64 @@ export default component$(() => {
               </div>
             ) : isHomePage ? (
               <>
-                <div
-                  class="overflow-x-auto snap-x snap-mandatory md:px-6 scrollbar-invisible"
-                  ref={carouselRef}
-                >
-                  <div class="flex gap-6">
-                    {safeReviews.map((review: Review) => (
-                      <div key={review.id} class="flex-shrink-0 w-80 snap-center">
-                        <div 
-                          class={[
-                            "review-card-container bg-gradient-to-br from-white/70 via-primary-50/70 to-secondary-50/70 dark:from-gray-800/90 dark:via-primary-900/30 dark:to-secondary-900/30 backdrop-blur-sm rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden border-2 border-primary-100 dark:border-secondary-700",
-                            expandedReview.value === review.id ? "expanded border-secondary-200" : "hover:border-secondary-200"
-                          ]}
-                          onClick$={() => {
-                            expandedReview.value = expandedReview.value === review.id ? null : review.id;
-                          }}
-                          role="button"
-                          tabIndex={0}
-                          aria-expanded={expandedReview.value === review.id}
-                        >
-                          <div class="flex justify-center mb-4 pt-6">
-                            <div class="flex space-x-1">{renderStars(review.rating)}</div>
-                          </div>
-                          <blockquote 
+                {/* Full-bleed on mobile, normal on desktop */}
+                <div class="-mx-4 sm:mx-0">
+                  <div
+                    class="carousel-container overflow-x-auto snap-x snap-mandatory scrollbar-invisible"
+                    ref={carouselRef}
+                  >
+                    <div class="flex gap-4 sm:gap-6 px-4 sm:px-0">
+                      {safeReviews.map((review: Review) => (
+                        <div key={review.id} class="flex-shrink-0 w-full sm:w-80 snap-center">
+                          <div 
                             class={[
-                              "review-content text-md text-secondary-900 dark:text-secondary-100 mb-4 px-6",
-                              expandedReview.value === review.id ? "expanded" : "collapsed"
+                              "review-card-container bg-gradient-to-br from-white/70 via-primary-50/70 to-secondary-50/70 dark:from-gray-800/90 dark:via-primary-900/30 dark:to-secondary-900/30 backdrop-blur-sm rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden border-2 border-primary-100 dark:border-secondary-700",
+                              expandedReview.value === review.id ? "expanded border-secondary-200" : "hover:border-secondary-200"
                             ]}
+                            onClick$={() => {
+                              expandedReview.value = expandedReview.value === review.id ? null : review.id;
+                            }}
+                            role="button"
+                            tabIndex={0}
+                            aria-expanded={expandedReview.value === review.id}
                           >
-                            "{review.review}"
-                          </blockquote>
-                          <div class="flex items-center space-x-3 mb-2 px-6">
-                            <div class="text-left">
-                              <h4 class=" font-bold text-secondary-900 dark:text-secondary-100">
-                                {review.name}
-                              </h4>
-                              {review.role && (
-                                <p class="text-primary-600 dark:text-primary-400 text-xs">{review.role}</p>
-                              )}
+                            <div class="flex justify-center mb-4 pt-6">
+                              <div class="flex space-x-1">{renderStars(review.rating)}</div>
                             </div>
+                            <blockquote 
+                              class={[
+                                "review-content text-md text-secondary-900 dark:text-secondary-100 mb-4 px-6",
+                                expandedReview.value === review.id ? "expanded" : "collapsed"
+                              ]}
+                            >
+                              "{review.review}"
+                            </blockquote>
+                            <div class="flex items-center space-x-3 mb-2 px-6">
+                              <div class="text-left">
+                                <h4 class="font-bold text-secondary-900 dark:text-secondary-100">
+                                  {review.name}
+                                </h4>
+                                {review.role && (
+                                  <p class="text-primary-600 dark:text-primary-400 text-xs">{review.role}</p>
+                                )}
+                              </div>
+                            </div>
+                            <p class="text-primary-500 dark:text-primary-400 text-xs pb-2 px-6">
+                              {formatRelativeDate(review.date)}
+                            </p>
                           </div>
-                          <p class="text-primary-500 dark:text-primary-400 text-xs pb-2 px-6">
-                            {formatRelativeDate(review.date)}
-                          </p>
                         </div>
-                      </div>
-                    ))}
+                      ))}
+                    </div>
                   </div>
                 </div>
-                {safeReviews.length > 1 && (
-                  <div class="flex justify-center mt-4 space-x-2">
-                    <button
-                      onClick$={prevSlide}
-                      class="p-2 rounded-full bg-primary-600 text-white hover:bg-primary-700"
-                      aria-label="Previous slide"
-                    >
-                      <svg
-                        class="w-5 h-5"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="2"
-                          d="M15 19l-7-7 7-7"
-                        ></path>
-                      </svg>
-                    </button>
-                    <button
-                      onClick$={nextSlide}
-                      class="p-2 rounded-full bg-primary-600 text-white hover:bg-primary-700"
-                      aria-label="Next slide"
-                    >
-                      <svg
-                        class="w-5 h-5"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="2"
-                          d="M9 5l7 7-7 7"
-                        ></path>
-                      </svg>
-                    </button>
-                  </div>
-                )}
               </>
             ) : (
               <div class="multi-column-grid">
                 <div class="reviews-slider">
-                  {/* First set of reviews */}
-                  {safeReviews.map((review: Review) => (
-                    <div key={`first-${review.id}`} class="review-card">
+                  {/* First set + duplicate for seamless loop */}
+                  {[...safeReviews, ...safeReviews].map((review: Review, idx: number) => (
+                    <div key={idx} class="review-card">
                       <div 
                         class={[
                           "review-card-container bg-gradient-to-br from-white/50 via-primary-50/30 to-secondary-50/30 dark:from-gray-800/90 dark:via-primary-900/30 dark:to-secondary-900/30 backdrop-blur-sm rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden border-2 border-primary-100 dark:border-secondary-700",
@@ -317,7 +296,6 @@ export default component$(() => {
                         }}
                         role="button"
                         tabIndex={0}
-                        aria-expanded={expandedReview.value === review.id}
                       >
                         <div class="flex justify-center mb-6 pt-6">
                           <div class="flex space-x-1">{renderStars(review.rating)}</div>
@@ -338,48 +316,7 @@ export default component$(() => {
                               </h4>
                             </div>
                           </div>
-                          <p class="text-primary-500 dark:text-primary-400 text-xs pb-2 px-6">
-                            {formatRelativeDate(review.date)}
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                  {/* Duplicate set for seamless loop */}
-                  {safeReviews.map((review: Review) => (
-                    <div key={`second-${review.id}`} class="review-card">
-                      <div 
-                        class={[
-                          "review-card-container bg-gradient-to-br from-white/50 via-primary-50/30 to-secondary-50/30 dark:from-gray-800/90 dark:via-primary-900/30 dark:to-secondary-900/30 backdrop-blur-sm rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden border-2 border-primary-100 dark:border-secondary-700",
-                          expandedReview.value === review.id + 1000 ? "expanded border-secondary-200" : "hover:border-secondary-200"
-                        ]}
-                        onClick$={() => {
-                          expandedReview.value = expandedReview.value === review.id + 1000 ? null : review.id + 1000;
-                        }}
-                        role="button"
-                        tabIndex={0}
-                        aria-expanded={expandedReview.value === review.id + 1000}
-                      >
-                        <div class="flex justify-center mb-6 pt-6">
-                          <div class="flex space-x-1">{renderStars(review.rating)}</div>
-                        </div>
-                        <blockquote 
-                          class={[
-                            "review-content text-lg text-secondary-900 dark:text-secondary-100 mb-6 px-6",
-                            expandedReview.value === review.id + 1000 ? "expanded" : "collapsed"
-                          ]}
-                        >
-                          "{review.review}"
-                        </blockquote>
-                        <div class="mt-auto">
-                          <div class="flex items-center space-x-3 mb-2 px-6">
-                            <div class="text-left">
-                              <h4 class="font-bold text-secondary-900 dark:text-secondary-100">
-                                {review.name}
-                              </h4>
-                            </div>
-                          </div>
-                          <p class="text-primary-500 dark:text-primary-400 text-xs pb-2 px-6">
+                          <p class="text-primary-500 dark:text-primary-400 text-xs pb-4 px-6">
                             {formatRelativeDate(review.date)}
                           </p>
                         </div>
@@ -397,50 +334,29 @@ export default component$(() => {
       <section class="relative overflow-hidden py-12 md:py-16 bg-gradient-to-br from-primary-50/30 to-secondary-50/30 dark:from-gray-900/50 dark:to-gray-800/50">
         <div class="relative max-w-7xl mx-auto px-4 sm:px-6">
           <div class="text-center mb-12">
-            <h2 class="!text-5xl md:text-6xl font-bold mb-6">
+            <h2 class="!text-4xl md:text-4xl font-bold mb-6">
               <span class="bg-gradient-to-r from-primary-600 via-tertiary-600 to-primary-600 bg-clip-text text-transparent">
                 In The News
               </span>
             </h2>
-            {/* <p class="text-lg text-secondary-600 dark:text-secondary-400 max-w-2xl mx-auto">
-              See what leading publications are saying about us
-            </p> */}
           </div>
 
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          <div class="grid grid-cols-1 md:grid-cols-2 px-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
             {[
               {
                 id: 1,
-                title: "Featured in Tech Innovation Magazine",
-                publication: "Tech Innovation",
-                date: "2024-10-15",
-                excerpt: "How this program is changing the landscape of professional development...",
-                url: "#",
-                image: "https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=250&fit=crop"
+                title: "Why earthen vessels is a story worth telling",
+                publication: "Kitchissippi Times",
+                date: "2025-08-16",
+                url: "https://kitchissippi.com/why-earthen-vessels-is-a-story-worth-telling/",
+                image: "/images/kitchissippi.webp"
               },
-              {
-                id: 2,
-                title: "Success Stories: Transforming Careers",
-                publication: "Business Weekly",
-                date: "2024-09-28",
-                excerpt: "Alumni share their journey and the impact of the program on their professional lives...",
-                url: "#",
-                image: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=250&fit=crop"
-              },
-              {
-                id: 3,
-                title: "Industry Leader Spotlight",
-                publication: "Professional Development Journal",
-                date: "2024-09-10",
-                excerpt: "Recognition for excellence in training and development programs...",
-                url: "#",
-                image: "https://images.unsplash.com/photo-1557804506-669a67965ba0?w=400&h=250&fit=crop"
-              }
+         
             ].map((article) => (
               <a
                 key={article.id}
                 href={article.url}
-                class="group bg-white dark:bg-gray-800 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border-2 border-primary-100 dark:border-secondary-700 hover:border-primary-300 dark:hover:border-primary-600"
+                class="group bg-white/30 dark:bg-gray-800 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border-2 border-primary-100 dark:border-secondary-700 hover:border-primary-300 dark:hover:border-primary-600"
               >
                 <div class="aspect-video overflow-hidden">
                   <img
@@ -455,21 +371,12 @@ export default component$(() => {
                       {article.publication}
                     </span>
                     <span class="text-xs text-gray-500 dark:text-gray-400">
-                      {formatRelativeDate(article.date)}
+                      {formatDate(article.date)}
                     </span>
                   </div>
                   <h3 class="text-xl font-bold text-secondary-900 dark:text-secondary-100 mb-3 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
                     {article.title}
                   </h3>
-                  {/* <p class="text-secondary-600 dark:text-secondary-400 text-sm line-clamp-3">
-                    {article.excerpt}
-                  </p> */}
-                  {/* <div class="mt-4 flex items-center text-primary-600 dark:text-primary-400 font-semibold text-sm">
-                    Read More
-                    <svg class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                    </svg>
-                  </div> */}
                 </div>
               </a>
             ))}
