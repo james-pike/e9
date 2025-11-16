@@ -39,45 +39,7 @@ export default component$(() => {
   const carouselRef = useSignal<HTMLElement | undefined>();
   const location = useLocation();
   const isHomePage = location.url.pathname === "/";
-  const scrollingReviews = useSignal<Set<number>>(new Set());
-
-  const handleReviewClick = $((reviewId: number, event: any) => {
-    const element = event.currentTarget as HTMLElement;
-    const scrollHeight = element.scrollHeight;
-    const clientHeight = element.clientHeight;
-    
-    if (scrollHeight > clientHeight) {
-      const newScrolling = new Set(scrollingReviews.value);
-      if (!newScrolling.has(reviewId)) {
-        newScrolling.add(reviewId);
-        scrollingReviews.value = newScrolling;
-        
-        // Auto-scroll to bottom
-        const scrollDistance = scrollHeight - clientHeight;
-        const scrollDuration = Math.min(scrollDistance * 15, 8000); // 15ms per pixel, max 8s
-        
-        let startTime: number | null = null;
-        const scroll = (timestamp: number) => {
-          if (!startTime) startTime = timestamp;
-          const progress = (timestamp - startTime) / scrollDuration;
-          
-          if (progress < 1) {
-            element.scrollTop = scrollDistance * progress;
-            requestAnimationFrame(scroll);
-          } else {
-            element.scrollTop = scrollDistance;
-            // Remove from scrolling set after animation
-            setTimeout(() => {
-              const updated = new Set(scrollingReviews.value);
-              updated.delete(reviewId);
-              scrollingReviews.value = updated;
-            }, 500);
-          }
-        };
-        requestAnimationFrame(scroll);
-      }
-    }
-  });
+  const expandedReview = useSignal<number | null>(null);
 
   // Load reviews data
   useVisibleTask$(() => {
@@ -86,23 +48,30 @@ export default component$(() => {
 
   useStyles$(`
     .multi-column-grid {
-      column-count: 1;
-      column-gap: 1.5rem;
+      display: flex;
+      overflow: hidden;
+      position: relative;
       padding: 0 1rem;
     }
-    @media (min-width: 640px) {
-      .multi-column-grid {
-        column-count: 2;
-      }
+    .reviews-slider {
+      display: flex;
+      gap: 1.5rem;
+      animation: slideReviews 120s linear infinite;
     }
-    @media (min-width: 1024px) {
-      .multi-column-grid {
-        column-count: 3;
+    .reviews-slider:hover {
+      animation-play-state: paused;
+    }
+    @keyframes slideReviews {
+      0% {
+        transform: translateX(0);
+      }
+      100% {
+        transform: translateX(-50%);
       }
     }
     .review-card {
-      break-inside: avoid;
-      margin-bottom: 1.5rem;
+      flex-shrink: 0;
+      width: 450px;
     }
     .scrollbar-invisible::-webkit-scrollbar {
       display: none;
@@ -112,37 +81,27 @@ export default component$(() => {
       scrollbar-width: none;
     }
     .review-content {
-      max-height: 350px;
       overflow: hidden;
-      line-height: 1.5;
-      position: relative;
-      transition: max-height 0.3s ease;
-      cursor: pointer;
+      line-height: 1.6;
+      transition: max-height 500ms cubic-bezier(0.4, 0, 0.2, 1);
     }
-    .review-content.scrolling {
-      overflow-y: auto;
-      animation: autoScroll 8s linear;
-      cursor: default;
+    .review-content.collapsed {
+      max-height: 12em;
     }
-    @keyframes autoScroll {
-      0% {
-        scroll-behavior: smooth;
-      }
-      100% {
-        scroll-behavior: smooth;
-      }
-    }
-    .review-content::-webkit-scrollbar {
-      display: none;
-    }
-    .review-content {
-      -ms-overflow-style: none;
-      scrollbar-width: none;
+    .review-content.expanded {
+      max-height: 2000px;
     }
     .review-card-container {
-      min-height: 420px;
+      min-height: 550px;
+      height: 100%;
       display: flex;
       flex-direction: column;
+      transition: transform 300ms ease-in-out, box-shadow 300ms ease-in-out, border-color 300ms ease-in-out;
+      cursor: pointer;
+    }
+    .review-card-container.expanded {
+      transform: scale(1.02);
+      box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
     }
   `);
 
@@ -217,37 +176,7 @@ export default component$(() => {
     ));
   };
 
-  // Mock media articles data - replace with your actual data source
-  const mediaArticles = [
-    {
-      id: 1,
-      title: "Why earthen vessels is a story worth telling",
-      publication: "Kitchissippi Times",
-      date: "2024-10-15",
-      excerpt: "Why earthen vessels is a story worth telling",
-      url: "https://kitchissippi.com/why-earthen-vessels-is-a-story-worth-telling/",
-      image: "/images/kitchissippi.webp"
-    },
-    // {
-    //   id: 2,
-    //   title: "Success Stories: Transforming Careers",
-    //   publication: "Business Weekly",
-    //   date: "2024-09-28",
-    //   excerpt: "Alumni share their journey and the impact of the program on their professional lives...",
-    //   url: "#",
-    //   image: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=250&fit=crop"
-    // },
-    // {
-    //   id: 3,
-    //   title: "Industry Leader Spotlight",
-    //   publication: "Professional Development Journal",
-    //   date: "2024-09-10",
-    //   excerpt: "Recognition for excellence in training and development programs...",
-    //   url: "#",
-    //   image: "https://images.unsplash.com/photo-1557804506-669a67965ba0?w=400&h=250&fit=crop"
-    // }
-  ];
-
+  // Loading state
   if (safeReviews.length === 0) {
     return (
       <section class="relative overflow-hidden py-12 md:py-16">
@@ -290,13 +219,26 @@ export default component$(() => {
                   <div class="flex gap-6">
                     {safeReviews.map((review: Review) => (
                       <div key={review.id} class="flex-shrink-0 w-80 snap-center">
-                        <div class="review-card-container bg-gradient-to-br from-white/70 via-primary-50/70 to-secondary-50/70 dark:from-gray-800/90 dark:via-primary-900/30 dark:to-secondary-900/30 backdrop-blur-sm rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden hover:border-secondary-200 border-2 border-primary-100 dark:border-secondary-700">
+                        <div 
+                          class={[
+                            "review-card-container bg-gradient-to-br from-white/70 via-primary-50/70 to-secondary-50/70 dark:from-gray-800/90 dark:via-primary-900/30 dark:to-secondary-900/30 backdrop-blur-sm rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden border-2 border-primary-100 dark:border-secondary-700",
+                            expandedReview.value === review.id ? "expanded border-secondary-200" : "hover:border-secondary-200"
+                          ]}
+                          onClick$={() => {
+                            expandedReview.value = expandedReview.value === review.id ? null : review.id;
+                          }}
+                          role="button"
+                          tabIndex={0}
+                          aria-expanded={expandedReview.value === review.id}
+                        >
                           <div class="flex justify-center mb-4 pt-6">
                             <div class="flex space-x-1">{renderStars(review.rating)}</div>
                           </div>
                           <blockquote 
-                            class={`review-content text-md text-secondary-900 dark:text-secondary-100 mb-4 px-6 ${scrollingReviews.value.has(review.id) ? 'scrolling' : ''}`}
-                            onClick$={(event) => handleReviewClick(review.id, event)}
+                            class={[
+                              "review-content text-md text-secondary-900 dark:text-secondary-100 mb-4 px-6",
+                              expandedReview.value === review.id ? "expanded" : "collapsed"
+                            ]}
                           >
                             "{review.review}"
                           </blockquote>
@@ -310,9 +252,23 @@ export default component$(() => {
                               )}
                             </div>
                           </div>
-                          <p class="text-primary-500 dark:text-primary-400 text-xs pb-6 px-6">
+                          <p class="text-primary-500 dark:text-primary-400 text-xs pb-4 px-6">
                             {formatRelativeDate(review.date)}
                           </p>
+                          <div class="flex justify-center pb-4">
+                            <svg
+                              class={[
+                                "w-4 h-4 text-primary-600 transition-transform duration-300",
+                                expandedReview.value === review.id && "transform rotate-180"
+                              ]}
+                              fill="none"
+                              stroke="currentColor"
+                              viewBox="0 0 24 24"
+                              xmlns="http://www.w3.org/2000/svg"
+                            >
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                          </div>
                         </div>
                       </div>
                     ))}
@@ -362,32 +318,119 @@ export default component$(() => {
                 )}
               </>
             ) : (
-                              <div class="multi-column-grid">
-                {safeReviews.map((review: Review) => (
-                  <div key={review.id} class="review-card">
-                    <div class="review-card-container bg-gradient-to-br from-white/50 via-primary-50/30 to-secondary-50/30 dark:from-gray-800/90 dark:via-primary-900/30 dark:to-secondary-900/30 backdrop-blur-sm rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden hover:border-secondary-200 border-2 border-primary-100 dark:border-secondary-700">
-                      <div class="flex justify-center mb-4 pt-6">
-                        <div class="flex space-x-1">{renderStars(review.rating)}</div>
-                      </div>
-                      <blockquote 
-                        class={`review-content !text-lg text-secondary-900 dark:text-secondary-100 mb-4 px-6 ${scrollingReviews.value.has(review.id) ? 'scrolling' : ''}`}
-                        onClick$={(event) => handleReviewClick(review.id, event)}
+              <div class="multi-column-grid">
+                <div class="reviews-slider">
+                  {/* First set of reviews */}
+                  {safeReviews.map((review: Review) => (
+                    <div key={`first-${review.id}`} class="review-card">
+                      <div 
+                        class={[
+                          "review-card-container bg-gradient-to-br from-white/50 via-primary-50/30 to-secondary-50/30 dark:from-gray-800/90 dark:via-primary-900/30 dark:to-secondary-900/30 backdrop-blur-sm rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden border-2 border-primary-100 dark:border-secondary-700",
+                          expandedReview.value === review.id ? "expanded border-secondary-200" : "hover:border-secondary-200"
+                        ]}
+                        onClick$={() => {
+                          expandedReview.value = expandedReview.value === review.id ? null : review.id;
+                        }}
+                        role="button"
+                        tabIndex={0}
+                        aria-expanded={expandedReview.value === review.id}
                       >
-                        "{review.review}"
-                      </blockquote>
-                      <div class="flex items-center space-x-3 mb-2 px-6">
-                        <div class="text-left">
-                          <h4 class=" font-bold text-secondary-900 dark:text-secondary-100">
-                            {review.name}
-                          </h4>
+                        <div class="flex justify-center mb-6 pt-6">
+                          <div class="flex space-x-1">{renderStars(review.rating)}</div>
+                        </div>
+                        <blockquote 
+                          class={[
+                            "review-content text-lg text-secondary-900 dark:text-secondary-100 mb-6 px-6",
+                            expandedReview.value === review.id ? "expanded" : "collapsed"
+                          ]}
+                        >
+                          "{review.review}"
+                        </blockquote>
+                        <div class="mt-auto">
+                          <div class="flex items-center space-x-3 mb-2 px-6">
+                            <div class="text-left">
+                              <h4 class="font-bold text-secondary-900 dark:text-secondary-100">
+                                {review.name}
+                              </h4>
+                            </div>
+                          </div>
+                          <p class="text-primary-500 dark:text-primary-400 text-xs pb-4 px-6">
+                            {formatRelativeDate(review.date)}
+                          </p>
+                          <div class="flex justify-center pb-6">
+                            <svg
+                              class={[
+                                "w-4 h-4 text-primary-600 transition-transform duration-300",
+                                expandedReview.value === review.id && "transform rotate-180"
+                              ]}
+                              fill="none"
+                              stroke="currentColor"
+                              viewBox="0 0 24 24"
+                              xmlns="http://www.w3.org/2000/svg"
+                            >
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                          </div>
                         </div>
                       </div>
-                      <p class="text-primary-500 dark:text-primary-400 text-xs pb-6 px-6">
-                        {formatRelativeDate(review.date)}
-                      </p>
                     </div>
-                  </div>
-                ))}
+                  ))}
+                  {/* Duplicate set for seamless loop */}
+                  {safeReviews.map((review: Review) => (
+                    <div key={`second-${review.id}`} class="review-card">
+                      <div 
+                        class={[
+                          "review-card-container bg-gradient-to-br from-white/50 via-primary-50/30 to-secondary-50/30 dark:from-gray-800/90 dark:via-primary-900/30 dark:to-secondary-900/30 backdrop-blur-sm rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden border-2 border-primary-100 dark:border-secondary-700",
+                          expandedReview.value === review.id + 1000 ? "expanded border-secondary-200" : "hover:border-secondary-200"
+                        ]}
+                        onClick$={() => {
+                          expandedReview.value = expandedReview.value === review.id + 1000 ? null : review.id + 1000;
+                        }}
+                        role="button"
+                        tabIndex={0}
+                        aria-expanded={expandedReview.value === review.id + 1000}
+                      >
+                        <div class="flex justify-center mb-6 pt-6">
+                          <div class="flex space-x-1">{renderStars(review.rating)}</div>
+                        </div>
+                        <blockquote 
+                          class={[
+                            "review-content text-lg text-secondary-900 dark:text-secondary-100 mb-6 px-6",
+                            expandedReview.value === review.id + 1000 ? "expanded" : "collapsed"
+                          ]}
+                        >
+                          "{review.review}"
+                        </blockquote>
+                        <div class="mt-auto">
+                          <div class="flex items-center space-x-3 mb-2 px-6">
+                            <div class="text-left">
+                              <h4 class="font-bold text-secondary-900 dark:text-secondary-100">
+                                {review.name}
+                              </h4>
+                            </div>
+                          </div>
+                          <p class="text-primary-500 dark:text-primary-400 text-xs pb-4 px-6">
+                            {formatRelativeDate(review.date)}
+                          </p>
+                          <div class="flex justify-center pb-6">
+                            <svg
+                              class={[
+                                "w-4 h-4 text-primary-600 transition-transform duration-300",
+                                expandedReview.value === review.id + 1000 && "transform rotate-180"
+                              ]}
+                              fill="none"
+                              stroke="currentColor"
+                              viewBox="0 0 24 24"
+                              xmlns="http://www.w3.org/2000/svg"
+                            >
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </div>
             )}
           </div>
@@ -395,19 +438,49 @@ export default component$(() => {
       </section>
 
       {/* Media Articles Section */}
-      <section id="news" class="relative overflow-hidden py-12 md:py-16 bg-gradient-to-br from-primary-50/30 to-secondary-50/30 dark:from-gray-900/50 dark:to-gray-800/50">
+      <section class="relative overflow-hidden py-12 md:py-16 bg-gradient-to-br from-primary-50/30 to-secondary-50/30 dark:from-gray-900/50 dark:to-gray-800/50">
         <div class="relative max-w-7xl mx-auto px-4 sm:px-6">
           <div class="text-center mb-12">
             <h2 class="!text-5xl md:text-6xl font-bold mb-6">
               <span class="bg-gradient-to-r from-primary-600 via-tertiary-600 to-primary-600 bg-clip-text text-transparent">
-                In The News
+                Featured in Media
               </span>
             </h2>
-           
+            <p class="text-lg text-secondary-600 dark:text-secondary-400 max-w-2xl mx-auto">
+              See what leading publications are saying about us
+            </p>
           </div>
 
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            {mediaArticles.map((article) => (
+            {[
+              {
+                id: 1,
+                title: "Featured in Tech Innovation Magazine",
+                publication: "Tech Innovation",
+                date: "2024-10-15",
+                excerpt: "How this program is changing the landscape of professional development...",
+                url: "#",
+                image: "https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=250&fit=crop"
+              },
+              {
+                id: 2,
+                title: "Success Stories: Transforming Careers",
+                publication: "Business Weekly",
+                date: "2024-09-28",
+                excerpt: "Alumni share their journey and the impact of the program on their professional lives...",
+                url: "#",
+                image: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=250&fit=crop"
+              },
+              {
+                id: 3,
+                title: "Industry Leader Spotlight",
+                publication: "Professional Development Journal",
+                date: "2024-09-10",
+                excerpt: "Recognition for excellence in training and development programs...",
+                url: "#",
+                image: "https://images.unsplash.com/photo-1557804506-669a67965ba0?w=400&h=250&fit=crop"
+              }
+            ].map((article) => (
               <a
                 key={article.id}
                 href={article.url}
@@ -432,9 +505,9 @@ export default component$(() => {
                   <h3 class="text-xl font-bold text-secondary-900 dark:text-secondary-100 mb-3 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
                     {article.title}
                   </h3>
-                  <p class="text-secondary-600 dark:text-secondary-400 text-sm line-clamp-3">
+                  {/* <p class="text-secondary-600 dark:text-secondary-400 text-sm line-clamp-3">
                     {article.excerpt}
-                  </p>
+                  </p> */}
                   {/* <div class="mt-4 flex items-center text-primary-600 dark:text-primary-400 font-semibold text-sm">
                     Read More
                     <svg class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">

@@ -40,7 +40,7 @@ export default component$(() => {
 
         <div class="hidden md:block absolute top-60 left-[93%] -translate-x-[93%] w-[100px] h-[100px] border-[2.5px] border-white rounded-full blur-sm animate-float" aria-hidden="true"></div> 
 
-        <div class="hidden md:block absolute top-[15%] left-[60%] -translate-x-[60%] w-[300px] h-[300px] border-[2.5px] border-white rounded-full blur-sm animate-float" aria-hidden="true"></div>
+        <div class="hidden md:block absolute top-[8%] left-[60%] -translate-x-[60%] w-[300px] h-[300px] border-[2.5px] border-white rounded-full blur-sm animate-float" aria-hidden="true"></div>
 
         <Hero />
         

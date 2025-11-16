@@ -71,7 +71,7 @@ export default component$(() => {
     <section class="relative overflow-hidden py-12 md:py-16">
       <div class="absolute inset-0 bg-pottery-texture opacity-20" aria-hidden="true"></div>
 
-      <div class="relative max-w-7xl mx-auto px-5 sm:px-8">
+      <div class="relative max-w-6xl mx-auto px-5 sm:px-8">
         <div class="text-center mb-12">
           <h1 class="!text-5xl md:text-6xl xdxd font-bold mb-6">
             <span class="bg-gradient-to-r from-secondary-800 via-tertiary-600 to-primary-600 bg-clip-text text-transparent">
@@ -124,7 +124,7 @@ With skilled hands and creative  presence, our facilitators bring expertise and 
                 </span>
                 <p
                   class={[
-                    "text-primary-700 dark:text-primary-300 !text-sm sm:!text-md  text-center mt-4",
+                    "text-primary-700 dark:text-primary-300 !text-md sm:!text-md  text-center mt-4",
                     expandedMember.value === member.name
                       ? "transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)]"
                       : "transition-all duration-300 ease-in-out line-clamp-3",
@@ -156,7 +156,25 @@ With skilled hands and creative  presence, our facilitators bring expertise and 
           ))}
         </div>
 
-        <div id="logo">Our facilitators and friends gathered to share their creative vision for earthen vessels.  Diane Black worked with these visions to create our rich logo. Together from our shared imaginations Diane designed a pinch pot holding water to remind us of the life that flows through clay, hands, and community. </div>
+{/* Logo section */}
+<div class="mt-12 flex  p-5 py-6 flex-col bg-white/30 rounded-xl md:flex-row items-center md:items-start gap-6">
+  {/* Left: Logo image (1/4 width on md+) */}
+  <div class="w-full md:w-1/4 flex justify-center md:justify-start">
+    <img
+      src="/images/logo22.svg"
+      alt="Earthen Vessels Logo"
+      class="w-40 md:ml-8 md:mt-4 h-auto md:w-full max-w-[200px]"
+    />
+  </div>
+
+  {/* Right: Text (3/4 width on md+) */}
+  <div class="w-full md:w-3/4 md:-ml-6s text-primary-800 dark:text-primary-200 text-lg">
+    Our facilitators and friends gathered to share their creative vision for earthen vessels.  
+    Diane Black worked with these visions to create our rich logo.  
+    Together from our shared imaginations, Diane designed a pinch pot holding water to remind us  
+    of the life that flows through clay, hands, and community.
+  </div>
+</div>
       </div>
     </section>
   );

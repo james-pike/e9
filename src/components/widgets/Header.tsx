@@ -90,10 +90,10 @@ export default component$(() => {
       },
          {
         text: "Reviews",
-        href: "/reviews",
+        href: "/reviews/",
         items: [
           { text: "Reviews", href: "/reviews", icon: LuCalendarDays },
-          { text: "In The News", href: "/reviews#news", icon: LuNewspaper },
+          { text: "In The News", href: "/reviews/#news", icon: LuNewspaper },
        
         ],
       },
@@ -258,7 +258,8 @@ export default component$(() => {
                     <li key={key} class={items?.length ? "dropdown" : ""}>
                       {items?.length ? (
                         <>
-                          <button
+                          <a
+                            href={href}
                             class={`
                               hover:text-secondary-800
                               px-4 py-3
@@ -275,24 +276,25 @@ export default component$(() => {
                               after:transition-all
                               after:duration-200
                               ${isActive
-                                ? "after:w-1/2 after:left-1/4 md:group-hover:[&:not(:hover)]:after:w-0 md:group-hover:[&:not(:hover)]:after:left-1/2"
+                                ? "text-secondary-800 after:w-1/2 after:left-1/4 md:group-hover:[&:not(:hover)]:after:w-0 md:group-hover:[&:not(:hover)]:after:left-1/2"
                                 : "after:w-0 md:hover:after:w-1/2 md:hover:after:left-1/4"
                               }
                             `}
-                            onClick$={() => {
-                              if (location.url.pathname !== "/") {
-                                window.location.href = "/classes";
-                              } else {
+                            onClick$={(event) => {
+                              // Only "Our Offerings" has the special home-page scroll behaviour
+                              if (href === "/classes" && location.url.pathname === "/") {
+                                event.preventDefault();
                                 const servicesSection = document.getElementById("services");
                                 if (servicesSection) {
                                   servicesSection.scrollIntoView({ behavior: "smooth" });
                                 }
                               }
+                              // all other cases (including clicking "Our Offerings" when not on home) → normal navigation
                             }}
                           >
                             {text}
                             <IconChevronDown class="w-3.5 h-3.5 ml-0.5 rtl:ml-0 rtl:mr-0.5 hidden md:inline" />
-                          </button>
+                          </a>
                           <ul
                             class={`
                               dropdown-menu
@@ -397,24 +399,23 @@ export default component$(() => {
               </ul>
             ) : null}
           </nav>
-          <div class="hidden md:self-center md:flex items-center md:mb-0 fixed w-full md:w-auto md:static justify-end left-0 rtl:left-auto rtl:right-0 bottom-0 p-3 md:p-0">
-            <div class="items-center flex justify-between w-full md:w-auto">
-              <a
-                href="https://bookeo.com/earthenvessels"
-                class="w-full sm:w-auto mr-2 bg-gradient-to-r from-primary-400 via-primary-500 to-primary-400 group relative inline-flex items-center justify-center px-3 pl-5 py-2.5 text-xl font-semibold text-white rounded-xl shadow-lg hover:shadow-[0_0_12px_rgba(255,255,255,0.4)] transition-all duration-300 overflow-hidden focus:outline-none focus:ring-2 focus:ring-secondary-600 before:content-[''] before:absolute before:bottom-0 before:left-0 before:h-0.5 before:w-full before:bg-white before:opacity-0 before:transform before:-translate-x-full group-hover:before:opacity-100 group-hover:before:translate-x-0 before:transition-all before:duration-500 hover:scale-102 hover:bg-gradient-to-r hover:from-primary-400 hover:via-primary-400 hover:to-primary-300"
-                role="button"
-                aria-label="Book a workshop"
-              >
-                <span class="relative z-10 flex items-center gap-1">
-                  Book a Class
-                  <svg class="w-5 h-5 -ml-0.5 transform group-hover:translate-x-0.75 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                  </svg>
-                </span>
-                <div class="absolute inset-0 bg-white/15 opacity-0 group-hover:opacity-25 transition-opacity duration-300"></div>
-                <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/45 to-transparent opacity-0 group-hover:opacity-90 transform group-hover:translate-x-full transition-all duration-500"></div>
-              </a>
-            </div>
+          {/* FIXED: Simplified button container - no more fixed/bottom positioning */}
+          <div class="hidden md:flex items-center justify-end space-x-2">
+            <a
+              href="https://bookeo.com/earthenvessels"
+              class="bg-gradient-to-r from-primary-400 via-primary-500 to-primary-400 group relative inline-flex items-center justify-center px-3 pl-5 py-2.5 text-xl font-semibold text-white rounded-xl shadow-lg hover:shadow-[0_0_12px_rgba(255,255,255,0.4)] transition-all duration-300 overflow-hidden focus:outline-none focus:ring-2 focus:ring-secondary-600 before:content-[''] before:absolute before:bottom-0 before:left-0 before:h-0.5 before:w-full before:bg-white before:opacity-0 before:transform before:-translate-x-full group-hover:before:opacity-100 group-hover:before:translate-x-0 before:transition-all before:duration-500 hover:scale-102 hover:bg-gradient-to-r hover:from-primary-400 hover:via-primary-400 hover:to-primary-300"
+              role="button"
+              aria-label="Book a workshop"
+            >
+              <span class="relative z-10 flex items-center gap-1">
+                Book a Class
+                <svg class="w-5 h-5 -ml-0.5 transform group-hover:translate-x-0.75 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                </svg>
+              </span>
+              <div class="absolute inset-0 bg-white/15 opacity-0 group-hover:opacity-25 transition-opacity duration-300"></div>
+              <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/45 to-transparent opacity-0 group-hover:opacity-90 transform group-hover:translate-x-full transition-all duration-500"></div>
+            </a>
           </div>
         </div>
       </header>

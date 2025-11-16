@@ -17,7 +17,7 @@ interface CarouselProps {
 
 export default component$<CarouselProps>(({ workshops = [] }) => {
   const isPlaying = useSignal<boolean>(false);
-  const slidesPerViewSig = useSignal(2);
+  const slidesPerViewSig = useSignal(1);
   const loc = useLocation();
 
   // Handle hash navigation
@@ -62,7 +62,7 @@ export default component$<CarouselProps>(({ workshops = [] }) => {
 
   return (
     <>
-      <div class="p-3 mt-6 md:p-8 bg-white/20 rounded-2xl max-w-7xl md:mx-0 mx-5">
+      <div class="p-3 mt-6 md:p-8 bg-white/20 rounded-2xl max-w-7xl md:mx-auto ">
         {/* Header and Subtitle */}
         <div class="text-center mt-12 mb-8">
           <h1 class="!text-5xl md:!text-5xl xdxd font-bold mb-6">
@@ -83,7 +83,7 @@ export default component$<CarouselProps>(({ workshops = [] }) => {
           <Carousel.Root
             class="carousel-root p-1"
             slidesPerView={slidesPerViewSig.value}
-            gap={12}
+            gap={20}
             autoPlayIntervalMs={2500}
             bind:autoplay={isPlaying}
             draggable={true}
@@ -112,8 +112,8 @@ export default component$<CarouselProps>(({ workshops = [] }) => {
                       <p class="text-sm md:text-md text-primary-700 dark:text-primary-300 line-clamp-4 mb-4">
                         {workshop.description}
                       </p>
-                      <span class="inline-block px-4 py-2 bg-gradient-to-r from-primary-500 to-primary-600 text-white font-medium rounded-xl hover:from-primary-700 hover:to-primary-800 transition-all duration-200">
-                        Book Now
+                      <span class="inline-block w-full px-4 py-2 bg-gradient-to-r from-primary-500 to-primary-600 text-white font-medium rounded-xl hover:from-primary-700 hover:to-primary-800 transition-all duration-200">
+                        Book 
                       </span>
                     </div>
                   </a>
@@ -124,7 +124,7 @@ export default component$<CarouselProps>(({ workshops = [] }) => {
         )}
 
         {/* Events Section with ID */}
-        <div id="events" class="text-center mt-16 mb-2">
+        <div id="#events" class="text-center mt-16 mb-2">
           <p class="text-2xl text-primary-700 dark:text-primary-300 max-w-3xl mx-auto mb-10">
             Book Private & Corporate Events
           </p>
@@ -152,9 +152,9 @@ export default component$<CarouselProps>(({ workshops = [] }) => {
                 <p class="text-primary-700 dark:text-primary-300 mb-4">
                   We offer creative, hands-on clay experiences designed to foster connection, reflection, and collaboration. Perfect for corporate retreats or staff appreciation gatherings. Contact us to discuss what might work for your group.
                 </p>
-                <span class="inline-block px-4 py-2 bg-gradient-to-r from-primary-500 to-primary-600 text-white font-medium rounded-xl hover:from-primary-700 hover:to-primary-800 transition-all duration-200">
-                  Book Now
-                </span>
+                {/* <span class="inline-block px-4 py-2 bg-gradient-to-r from-primary-500 to-primary-600 text-white font-medium rounded-xl hover:from-primary-700 hover:to-primary-800 transition-all duration-200">
+                  Book Corporate Event
+                </span> */}
               </div>
             </a>
 
@@ -179,9 +179,9 @@ export default component$<CarouselProps>(({ workshops = [] }) => {
                 <p class="text-primary-700 dark:text-primary-300 mb-4">
                   Celebrate life's special moments. Gather around our large creative table to celebrate one another, play, and make something beautiful together. Think about hosting your next birthday, book club, family gathering or evening out with friends at earthen vessels. Contact us to discuss the opportunities!
                 </p>
-                <span class="inline-block px-4 py-2 bg-gradient-to-r from-primary-500 to-primary-600 text-white font-medium rounded-xl hover:from-primary-700 hover:to-primary-800 transition-all duration-200">
-                  Book Now
-                </span>
+                {/* <span class="inline-block px-4 py-2 bg-gradient-to-r from-primary-500 to-primary-600 text-white font-medium rounded-xl hover:from-primary-700 hover:to-primary-800 transition-all duration-200">
+                  Book Private Event
+                </span> */}
               </div>
             </a>
           </div>

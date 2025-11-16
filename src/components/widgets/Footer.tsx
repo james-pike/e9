@@ -203,13 +203,13 @@ export default component$(() => {
             </div>
           ))}
         </div>
-        <div class="flex flex-col md:flex-row md:items-center md:justify-between -mt-6 md:pt-8 pb-3 md:pb-4 border-t border-half border-secondary-200/50 dark:border-secondary-700/50">
+        <div class="flex flex-col md:flex-row md:items-center md:justify-between  -mt-4 md:-mt-0 md:pt-4 pb-3 md:pb-6 border-t border-half border-secondary-200/50 dark:border-secondary-700/50">
           <div class="flex flex-col md:flex-row md:items-center text-sm text-primary-700 dark:text-primary-300 order-2 md:order-1 w-full md:w-auto">
-            <div class="flex items-center pb-2 md:pb-2 mt-2">
+            <div class="flex items-center py-4 md:pb-2 mb-2">
               <img
                 src="/images/logo22.svg"
                 alt="earthen vessels Logo"
-                class="w-16 h-16 md:w-120 md:h-30 mr-4 rounded-sm"
+                class="w-18 h-18 md:w-120 md:h-30 mr-4 rounded-sm"
                 width={80}
                 height={80}
               />
@@ -220,7 +220,7 @@ export default component$(() => {
             </div>
           </div>
           <span class="hidden underline md:block text-sm text-primary-700 dark:text-primary-300 order-1 md:order-2">
-          <a href="mailto:james@webdev.ca"> Web Design by James</a> 
+          <a href="mailto:james@webdev.ca?subject=Web%20Design%20Services"> Web Design by James</a> 
           </span>
         </div>
       </div>
