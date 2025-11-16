@@ -1,6 +1,7 @@
 import { component$, useSignal, useVisibleTask$, useTask$, $ } from '@builder.io/qwik';
 import { Carousel } from '@qwik-ui/headless';
 import { useLocation } from "@builder.io/qwik-city";
+import { LuChevronLeft, LuChevronRight } from '@qwikest/icons/lucide';
 
 interface Workshop {
   id: string;
@@ -17,7 +18,7 @@ interface CarouselProps {
 
 export default component$<CarouselProps>(({ workshops = [] }) => {
   const isPlaying = useSignal<boolean>(false);
-  const slidesPerViewSig = useSignal(1);
+  const slidesPerViewSig = useSignal(4); // Start with 4 for desktop to avoid flash
   const loc = useLocation();
 
   // Handle hash navigation
@@ -32,15 +33,17 @@ export default component$<CarouselProps>(({ workshops = [] }) => {
     }
   });
 
-  // Update slidesPerView based on screen size
+  // Responsive slidesPerView – 1 on mobile (<768px), then scale up
   useVisibleTask$(({ cleanup }) => {
     isPlaying.value = true;
 
     const updateSlidesPerView = () => {
-      if (window.matchMedia('(min-width: 640px)').matches) {
-        slidesPerViewSig.value = 3; // Larger screens
+      if (window.matchMedia('(min-width: 1024px)').matches) {
+        slidesPerViewSig.value = 4; // Desktop and up: 4 per row
+      } else if (window.matchMedia('(min-width: 768px)').matches) {
+        slidesPerViewSig.value = 2; // Tablet: 2 per row
       } else {
-        slidesPerViewSig.value = 1; // Mobile
+        slidesPerViewSig.value = 1; // Mobile: strictly 1 per row
       }
     };
 
@@ -51,7 +54,6 @@ export default component$<CarouselProps>(({ workshops = [] }) => {
     });
   });
 
-  // Hover pause handlers
   const handleMouseEnter$ = $(() => {
     isPlaying.value = false;
   });
@@ -60,39 +62,50 @@ export default component$<CarouselProps>(({ workshops = [] }) => {
     isPlaying.value = true;
   });
 
+  // Shared button style for perfect consistency
+  const bookButtonClass = "shrink-0 min-w-[90px] px-4 py-1.5 text-sm font-medium text-white bg-gradient-to-r from-primary-500 to-primary-600 rounded-lg hover:from-primary-700 hover:to-primary-800 transition-all duration-200 whitespace-nowrap";
+
+  // Arrow button styles
+  const arrowButtonClass = "absolute top-1/2 -translate-y-1/2 z-10 w-10 h-10 flex items-center justify-center rounded-full bg-white/80 hover:bg-white shadow-lg transition-all duration-200 opacity-75 hover:opacity-100 disabled:opacity-30 disabled:cursor-not-allowed text-primary-600";
+
   return (
     <>
-      <div class="p-5 md:my-8 md:px-16 bg-white/20 rounded-2xl max-w-7xl md:mx-auto ">
-        {/* Header and Subtitle */}
-        <div class="text-center mt-12 mb-8">
-          <h1 class="!text-5xl md:!text-5xl xdxd font-bold mb-6">
+      <div class="p-5 md:my-12 md:px-16 bg-white/20 rounded-2xl max-w-7xl md:mx-auto">
+        {/* Header */}
+        <div class="text-center mt-10 mb-10">
+          <h1 class="!text-4xl md:!text-5xl font-bold mb-4">
             <span class="bg-gradient-to-r from-primary-600 via-tertiary-600 to-primary-700 bg-clip-text text-transparent">
               Our Offerings
             </span>
           </h1>
-          <p class="text-2xl px-1 text-primary-700 dark:text-primary-300 max-w-3xl mx-auto">
+          <p class="text-xl md:text-2xl text-primary-700 dark:text-primary-300 max-w-3xl mx-auto">
             Explore our Classes & Workshops
           </p>
         </div>
 
+        {/* Carousel */}
         {workshops.length === 0 ? (
           <div class="text-center py-12">
             <p class="text-primary-700 dark:text-primary-300 text-lg">Loading classes...</p>
           </div>
         ) : (
           <Carousel.Root
-            class="carousel-root p-1"
+            class="carousel-root relative"
             slidesPerView={slidesPerViewSig.value}
             gap={25}
             autoPlayIntervalMs={4000}
             bind:autoplay={isPlaying}
             draggable={true}
             align="start"
-                        sensitivity={{ mouse: 2.5, touch: 2.0 }} // Increased sensitivity for more responsive drag/scroll (defaults: mouse=1.5, touch=1.25)
-
+            sensitivity={{ mouse: 2.5, touch: 2.0 }}
             onMouseEnter$={handleMouseEnter$}
             onMouseLeave$={handleMouseLeave$}
           >
+            {/* Previous Arrow */}
+            <Carousel.Previous class={arrowButtonClass + " left-2 md:left-4"}>
+              <LuChevronLeft class="h-5 w-5" />
+            </Carousel.Previous>
+
             <Carousel.Scroller class="carousel-scroller">
               {workshops.map((workshop) => (
                 <Carousel.Slide key={workshop.id} class="h-auto">
@@ -100,23 +113,23 @@ export default component$<CarouselProps>(({ workshops = [] }) => {
                     href={workshop.url || "https://bookeo.com/earthenvessels"}
                     target="_blank"
                     rel="noopener noreferrer"
-                    class="group backdrop-blur-sm border-2 rounded-2xl transition-all duration-300 ease-in-out shadow-md hover:shadow-lg hover:border-secondary-200 hover:bg-white/45 cursor-pointer bg-white/35 border-primary-200 dark:border-secondary-700 overflow-hidden block"
+                    class="group flex flex-col h-full backdrop-blur-sm border-2 rounded-2xl transition-all duration-300 ease-in-out shadow-md hover:shadow-xl hover:border-secondary-200 hover:bg-white/45 cursor-pointer bg-white/35 border-primary-200 dark:border-secondary-700 overflow-hidden block"
                   >
                     <img
                       src={workshop.image}
-                      class="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-105"
+                      class="w-full h-40 object-cover transition-transform duration-300 group-hover:scale-105"
                       alt={workshop.name}
                     />
-                    <div class="p-4">
+                    <div class="flex flex-col flex-1 p-4">
                       <div class="flex items-center justify-between mb-2">
-                        <h3 class="text-lg font-bold text-secondary-900 dark:text-secondary-100 line-clamp-2 flex-1 pr-2">
+                        <h3 class="text-lg font-bold text-secondary-900 dark:text-secondary-100 line-clamp-2 flex-1 pr-3">
                           {workshop.name}
                         </h3>
-                        <span class="flex-none w-1/6  px-3 py-1 text-sm bg-gradient-to-r from-primary-500 to-primary-600 text-white font-medium rounded-lg hover:from-primary-700 hover:to-primary-800 transition-all duration-200 whitespace-nowrap">
+                        <span class={bookButtonClass}>
                           Book
                         </span>
                       </div>
-                      <p class="text-sm md:text-md text-primary-700 dark:text-primary-300 line-clamp-4">
+                      <p class="text-sm md:text-base text-primary-700 dark:text-primary-300 line-clamp-3 flex-1">
                         {workshop.description}
                       </p>
                     </div>
@@ -124,70 +137,81 @@ export default component$<CarouselProps>(({ workshops = [] }) => {
                 </Carousel.Slide>
               ))}
             </Carousel.Scroller>
+
+            {/* Next Arrow */}
+            <Carousel.Next class={arrowButtonClass + " right-2 md:right-4"}>
+              <LuChevronRight class="h-5 w-5" />
+            </Carousel.Next>
+
+            {/* Pagination Dots */}
+            <Carousel.Pagination class="flex justify-center space-x-2 mt-6">
+              {workshops.map((_, index) => (
+                <Carousel.Bullet key={index} />
+              ))}
+            </Carousel.Pagination>
           </Carousel.Root>
         )}
 
-        {/* Events Section with ID */}
-        <div id="events" class="text-center mt-16 mb-8">
-          <p class="text-2xl text-primary-700 dark:text-primary-300 max-w-3xl mx-auto mb-10">
+        {/* Events Section */}
+        <div id="events" class="text-center mt-12 mb-8">
+          <p class="text-xl md:text-2xl text-primary-700 dark:text-primary-300 max-w-3xl mx-auto mb-8">
             Book Private & Corporate Events
           </p>
 
-          {/* Event Cards */}
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto px-1">
-            {/* Corporate Events Card */}
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
+            {/* Corporate */}
             <a
               href="mailto:hello@earthenvessels.ca"
               target="_blank"
               rel="noopener noreferrer"
-              class="group backdrop-blur-sm border-2 rounded-2xl transition-all duration-300 ease-in-out shadow-md hover:shadow-lg hover:border-secondary-200 hover:bg-white/45 cursor-pointer bg-white/35 border-primary-200 dark:border-secondary-700 overflow-hidden self-start"
+              class="group flex flex-col backdrop-blur-sm border-2 rounded-2xl transition-all duration-300 ease-in-out shadow-md hover:shadow-xl hover:border-secondary-200 hover:bg-white/45 cursor-pointer bg-white/35 border-primary-200 dark:border-secondary-700 overflow-hidden"
             >
-              <div class="h-64 w-full overflow-hidden">
+              <div class="h-48 w-full overflow-hidden">
                 <img
                   src="/images/corporate.png"
                   alt="Corporate Events"
                   class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                 />
               </div>
-              <div class="p-6">
-                <div class="flex items-center justify-between mb-3">
-                  <h3 class="text-xl font-bold text-secondary-900 dark:text-secondary-100 flex-1 pr-2">
+              <div class="flex flex-col flex-1 p-5">
+                <div class="flex items-center justify-between mb-2">
+                  <h3 class="text-lg font-bold text-secondary-900 dark:text-secondary-100 flex-1 pr-3">
                     Corporate Events
                   </h3>
-                  <span class="flex-none w-1/6 min-w-[80px] px-3 py-1 text-sm bg-gradient-to-r from-primary-500 to-primary-600 text-white font-medium rounded-lg hover:from-primary-700 hover:to-primary-800 transition-all duration-200 whitespace-nowrap">
+                  <span class={bookButtonClass}>
                     Book
                   </span>
                 </div>
-                <p class="text-primary-700 dark:text-primary-300 mb-4">
+                <p class="text-sm md:text-base text-primary-700 dark:text-primary-300 line-clamp-4">
                   We offer creative, hands-on clay experiences designed to foster connection, reflection, and collaboration. Perfect for corporate retreats or staff appreciation gatherings. Contact us to discuss what might work for your group.
                 </p>
               </div>
             </a>
 
-            {/* Private Events Card */}
+            {/* Private */}
             <a
               href="mailto:hello@earthenvessels.ca"
               target="_blank"
               rel="noopener noreferrer"
-              class="group backdrop-blur-sm border-2 rounded-2xl transition-all duration-300 ease-in-out hover:shadow-lg shadow-md hover:border-secondary-200 hover:bg-white/45 cursor-pointer bg-white/35 border-primary-200 dark:border-secondary-700 overflow-hidden self-start"
+              class="group flex flex-col backdrop-blur-sm border-2 rounded-2xl transition-all duration-300 ease-in-out shadow-md hover:shadow-xl hover:border-secondary-200 hover:bg-white/45 cursor-pointer bg-white/35 border-primary-200 dark:border-secondary-700 overflow-hidden"
             >
-              <div class="h-64 w-full overflow-hidden">
+              <div class="h-48 w-full overflow-hidden">
                 <img
                   src="/images/private.jpeg"
                   alt="Private Events"
                   class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                 />
               </div>
-              <div id='private-events' class="p-4">
-                <div class="flex items-center justify-between mb-3">
-                  <h3 class="text-xl font-bold text-secondary-900 dark:text-secondary-100 flex-1 pr-2">
+              <div class="flex flex-col flex-1 p-5">
+                <div class="flex items-center justify-between mb-2">
+                  <h3 class="text-lg font-bold text-secondary-900 dark:text-secondary-100 flex-1 pr-3">
                     Private Events
                   </h3>
-                  <span class="flex-none w-1/6 min-w-[80px] px-3 py-1 text-sm bg-gradient-to-r from-primary-500 to-primary-600 text-white font-medium rounded-lg hover:from-primary-700 hover:to-primary-800 transition-all duration-200 whitespace-nowrap">
+                  <span class={bookButtonClass}>
                     Book
                   </span>
                 </div>
-                <p class="text-primary-700 dark:text-primary-300 mb-4">
+                <p class="text-sm md:text-base text-primary-700 dark:text-primary-300 line-clamp-4">
                   Celebrate life's special moments. Gather around our large creative table to celebrate one another, play, and make something beautiful together. Think about hosting your next birthday, book club, family gathering or evening out with friends at earthen vessels. Contact us to discuss the opportunities!
                 </p>
               </div>
