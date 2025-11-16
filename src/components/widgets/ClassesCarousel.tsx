@@ -62,7 +62,7 @@ export default component$<CarouselProps>(({ workshops = [] }) => {
 
   return (
     <>
-      <div class="p-5 mt-0 md:px-16 bg-white/20 rounded-2xl max-w-7xl md:mx-auto ">
+      <div class="p-5 md:my-8 md:px-16 bg-white/20 rounded-2xl max-w-7xl md:mx-auto ">
         {/* Header and Subtitle */}
         <div class="text-center mt-12 mb-8">
           <h1 class="!text-5xl md:!text-5xl xdxd font-bold mb-6">
@@ -84,7 +84,7 @@ export default component$<CarouselProps>(({ workshops = [] }) => {
             class="carousel-root p-1"
             slidesPerView={slidesPerViewSig.value}
             gap={20}
-            autoPlayIntervalMs={2500}
+            autoPlayIntervalMs={3500}
             bind:autoplay={isPlaying}
             draggable={true}
             align="start"
