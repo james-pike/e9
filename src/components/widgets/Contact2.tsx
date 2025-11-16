@@ -38,7 +38,7 @@ export default component$(() => {
 
   return (
     <section id="contact" class="relative overflow-hidden py-12 md:py-16">
-      <div class="relative max-w-6xl mx-auto px-4 sm:px-6">
+      <div class="relative max-w-6xl mx-auto px-5 sm:px-6">
         <div class="text-center mb-12">
           <h2 class="!text-5xl md:!text-5xl xdxd font-bold mb-6">
             <span class="bg-gradient-to-r from-secondary-800 via-tertiary-600 to-primary-600 bg-clip-text text-transparent">

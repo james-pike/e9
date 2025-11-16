@@ -100,7 +100,7 @@ export default component$<CarouselProps>(({ workshops = [] }) => {
                     href={workshop.url || "https://bookeo.com/earthenvessels"}
                     target="_blank"
                     rel="noopener noreferrer"
-                    class="group backdrop-blur-sm border-2 rounded-2xl transition-all duration-300 ease-in-out hover:shadow-xl hover:border-secondary-200 hover:bg-white/45 cursor-pointer bg-white/35 border-primary-200 dark:border-secondary-700 overflow-hidden block"
+                    class="group backdrop-blur-sm border-2 rounded-2xl transition-all duration-300 ease-in-out shadow-md hover:shadow-lg hover:border-secondary-200 hover:bg-white/45 cursor-pointer bg-white/35 border-primary-200 dark:border-secondary-700 overflow-hidden block"
                   >
                     <img
                       src={workshop.image}
@@ -112,7 +112,7 @@ export default component$<CarouselProps>(({ workshops = [] }) => {
                         <h3 class="text-lg font-bold text-secondary-900 dark:text-secondary-100 line-clamp-2 flex-1 pr-2">
                           {workshop.name}
                         </h3>
-                        <span class="flex-none w-1/6 min-w-[80px] px-3 py-1 text-sm bg-gradient-to-r from-primary-500 to-primary-600 text-white font-medium rounded-lg hover:from-primary-700 hover:to-primary-800 transition-all duration-200 whitespace-nowrap">
+                        <span class="flex-none w-1/6  px-3 py-1 text-sm bg-gradient-to-r from-primary-500 to-primary-600 text-white font-medium rounded-lg hover:from-primary-700 hover:to-primary-800 transition-all duration-200 whitespace-nowrap">
                           Book
                         </span>
                       </div>
@@ -140,7 +140,7 @@ export default component$<CarouselProps>(({ workshops = [] }) => {
               href="mailto:hello@earthenvessels.ca"
               target="_blank"
               rel="noopener noreferrer"
-              class="group backdrop-blur-sm border-2 rounded-2xl transition-all duration-300 ease-in-out hover:shadow-xl hover:border-secondary-200 hover:bg-white/45 cursor-pointer bg-white/35 border-primary-200 dark:border-secondary-700 overflow-hidden self-start"
+              class="group backdrop-blur-sm border-2 rounded-2xl transition-all duration-300 ease-in-out shadow-md hover:shadow-lg hover:border-secondary-200 hover:bg-white/45 cursor-pointer bg-white/35 border-primary-200 dark:border-secondary-700 overflow-hidden self-start"
             >
               <div class="h-64 w-full overflow-hidden">
                 <img
@@ -169,7 +169,7 @@ export default component$<CarouselProps>(({ workshops = [] }) => {
               href="mailto:hello@earthenvessels.ca"
               target="_blank"
               rel="noopener noreferrer"
-              class="group backdrop-blur-sm border-2 rounded-2xl transition-all duration-300 ease-in-out hover:shadow-xl hover:border-secondary-200 hover:bg-white/45 cursor-pointer bg-white/35 border-primary-200 dark:border-secondary-700 overflow-hidden self-start"
+              class="group backdrop-blur-sm border-2 rounded-2xl transition-all duration-300 ease-in-out hover:shadow-lg shadow-md hover:border-secondary-200 hover:bg-white/45 cursor-pointer bg-white/35 border-primary-200 dark:border-secondary-700 overflow-hidden self-start"
             >
               <div class="h-64 w-full overflow-hidden">
                 <img

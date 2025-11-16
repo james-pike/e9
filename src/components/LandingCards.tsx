@@ -49,7 +49,7 @@ We acknowledge that earthen vessels is on the traditional unceded territory of t
 
   {/* Text */}
   <div class="w-full md:w-1/2 p-2  md:text-left">
-    <p class="text-xs md:text-lg  text-gray-700">
+    <p class="text-md md:text-lg  text-gray-700">
       {card.text}
     </p>
   </div>
