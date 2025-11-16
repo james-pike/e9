@@ -1,5 +1,4 @@
-import { component$, useSignal, useVisibleTask$, useTask$, $ } from '@builder.io/qwik';
-import { Carousel } from '@qwik-ui/headless';
+import { component$, useSignal, useVisibleTask$, useTask$ } from '@builder.io/qwik';
 import { routeLoader$, useLocation } from "@builder.io/qwik-city";
 import { getClasses } from '~/lib/turso';
 import ClassesCarousel from '~/components/widgets/ClassesCarousel';
@@ -37,7 +36,7 @@ export const useClassesData = routeLoader$(async () => {
   }
 });
 
-export default component$<CarouselProps>(({ workshops = [] }) => {
+export default component$<CarouselProps>(() => {
   const isPlaying = useSignal<boolean>(false);
   const slidesPerViewSig = useSignal(1);
   const loc = useLocation();
@@ -77,13 +76,7 @@ export default component$<CarouselProps>(({ workshops = [] }) => {
   });
 
   // Hover pause handlers
-  const handleMouseEnter$ = $(() => {
-    isPlaying.value = false;
-  });
-
-  const handleMouseLeave$ = $(() => {
-    isPlaying.value = true;
-  });
+ 
 
   return (
     <>

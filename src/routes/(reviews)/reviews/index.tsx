@@ -34,7 +34,6 @@ export const useReviewsLoader = routeLoader$(async (event) => {
 export default component$(() => {
   const reviewsData = useReviewsLoader();
   const reviews = useSignal<Review[]>([]);
-  const currentIndex = useSignal(0);
   const isAutoPlaying = useSignal(true);
   const carouselRef = useSignal<HTMLElement | undefined>();
   const location = useLocation();
