@@ -220,7 +220,7 @@ export default component$(() => {
                 height={80}
               />
               <div class="flex flex-col md:flex-row md:items-center md:gap-0">
-               <a href="mailto:james@webdev.ca?subject=Web%20Design%20Services"><span class="block underline md:hidden mb-1">Web Design by James</span></a> 
+               <a href="mailto:james@webdev.ca?subject=Web%20Design%20Services"><span class="block underline md:hidden mb-1">web design by James</span></a> 
                 <span class="block">© 2025 earthen vessels · All rights reserved.</span>
               </div>
             </div>
