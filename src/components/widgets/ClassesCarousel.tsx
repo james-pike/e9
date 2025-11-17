@@ -168,7 +168,7 @@ export default component$(() => {
             Book Private & Corporate Events
           </p>
 
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
             {/* Corporate */}
             <a
               href="mailto:hello@earthenvessels.ca"
