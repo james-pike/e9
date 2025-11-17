@@ -67,6 +67,7 @@ export default component$(() => {
           { text: "Our Logo", href: "/team#logo", icon: LuImage },
         ]
       },
+      //
       {
         text: "About",
         href: "/about",
