@@ -12,14 +12,24 @@ interface Workshop {
   isActive?: boolean;
 }
 
-interface CarouselProps {
-  workshops: Workshop[];
-}
-
-export default component$<CarouselProps>(({ workshops = [] }) => {
+export default component$(() => {
+  const workshops = useSignal<Workshop[]>([]);
   const isPlaying = useSignal<boolean>(false);
   const slidesPerViewSig = useSignal(4); // Start with 4 for desktop to avoid flash
   const loc = useLocation();
+
+  // Fetch workshops data client-side
+  useVisibleTask$(async () => {
+    try {
+      const response = await fetch('/api/classes');
+      if (response.ok) {
+        const data = await response.json();
+        workshops.value = data;
+      }
+    } catch (error) {
+      console.error('Error fetching classes:', error);
+    }
+  });
 
   // Handle hash navigation
   useTask$(({ track }) => {
@@ -63,17 +73,17 @@ export default component$<CarouselProps>(({ workshops = [] }) => {
   });
 
   // Shared button style for perfect consistency
-  const bookButtonClass = "shrink-0 min-w-[90px] px-4 py-1.5 text-sm font-medium text-white bg-gradient-to-r from-primary-500 to-primary-600 rounded-lg hover:from-primary-700 hover:to-primary-800 transition-all duration-200 whitespace-nowrap";
+  const bookButtonClass = "shrink-0 min-w-[90px] px-4 py-1.5 text-sm font-medium text-white text-center bg-gradient-to-r from-primary-500 to-primary-600 rounded-lg hover:from-primary-700 hover:to-primary-800 transition-all duration-200 whitespace-nowrap";
 
-  // Arrow button styles
-  const arrowButtonClass = "absolute top-1/2 -translate-y-1/2 z-10 w-10 h-10 flex items-center justify-center rounded-full bg-white/80 hover:bg-white shadow-lg transition-all duration-200 opacity-75 hover:opacity-100 disabled:opacity-30 disabled:cursor-not-allowed text-primary-600";
+  // Arrow button styles - now for bottom placement
+  const arrowButtonClass = "w-10 h-10 flex items-center justify-center rounded-full bg-white/80 hover:bg-white shadow-lg transition-all duration-200 opacity-75 hover:opacity-100 disabled:opacity-30 disabled:cursor-not-allowed text-primary-600";
 
   return (
     <>
-      <div class="p-5 md:my-12 md:px-16 bg-white/20 rounded-2xl max-w-7xl md:mx-auto">
+      <div class="p-5 -mt-1.5 md:px-16 bg-white/20  max-w-7xl md:mx-auto">
         {/* Header */}
-        <div class="text-center mt-10 mb-10">
-          <h1 class="!text-4xl md:!text-5xl font-bold mb-4">
+        <div class="text-center mt-14 mb-10">
+          <h1 class="!text-4xl md:!text-4.5xl font-bold mb-4">
             <span class="bg-gradient-to-r from-primary-600 via-tertiary-600 to-primary-700 bg-clip-text text-transparent">
               Our Offerings
             </span>
@@ -84,7 +94,7 @@ export default component$<CarouselProps>(({ workshops = [] }) => {
         </div>
 
         {/* Carousel */}
-        {workshops.length === 0 ? (
+        {workshops.value.length === 0 ? (
           <div class="text-center py-12">
             <p class="text-primary-700 dark:text-primary-300 text-lg">Loading classes...</p>
           </div>
@@ -101,13 +111,8 @@ export default component$<CarouselProps>(({ workshops = [] }) => {
             onMouseEnter$={handleMouseEnter$}
             onMouseLeave$={handleMouseLeave$}
           >
-            {/* Previous Arrow */}
-            <Carousel.Previous class={arrowButtonClass + " left-2 md:left-4"}>
-              <LuChevronLeft class="h-5 w-5" />
-            </Carousel.Previous>
-
             <Carousel.Scroller class="carousel-scroller">
-              {workshops.map((workshop) => (
+              {workshops.value.map((workshop) => (
                 <Carousel.Slide key={workshop.id} class="h-auto">
                   <a
                     href={workshop.url || "https://bookeo.com/earthenvessels"}
@@ -129,7 +134,7 @@ export default component$<CarouselProps>(({ workshops = [] }) => {
                           Book
                         </span>
                       </div>
-                      <p class="text-sm md:text-base text-primary-700 dark:text-primary-300 line-clamp-4 flex-1">
+                      <p class="text-sm md:text-base text-primary-700 dark:text-primary-300 line-clamp-5 flex-1">
                         {workshop.description}
                       </p>
                     </div>
@@ -138,17 +143,22 @@ export default component$<CarouselProps>(({ workshops = [] }) => {
               ))}
             </Carousel.Scroller>
 
-            {/* Next Arrow */}
-            <Carousel.Next class={arrowButtonClass + " right-2 md:right-4"}>
-              <LuChevronRight class="h-5 w-5" />
-            </Carousel.Next>
-
-            {/* Pagination Dots */}
-            <Carousel.Pagination class="flex justify-center space-x-2 mt-6">
-              {workshops.map((_, index) => (
-                <Carousel.Bullet key={index} />
-              ))}
-            </Carousel.Pagination>
+            {/* Navigation and Pagination */}
+            <div class="flex items-center justify-end mt-6 gap-4">
+              <Carousel.Pagination class="flex space-x-2">
+                {workshops.value.map((_, index) => (
+                  <Carousel.Bullet key={index} />
+                ))}
+              </Carousel.Pagination>
+              <div class="flex gap-2">
+                <Carousel.Previous class={arrowButtonClass}>
+                  <LuChevronLeft class="h-5 w-5" />
+                </Carousel.Previous>
+                <Carousel.Next class={arrowButtonClass}>
+                  <LuChevronRight class="h-5 w-5" />
+                </Carousel.Next>
+              </div>
+            </div>
           </Carousel.Root>
         )}
 

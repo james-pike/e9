@@ -1,7 +1,8 @@
-import { component$, useSignal, $, useTask$, useStyles$, useVisibleTask$ } from "@builder.io/qwik";
+import { component$, useSignal, $, useStyles$, useVisibleTask$ } from "@builder.io/qwik";
 import { routeLoader$ } from "@builder.io/qwik-city";
-import { useLocation } from "@builder.io/qwik-city";
 import { tursoClient } from "~/lib/turso";
+import { Carousel } from '@qwik-ui/headless';
+import { LuChevronLeft, LuChevronRight } from '@qwikest/icons/lucide';
 
 interface Review {
   id: number;
@@ -35,110 +36,94 @@ export default component$(() => {
   const reviewsData = useReviewsLoader();
   const reviews = useSignal<Review[]>([]);
   const isAutoPlaying = useSignal(true);
-  const carouselRef = useSignal<HTMLElement | undefined>();
-  const location = useLocation();
-  const isHomePage = location.url.pathname === "/";
-  const expandedReview = useSignal<number | null>(null);
+  const slidesPerViewSig = useSignal(3);
+  const expandedReviews = useSignal<number[]>([]);
 
   // Load reviews data
   useVisibleTask$(() => {
     reviews.value = reviewsData.value;
   });
 
+  const toggleExpand = $((reviewId: number) => {
+    if (expandedReviews.value.includes(reviewId)) {
+      expandedReviews.value = expandedReviews.value.filter(id => id !== reviewId);
+    } else {
+      expandedReviews.value = [...expandedReviews.value, reviewId];
+    }
+  });
+
+  // Responsive slidesPerView
+  useVisibleTask$(({ cleanup }) => {
+    const updateSlidesPerView = () => {
+      if (window.matchMedia('(min-width: 1024px)').matches) {
+        slidesPerViewSig.value = 3;
+      } else if (window.matchMedia('(min-width: 768px)').matches) {
+        slidesPerViewSig.value = 2;
+      } else {
+        slidesPerViewSig.value = 1;
+      }
+    };
+
+    updateSlidesPerView();
+    window.addEventListener('resize', updateSlidesPerView);
+    cleanup(() => {
+      window.removeEventListener('resize', updateSlidesPerView);
+    });
+  });
+
   useStyles$(`
-    .multi-column-grid {
-      display: flex;
-      overflow: hidden;
+    .review-content-wrapper {
       position: relative;
-      padding: 0 1rem;
-    }
-    .reviews-slider {
-      display: flex;
-      gap: 1.5rem;
-      animation: slideReviews 120s linear infinite;
-    }
-    .reviews-slider:hover {
-      animation-play-state: paused;
-    }
-    @keyframes slideReviews {
-      0% {
-        transform: translateX(0);
-      }
-      100% {
-        transform: translateX(-50%);
-      }
-    }
-    .review-card {
-      flex-shrink: 0;
-      width: 400px;
-    }
-    .scrollbar-invisible::-webkit-scrollbar {
-      display: none;
-    }
-    .scrollbar-invisible {
-      -ms-overflow-style: none;
-      scrollbar-width: none;
     }
     .review-content {
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 8;
       overflow: hidden;
-      line-height: 1.6;
-      transition: max-height 500ms cubic-bezier(0.4, 0, 0.2, 1);
-    }
-    .review-content.collapsed {
-      max-height: 18em;
+      transition: all 0.3s ease-in-out;
     }
     .review-content.expanded {
-      max-height: 30em;
-      overflow-y: auto;
-      scrollbar-width: thin;
-      scrollbar-color: rgba(0,0,0,0.2) transparent;
+      -webkit-line-clamp: unset;
+      overflow: visible;
     }
-    .review-content.expanded::-webkit-scrollbar {
-      width: 4px;
+    .review-content-wrapper:not(.expanded)::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 50px;
+      background: linear-gradient(transparent, rgba(255,255,255,0.95));
+      pointer-events: none;
     }
-    .review-content.expanded::-webkit-scrollbar-track {
-      background: transparent;
-    }
-    .review-content.expanded::-webkit-scrollbar-thumb {
-      background-color: rgba(0,0,0,0.2);
-      border-radius: 2px;
-    }
-    .review-card-container {
-      display: flex;
-      flex-direction: column;
-      transition: transform 300ms ease-in-out, box-shadow 300ms ease-in-out, border-color 300ms ease-in-out;
+    .review-card-wrapper {
       cursor: pointer;
+      transition: transform 0.2s ease-in-out;
     }
-    .review-card-container.expanded {
+    .review-card-wrapper:hover {
       transform: scale(1.02);
-      box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
     }
-    .carousel-container {
-      -webkit-overflow-scrolling: touch;
-      overscroll-behavior-x: contain;
+    .review-card-wrapper:hover .review-content:not(.expanded) {
+      -webkit-line-clamp: 12;
+    }
+    .expand-indicator {
+      opacity: 0.7;
+      transition: opacity 0.2s;
+    }
+    .review-card-wrapper:hover .expand-indicator {
+      opacity: 1;
+    }
+    .carousel-scroller {
+      align-items: flex-start !important;
+    }
+    @media (max-width: 767px) {
+      .carousel-scroller {
+        align-items: flex-end !important;
+      }
     }
   `);
 
-  const safeReviews = reviews.value;
-
-  const nextSlide = $(() => {
-    if (carouselRef.value) {
-      const containerWidth = carouselRef.value.clientWidth;
-      carouselRef.value.scrollBy({ left: containerWidth, behavior: "smooth" });
-    }
-  });
-
-  useTask$(({ track, cleanup }) => {
-    track(() => isAutoPlaying.value);
-    if (typeof window !== "undefined" && isHomePage) {
-      const interval = setInterval(() => {
-        if (isAutoPlaying.value && safeReviews.length > 0) {
-          nextSlide();
-        }
-      }, 4000);
-      cleanup(() => clearInterval(interval));
-    }
-  });
+  const arrowButtonClass = "w-10 h-10 flex items-center justify-center rounded-full bg-white/80 hover:bg-white shadow-lg transition-all duration-200 opacity-75 hover:opacity-100 disabled:opacity-30 disabled:cursor-not-allowed text-primary-600";
 
   // Fixed typing issue with Intl.DateTimeFormatOptions
   function formatDate(dateString: string) {
@@ -191,27 +176,10 @@ export default component$(() => {
     ));
   };
 
-  // Loading state
-  if (safeReviews.length === 0) {
-    return (
-      <section class="relative overflow-hidden py-12 md:py-16">
-        <div class="relative max-w-7xl mx-auto px-1 sm:px-6">
-          <div class="text-center mb-12">
-            <h2 class="!text-5xl md:text-6xl px-4 font-bold mb-6">
-              <span class="bg-gradient-to-r xdxd from-primary-600 via-tertiary-600 to-primary-600 bg-clip-text text-transparent">
-                Participant Reviews
-              </span>
-            </h2>
-          </div>
-        </div>
-      </section>
-    );
-  }
-
   return (
     <>
       <section class="relative overflow-hidden py-12 md:py-16">
-        <div class="relative max-w-7xl mx-auto px-1 sm:px-6">
+        <div class="relative max-w-7xl mx-auto px-5 sm:px-6">
           <div class="text-center mb-12">
             <h2 class="!text-5xl md:text-6xl px-4 font-bold mb-6">
               <span class="bg-gradient-to-r xdxd from-primary-600 via-tertiary-600 to-primary-600 bg-clip-text text-transparent">
@@ -220,117 +188,81 @@ export default component$(() => {
             </h2>
           </div>
 
-          <div class="relative max-w-7xl mx-auto">
-            {safeReviews.length === 0 ? (
+          <div class="relative max-w-6xl mx-auto">
+            {reviews.value.length === 0 ? (
               <div class="text-center py-12 text-primary-600 text-lg">
-                No reviews available yet.
+                Loading reviews...
               </div>
-            ) : isHomePage ? (
-              <>
-                {/* Full-bleed on mobile, normal on desktop */}
-                <div class="-mx-4 sm:mx-0">
-                  <div
-                    class="carousel-container overflow-x-auto snap-x snap-mandatory scrollbar-invisible"
-                    ref={carouselRef}
-                  >
-                    <div class="flex gap-4 sm:gap-6 px-4 sm:px-0">
-                      {safeReviews.map((review: Review) => (
-                        <div key={review.id} class="flex-shrink-0 w-full sm:w-80 snap-center">
-                          <div 
-                            class={[
-                              "review-card-container bg-gradient-to-br from-white/70 via-primary-50/70 to-secondary-50/70 dark:from-gray-800/90 dark:via-primary-900/30 dark:to-secondary-900/30 backdrop-blur-sm rounded-2xl shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden border-2 border-primary-100 dark:border-secondary-700",
-                              expandedReview.value === review.id ? "expanded border-secondary-200" : "hover:border-secondary-200"
-                            ]}
-                            onClick$={() => {
-                              expandedReview.value = expandedReview.value === review.id ? null : review.id;
-                            }}
-                            role="button"
-                            tabIndex={0}
-                            aria-expanded={expandedReview.value === review.id}
-                          >
-                            <div class="flex justify-center mb-4 pt-6">
-                              <div class="flex space-x-1">{renderStars(review.rating)}</div>
-                            </div>
-                            <blockquote 
-                              class={[
-                                "review-content text-md text-secondary-900 dark:text-secondary-100 mb-4 px-6",
-                                expandedReview.value === review.id ? "expanded" : "collapsed"
-                              ]}
-                            >
-                              "{review.review}"
-                            </blockquote>
-                            <div class="flex items-center space-x-3 mb-2 px-6">
-                              <div class="text-left">
-                                <h4 class="font-bold text-secondary-900 dark:text-secondary-100">
-                                  {review.name}
-                                </h4>
-                                {review.role && (
-                                  <p class="text-primary-600 dark:text-primary-400 text-xs">{review.role}</p>
-                                )}
-                              </div>
-                            </div>
-                            <p class="text-primary-500 dark:text-primary-400 text-xs pb-2 px-6">
-                              {formatRelativeDate(review.date)}
-                            </p>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </>
             ) : (
-              <div class="multi-column-grid">
-                <div class="reviews-slider">
-                  {/* First set + duplicate for seamless loop */}
-                  {[...safeReviews, ...safeReviews].map((review: Review, idx: number) => (
-                    <div key={idx} class="review-card">
-                      <div 
-                        class={[
-                          "review-card-container bg-gradient-to-br from-white/50 via-primary-50/30 to-secondary-50/30 dark:from-gray-800/90 dark:via-primary-900/30 dark:to-secondary-900/30 backdrop-blur-sm rounded-2xl shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden border-2 border-primary-100 dark:border-secondary-700",
-                          expandedReview.value === review.id ? "expanded border-secondary-200" : "hover:border-secondary-200"
-                        ]}
-                        onClick$={() => {
-                          expandedReview.value = expandedReview.value === review.id ? null : review.id;
-                        }}
-                        role="button"
-                        tabIndex={0}
+              <Carousel.Root
+                class="carousel-root relative"
+                slidesPerView={slidesPerViewSig.value}
+                gap={24}
+                autoPlayIntervalMs={3000}
+                bind:autoplay={isAutoPlaying}
+                draggable={true}
+                align="start"
+                sensitivity={{ mouse: 2.5, touch: 2.0 }}
+              >
+                <Carousel.Scroller class="carousel-scroller">
+                  {reviews.value.map((review: Review) => (
+                    <Carousel.Slide key={review.id} class="h-auto">
+                      <div
+                        class="review-card-wrapper bg-gradient-to-br from-white/70 via-primary-50/70 to-secondary-50/70 dark:from-gray-800/90 dark:via-primary-900/30 dark:to-secondary-900/30 backdrop-blur-sm rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden hover:border-secondary-200 border-2 border-primary-100 dark:border-secondary-700"
+                        onClick$={() => toggleExpand(review.id)}
                       >
-                        <div class="flex justify-center mb-6 pt-6">
+                        <div class="flex justify-center mb-4 pt-6">
                           <div class="flex space-x-1">{renderStars(review.rating)}</div>
                         </div>
-                        <blockquote 
-                          class={[
-                            "review-content text-lg text-secondary-900 dark:text-secondary-100 mb-6 px-6",
-                            expandedReview.value === review.id ? "expanded" : "collapsed"
-                          ]}
-                        >
-                          "{review.review}"
-                        </blockquote>
-                        <div class="mt-auto">
-                          <div class="flex items-center space-x-3 mb-2 px-6">
-                            <div class="text-left">
-                              <h4 class="font-bold text-secondary-900 dark:text-secondary-100">
-                                {review.name}
-                              </h4>
-                            </div>
-                          </div>
-                          <p class="text-primary-500 dark:text-primary-400 text-xs pb-4 px-6">
-                            {formatRelativeDate(review.date)}
-                          </p>
+                        <div class={`review-content-wrapper px-6 mb-2 ${expandedReviews.value.includes(review.id) ? 'expanded' : ''}`}>
+                          <blockquote class={`review-content text-lg pb-3 text-secondary-900 dark:text-secondary-100 ${expandedReviews.value.includes(review.id) ? 'expanded' : ''}`}>
+                            "{review.review}"
+                          </blockquote>
                         </div>
+                        <div class="flex items-center justify-between px-6 mb-1">
+                          <div class="text-left">
+                            <h4 class=" font-bold text-secondary-900 dark:text-secondary-100">
+                              {review.name}
+                            </h4>
+                          </div>
+                          <div class="expand-indicator">
+                            <span class="text-xs text-primary-600 dark:text-primary-400 font-medium">
+                              {expandedReviews.value.includes(review.id) ? 'Collapse' : 'Read more'}
+                            </span>
+                          </div>
+                        </div>
+                        <p class="text-primary-500 dark:text-primary-400 text-xs pb-3 px-6">
+                          {formatRelativeDate(review.date)}
+                        </p>
                       </div>
-                    </div>
+                    </Carousel.Slide>
                   ))}
+                </Carousel.Scroller>
+
+                {/* Navigation and Pagination */}
+                <div class="flex items-center justify-end mt-6 gap-4">
+                  <Carousel.Pagination class="flex space-x-2">
+                    {reviews.value.map((_, index) => (
+                      <Carousel.Bullet key={index} />
+                    ))}
+                  </Carousel.Pagination>
+                  <div class="flex gap-2">
+                    <Carousel.Previous class={arrowButtonClass}>
+                      <LuChevronLeft class="h-5 w-5" />
+                    </Carousel.Previous>
+                    <Carousel.Next class={arrowButtonClass}>
+                      <LuChevronRight class="h-5 w-5" />
+                    </Carousel.Next>
+                  </div>
                 </div>
-              </div>
+              </Carousel.Root>
             )}
           </div>
         </div>
       </section>
 
       {/* Media Articles Section */}
-      <section class="relative overflow-hidden py-12 md:py-16 bg-gradient-to-br from-primary-50/30 to-secondary-50/30 dark:from-gray-900/50 dark:to-gray-800/50">
+      <section id="news" class="scroll-mt-20 relative overflow-hidden py-16 md:py-16 bg-gradient-to-br from-primary-50/30 to-secondary-50/30 dark:from-gray-900/50 dark:to-gray-800/50">
         <div class="relative max-w-7xl mx-auto px-4 sm:px-6">
           <div class="text-center mb-12">
             <h2 class="!text-4xl md:text-4xl font-bold mb-6">

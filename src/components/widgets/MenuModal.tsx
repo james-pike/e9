@@ -125,35 +125,35 @@ export default component$(() => {
   const menuItems = [
       {
       title: "This Is Us",
-      href: "/team/",
+      href: "/team",
       hasSubmenu: true,
       subitems: [
         { title: "Facilitators", href: "/team" },
-            { title: "Our Logo", href: "/team/#logo", badge: null },
+            { title: "Our Logo", href: "/team#logo", badge: null },
 
       ],
     },
     {
       title: "About",
-      href: "/about/",
+      href: "/about",
       hasSubmenu: true,
       subitems: [
         { title: "Our Space", href: "/about" },
         { title: "What To Expect", href: "/about#what-to-expect" },
         { title: "Newsletter", href: "/newsletter" },
-            { title: "Gallery", href: "/gallery/", badge: null },
+            { title: "Gallery", href: "/gallery", badge: null },
 
         { title: "FAQ", href: "/faq" },
       ],
     },
     {
       title: "Our Offerings",
-      href: "/offerings/",
+      href: "/offerings",
       hasSubmenu: true,
       subitems: [
         { title: "Classes & Workshops", href: "/offerings" },
-                { title: "Corporate Events", href: "/offerings/#events" },
-                                { title: "Private Events", href: "/offerings/#private-events" },
+                { title: "Corporate Events", href: "/offerings#events" },
+                                { title: "Private Events", href: "/offerings#private-events" },
 
                         { title: "Gift Cards", href: "https://bookeo.com/earthenvessels/buyvoucher" },
 
@@ -162,12 +162,12 @@ export default component$(() => {
     },
       {
       title: "Reviews",
-      href: "/reviews/",
+      href: "/reviews",
       hasSubmenu: true,
       subitems: [
         { title: "Reviews", href: "/reviews" },
                 { title: "In The News", href: "/reviews#news" },
-                                
+
 
       ],
     },
