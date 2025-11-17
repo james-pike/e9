@@ -134,7 +134,7 @@ export default component$(() => {
                           Book
                         </span>
                       </div>
-                      <p class="text-sm md:text-base text-primary-700 dark:text-primary-300 line-clamp-5 flex-1">
+                      <p class="text-sm md:text-base text-primary-700 dark:text-primary-300 line-clamp-4 flex-1">
                         {workshop.description}
                       </p>
                     </div>
