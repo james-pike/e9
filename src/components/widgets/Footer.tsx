@@ -226,7 +226,7 @@ export default component$(() => {
             </div>
           </div>
           <span class="hidden underline md:block text-sm text-primary-700 dark:text-primary-300 order-1 md:order-2">
-          <a href="mailto:james@webdev.ca?subject=Web%20Design%20Services"> Web Design by James</a> 
+          <a href="mailto:james@webdev.ca?subject=Web%20Design%20Services"> web design by James</a> 
           </span>
         </div>
       </div>
