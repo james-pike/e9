@@ -163,7 +163,7 @@ export default component$(() => {
         )}
 
         {/* Events Section */}
-        <div id="events" class="text-center mt-12 mb-8">
+        <div id="events" class="text-center mt-12 mb-12">
           <p class="text-xl md:text-2xl text-primary-700 dark:text-primary-300 max-w-3xl mx-auto mb-8">
             Book Private & Corporate Events
           </p>
