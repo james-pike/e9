@@ -2,7 +2,7 @@ import { component$, useSignal, $, useStyles$, useVisibleTask$ } from "@builder.
 import { routeLoader$ } from "@builder.io/qwik-city";
 import { tursoClient } from "~/lib/turso";
 import { Carousel } from '@qwik-ui/headless';
-import { LuChevronLeft, LuChevronRight } from '@qwikest/icons/lucide';
+import { LuChevronLeft, LuChevronRight, LuChevronDown } from '@qwikest/icons/lucide';
 
 interface Review {
   id: number;
@@ -38,10 +38,33 @@ export default component$(() => {
   const isAutoPlaying = useSignal(true);
   const slidesPerViewSig = useSignal(3);
   const expandedReviews = useSignal<number[]>([]);
+  const overflowingReviews = useSignal<number[]>([]);
 
   // Load reviews data
   useVisibleTask$(() => {
     reviews.value = reviewsData.value;
+  });
+
+  // Detect which reviews are overflowing and need expand button
+  useVisibleTask$(({ track }) => {
+    track(() => reviews.value);
+
+    if (reviews.value.length === 0) return;
+
+    // Wait for DOM to render
+    setTimeout(() => {
+      const overflowing: number[] = [];
+      reviews.value.forEach((review) => {
+        const element = document.querySelector(`[data-review-id="${review.id}"] .review-content`);
+        if (element) {
+          // Check if content is clamped (scrollHeight > clientHeight)
+          if (element.scrollHeight > element.clientHeight) {
+            overflowing.push(review.id);
+          }
+        }
+      });
+      overflowingReviews.value = overflowing;
+    }, 100);
   });
 
   const toggleExpand = $((reviewId: number) => {
@@ -49,6 +72,13 @@ export default component$(() => {
       expandedReviews.value = expandedReviews.value.filter(id => id !== reviewId);
     } else {
       expandedReviews.value = [...expandedReviews.value, reviewId];
+    }
+  });
+
+  const handleSlideChange = $(() => {
+    // On mobile, collapse all expanded reviews when slide changes
+    if (window.matchMedia('(max-width: 767px)').matches) {
+      expandedReviews.value = [];
     }
   });
 
@@ -97,20 +127,22 @@ export default component$(() => {
       pointer-events: none;
     }
     .review-card-wrapper {
-      cursor: pointer;
       transition: transform 0.2s ease-in-out;
     }
-    .review-card-wrapper:hover {
+    .review-card-wrapper.has-overflow {
+      cursor: pointer;
+    }
+    .review-card-wrapper.has-overflow:hover {
       transform: scale(1.02);
     }
-    .review-card-wrapper:hover .review-content:not(.expanded) {
+    .review-card-wrapper.has-overflow:hover .review-content:not(.expanded) {
       -webkit-line-clamp: 12;
     }
     .expand-indicator {
       opacity: 0.7;
       transition: opacity 0.2s;
     }
-    .review-card-wrapper:hover .expand-indicator {
+    .review-card-wrapper.has-overflow:hover .expand-indicator {
       opacity: 1;
     }
     .carousel-scroller {
@@ -203,13 +235,15 @@ export default component$(() => {
                 draggable={true}
                 align="start"
                 sensitivity={{ mouse: 2.5, touch: 2.0 }}
+                onChange$={handleSlideChange}
               >
                 <Carousel.Scroller class="carousel-scroller">
                   {reviews.value.map((review: Review) => (
                     <Carousel.Slide key={review.id} class="h-auto">
                       <div
-                        class="review-card-wrapper bg-gradient-to-br from-white/70 via-primary-50/70 to-secondary-50/70 dark:from-gray-800/90 dark:via-primary-900/30 dark:to-secondary-900/30 backdrop-blur-sm rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden hover:border-secondary-200 border-2 border-primary-100 dark:border-secondary-700"
-                        onClick$={() => toggleExpand(review.id)}
+                        data-review-id={review.id}
+                        class={`review-card-wrapper ${overflowingReviews.value.includes(review.id) ? 'has-overflow' : ''} bg-gradient-to-br from-white/70 via-primary-50/70 to-secondary-50/70 dark:from-gray-800/90 dark:via-primary-900/30 dark:to-secondary-900/30 backdrop-blur-sm rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden hover:border-secondary-200 border-2 border-primary-100 dark:border-secondary-700`}
+                        onClick$={() => overflowingReviews.value.includes(review.id) && toggleExpand(review.id)}
                       >
                         <div class="flex justify-center mb-4 pt-6">
                           <div class="flex space-x-1">{renderStars(review.rating)}</div>
@@ -225,11 +259,11 @@ export default component$(() => {
                               {review.name}
                             </h4>
                           </div>
-                          <div class="expand-indicator">
-                            <span class="text-xs text-primary-600 dark:text-primary-400 font-medium">
-                              {expandedReviews.value.includes(review.id) ? 'Collapse' : 'Read more'}
-                            </span>
-                          </div>
+                          {overflowingReviews.value.includes(review.id) && (
+                            <div class="expand-indicator">
+                              <LuChevronDown class={`w-5 h-5 text-primary-600 dark:text-primary-400 transition-transform duration-200 ${expandedReviews.value.includes(review.id) ? 'rotate-180' : ''}`} />
+                            </div>
+                          )}
                         </div>
                         <p class="text-primary-500 dark:text-primary-400 text-xs pb-3 px-6">
                           {formatRelativeDate(review.date)}
