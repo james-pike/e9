@@ -17,7 +17,7 @@ interface Review {
 export const useReviewsLoader = routeLoader$(async (event) => {
   try {
     const client = tursoClient(event);
-    const result = await client.execute('SELECT * FROM reviews ORDER BY id ASC');
+    const result = await client.execute('SELECT * FROM reviews ORDER BY position ASC');
     return result.rows.map((row: any) => ({
       id: Number(row.id) || 0,
       name: String(row.name) || '',

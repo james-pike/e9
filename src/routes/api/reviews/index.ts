@@ -3,7 +3,7 @@ import { turso } from '~/lib/turso';
 
 export const onGet: RequestHandler = async ({ json }) => {
   try {
-    const result = await turso.execute('SELECT * FROM reviews ORDER BY id ASC');
+    const result = await turso.execute('SELECT * FROM reviews ORDER BY position ASC');
     const reviews = result.rows.map((row: any) => ({
       id: Number(row.id) || 0,
       name: String(row.name) || '',

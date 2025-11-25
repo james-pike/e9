@@ -17,7 +17,7 @@ export const turso = createClient({
 export async function getClasses() {
   try {
     console.log('Attempting to query classes table...');
-    const result = await turso.execute('SELECT * FROM classes ORDER BY isActive DESC');
+    const result = await turso.execute('SELECT * FROM classes ORDER BY position ASC');
     console.log('Query successful, found', result.rows.length, 'classes');
     return result.rows;
   } catch (error) {
@@ -169,7 +169,7 @@ export function tursoClient(event: any) {
 export async function getFaqs() {
   try {
     console.log('Attempting to query faqs table...');
-    const result = await turso.execute('SELECT * FROM faqs ORDER BY id ASC');
+    const result = await turso.execute('SELECT * FROM faqs ORDER BY position ASC');
     console.log('Query successful, found', result.rows.length, 'faqs');
     return result.rows;
   } catch (error) {

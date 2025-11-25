@@ -129,6 +129,16 @@ export default component$(() => {
                       <span class="text-md opacity-90">{bannerMessages.value?.subtitle}</span>
                       <span class="text-xs opacity-90">•</span>
                       <span class="text-md opacity-90">{bannerMessages.value?.message}</span>
+                      {bannerMessages.value?.gif && (
+                        <>
+                          <span class="text-md opacity-90">•</span>
+                          <img
+                            src={bannerMessages.value.gif}
+                            alt="Banner animation"
+                            class="h-6 w-auto object-contain inline-block"
+                          />
+                        </>
+                      )}
                       <span class="text-md opacity-0 mx-8">•</span>
                     </span>
                     {/* Duplicate for seamless loop */}
@@ -138,11 +148,21 @@ export default component$(() => {
                       <span class="text-md opacity-90">{bannerMessages.value?.subtitle}</span>
                       <span class="text-md opacity-90">•</span>
                       <span class="text-md opacity-90">{bannerMessages.value?.message}</span>
+                      {bannerMessages.value?.gif && (
+                        <>
+                          <span class="text-md opacity-90">•</span>
+                          <img
+                            src={bannerMessages.value.gif}
+                            alt="Banner animation"
+                            class="h-6 w-auto object-contain inline-block"
+                          />
+                        </>
+                      )}
                       <span class="text-md opacity-0 mx-8">•</span>
                     </span>
                   </div>
                 </div>
-                
+
                 {/* Desktop: Static wrapped text */}
                 <div class="hidden md:flex items-center gap-2 flex-wrap text-primary-700">
                   <h3 class="font-bold text-md text-primary-600 whitespace-nowrap">{bannerMessages.value?.title}</h3>
@@ -150,6 +170,16 @@ export default component$(() => {
                   <span class="text-md md:text-md opacity-90">{bannerMessages.value?.subtitle}</span>
                   <span class="text-sm opacity-90">•</span>
                   <span class="text-md md:text-sm opacity-90">{bannerMessages.value?.message}</span>
+                  {bannerMessages.value?.gif && (
+                    <>
+                      <span class="text-md opacity-90">•</span>
+                      <img
+                        src={bannerMessages.value.gif}
+                        alt="Banner animation"
+                        class="h-6 w-auto object-contain inline-block"
+                      />
+                    </>
+                  )}
                 </div>
               </div>
             </div>

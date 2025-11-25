@@ -80,7 +80,7 @@ export const useGalleryLoader = routeLoader$(async (event) => {
     const schemaResult = await client.execute("PRAGMA table_info(gallery_images)");
     console.log('Table schema:', schemaResult.rows);
 
-    const result = await client.execute("SELECT * FROM gallery_images ORDER BY id ASC");
+    const result = await client.execute("SELECT * FROM gallery_images ORDER BY position ASC");
     console.log('Query result count:', result.rows.length);
 
     if (result.rows.length === 0) {

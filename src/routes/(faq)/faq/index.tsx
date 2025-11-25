@@ -13,7 +13,7 @@ interface Faq {
 export const useFaqsLoader = routeLoader$(async (event) => {
   try {
     const client = tursoClient(event);
-    const result = await client.execute("SELECT * FROM faqs ORDER BY id ASC");
+    const result = await client.execute("SELECT * FROM faqs ORDER BY position ASC");
     return result.rows.map((row: any) => ({
       id: Number(row.id),
       question: String(row.question),
