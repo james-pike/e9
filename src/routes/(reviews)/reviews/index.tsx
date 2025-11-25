@@ -35,7 +35,7 @@ export const useReviewsLoader = routeLoader$(async (event) => {
 export default component$(() => {
   const reviewsData = useReviewsLoader();
   const reviews = useSignal<Review[]>([]);
-  const isAutoPlaying = useSignal(true);
+  const isAutoPlaying = useSignal(false);
   const slidesPerViewSig = useSignal(3);
   const expandedReviews = useSignal<number[]>([]);
   const overflowingReviews = useSignal<number[]>([]);
