@@ -171,7 +171,7 @@ export default component$(() => {
 
       ],
     },
-        { title: "Connections", href: "/connections/", badge: null },
+        { title: "Community", href: "/community/", badge: null },
 
         { title: "Contact", href: "/contact/", badge: null },
 

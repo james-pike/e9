@@ -98,7 +98,7 @@ export default component$(() => {
        
         ],
       },
-            { text: "Connections", href: "/connections" },
+            { text: "Community", href: "/community" },
 
     
       { text: "Contact", href: "/contact" },

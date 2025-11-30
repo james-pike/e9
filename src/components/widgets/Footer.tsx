@@ -42,7 +42,7 @@ export default component$(() => {
         { title: "Classes & Workshops", href: "/offerings" },
                         { title: "Corporate Events", href: "/offerings#events" },
 
-        { title: "Connections", href: "/connections" },
+        { title: "Community", href: "/community" },
 
         { title: "Reviews", href: "/reviews" },
         { title: "Contact", href: "/contact" },

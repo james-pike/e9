@@ -199,33 +199,36 @@ export default component$(() => {
             </a>
 
             {/* Private */}
-            <a
-              href="mailto:hello@earthenvessels.ca"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="group flex flex-col backdrop-blur-sm border-2 rounded-2xl transition-all duration-300 ease-in-out shadow-md hover:shadow-xl hover:border-secondary-200 hover:bg-white/45 cursor-pointer bg-white/35 border-primary-200 dark:border-secondary-700 overflow-hidden"
-            >
-              <div class="h-48 w-full overflow-hidden">
-                <img
-                  src="/images/private.jpeg"
-                  alt="Private Events"
-                  class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-                />
-              </div>
-              <div class="flex flex-col flex-1 p-5">
-                <div class="flex items-center justify-between mb-2">
-                  <h3 class="text-lg font-bold text-secondary-900 dark:text-secondary-100 flex-1 pr-3">
-                    Private Events
-                  </h3>
-                  <span class={bookButtonClass}>
-                    Book
-                  </span>
-                </div>
-                <p class="text-sm md:text-base text-primary-700 dark:text-primary-300 line-clamp-4">
-                  Celebrate life's special moments. Gather around our large creative table to celebrate one another, play, and make something beautiful together. Think about hosting your next birthday, book club, family gathering or evening out with friends at earthen vessels. Contact us to discuss the opportunities!
-                </p>
-              </div>
-            </a>
+      <a
+  href="mailto:hello@earthenvessels.ca"
+  target="_blank"
+  rel="noopener noreferrer"
+  class="group flex flex-col backdrop-blur-sm border-2 rounded-2xl transition-all duration-300 ease-in-out shadow-md hover:shadow-xl hover:border-secondary-200 hover:bg-white/45 cursor-pointer bg-white/35 border-primary-200 dark:border-secondary-700 overflow-hidden"
+>
+  <div class="h-48 w-full overflow-hidden">
+    <img
+      src="/images/private.jpeg"
+      alt="Private Events"
+      class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105
+             /* ← This line does exactly what you asked for */
+             md:object-top lg:object-top"
+    />
+  </div>
+
+  <div class="flex flex-col flex-1 p-5">
+    <div class="flex items-center justify-between mb-2">
+      <h3 class="text-lg font-bold text-secondary-900 dark:text-secondary-100 flex-1 pr-3">
+        Private Events
+      </h3>
+      <span class={bookButtonClass}>
+        Book
+      </span>
+    </div>
+    <p class="text-sm md:text-base text-primary-700 dark:text-primary-300 line-clamp-4">
+      Celebrate life's special moments. Gather around our large creative table to celebrate one another, play, and make something beautiful together. Think about hosting your next birthday, book club, family gathering or evening out with friends at earthen vessels. Contact us to discuss the opportunities!
+    </p>
+  </div>
+</a>
           </div>
         </div>
       </div>
