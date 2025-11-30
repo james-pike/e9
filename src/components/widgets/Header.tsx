@@ -13,7 +13,11 @@ import {
   LuCalendarDays,
   LuBuilding2,
   LuPartyPopper,
-  LuGift
+  LuGift,
+  LuFlower2,
+  LuCupSoda,
+  LuSoup,
+  LuCuboid,
 } from "@qwikest/icons/lucide";
 
 export default component$(() => {
@@ -74,6 +78,8 @@ export default component$(() => {
         items: [
           { text: "Our Space", href: "/about", icon: LuHome },
           { text: "What To Expect", href: "/about#what-to-expect", icon: LuEye },
+                    { text: "Benefits Of Clay", href: "/about#benefits-of-clay", icon: LuCuboid },
+
           { text: "Newsletter", href: "/newsletter", icon: LuNewspaper },
           { text: "Gallery", href: "/gallery", icon: LuImage },
           { text: "FAQ", href: "/faq", icon: LuHelpCircle },

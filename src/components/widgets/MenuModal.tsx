@@ -140,6 +140,8 @@ export default component$(() => {
       subitems: [
         { title: "Our Space", href: "/about" },
         { title: "What To Expect", href: "/about#what-to-expect" },
+                { title: "Benefits Of Clay", href: "/about#benefits-of-clay" },
+
         { title: "Newsletter", href: "/newsletter" },
             { title: "Gallery", href: "/gallery", badge: null },
 
