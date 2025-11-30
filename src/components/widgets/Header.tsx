@@ -14,9 +14,7 @@ import {
   LuBuilding2,
   LuPartyPopper,
   LuGift,
-  LuFlower2,
-  LuCupSoda,
-  LuSoup,
+  
   LuCuboid,
 } from "@qwikest/icons/lucide";
 
