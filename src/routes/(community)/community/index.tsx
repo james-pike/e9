@@ -155,16 +155,20 @@ export default component$(() => {
                     <div class="relative w-full flex flex-col items-center justify-center mb-2 group/link">
                       <a
                         href={partner.website}
+                        target="_blank"
+                        rel="noopener noreferrer"
                         aria-label={`Visit ${partner.name} website`}
                         class="flex items-center gap-2 group/link"
                       >
                         <h3 class="text-lg font-semibold text-primary-800 dark:text-primary-200 transition-colors duration-200 ease-in-out">
                           {partner.name}
                         </h3>
-                       
+
                       </a>
                       <a
                         href={partner.website}
+                        target="_blank"
+                        rel="noopener noreferrer"
                         class="text-sm text-primary-600 dark:text-primary-400 mt-1 transition-all duration-200 ease-in-out group-hover:text-secondary-800 dark:group-hover:text-secondary-800 group-hover:underline group-hover:decoration-2 group-hover:underline-offset-4"
                       >
                         {getDomain(partner.website)}

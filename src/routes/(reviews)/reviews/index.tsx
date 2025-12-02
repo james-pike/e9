@@ -321,6 +321,8 @@ export default component$(() => {
               <a
                 key={article.id}
                 href={article.url}
+                target="_blank"
+                rel="noopener noreferrer"
                 class="group bg-white/30 dark:bg-gray-800 rounded-2xl shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden border-2 border-primary-100 dark:border-secondary-700 hover:border-primary-300 dark:hover:border-primary-600"
               >
                 <div class="aspect-video overflow-hidden">

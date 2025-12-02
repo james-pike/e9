@@ -72,11 +72,13 @@ const CustomAccordion = component$(({ items, show }: { items: any[]; show: Signa
                       const isSubitemActive =
                         normalizePath(subitem.href) ===
                         normalizePath(location.url.pathname + (location.url.hash || ""));
+                      const isExternalLink = subitem.href?.startsWith('http');
                       return (
                         <li key={subitem.title} class="flex items-center">
                           <span class="text-primary-300 !text-2xs mr-3">✦</span>
                           <a
                             href={subitem.href}
+                            {...(isExternalLink && { target: "_blank", rel: "noopener noreferrer" })}
                             class={cn(
                               "block text-gray-700 dark:text-gray-200 !text-xl p-3 pl-1 font-medium transition-all duration-200",
                               isSubitemActive &&
@@ -96,6 +98,7 @@ const CustomAccordion = component$(({ items, show }: { items: any[]; show: Signa
             ) : (
               <a
                 href={item.href}
+                {...(item.href?.startsWith('http') && { target: "_blank", rel: "noopener noreferrer" })}
                 class={cn(
                   "block lg text-gray-700 !text-xl dark:text-gray-200 p-3 px-5 font-medium transition-all duration-200",
                   isActive &&
@@ -221,6 +224,8 @@ export default component$(() => {
               <div class="flex-shrink-0">
                 <a
                   href="https://www.bookeo.com/earthenvessels"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   class="group relative inline-flex items-center justify-center px-5 py-2.5 !text-lg font-medium text-white bg-gradient-to-r from-primary-600 via-primary-700 to-primary-600 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 overflow-hidden focus:outline-none focus:ring-2 focus:ring-primary-300"
                   role="button"
                   aria-label="Book a workshop"

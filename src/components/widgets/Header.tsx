@@ -350,6 +350,7 @@ export default component$(() => {
                               const isDropdownActive = location.url.pathname === href2;
                               const isFirst = key2 === 0;
                               const isLast = key2 === items.length - 1;
+                              const isExternalLink = href2?.startsWith('http');
                               return (
                                 <li key={key2}>
                                   <a
@@ -378,6 +379,7 @@ export default component$(() => {
                                       ${!isFirst && !isLast ? "hover:rounded-none" : ""}
                                     `}
                                     href={href2}
+                                    {...(isExternalLink && { target: "_blank", rel: "noopener noreferrer" })}
                                     onClick$={(e) => {
                                       if (text2 === "Clay" && href2 === "/about#clay") {
                                         e.preventDefault();
@@ -438,6 +440,8 @@ export default component$(() => {
           <div class="hidden md:flex items-center justify-end space-x-2">
             <a
               href="https://bookeo.com/earthenvessels"
+              target="_blank"
+              rel="noopener noreferrer"
               class="bg-gradient-to-r from-primary-400 via-primary-500 to-primary-400 group relative inline-flex items-center justify-center px-3 pl-5 py-2.5 text-xl font-semibold text-white rounded-xl shadow-lg hover:shadow-[0_0_12px_rgba(255,255,255,0.4)] transition-all duration-300 overflow-hidden focus:outline-none focus:ring-2 focus:ring-secondary-600 before:content-[''] before:absolute before:bottom-0 before:left-0 before:h-0.5 before:w-full before:bg-white before:opacity-0 before:transform before:-translate-x-full group-hover:before:opacity-100 group-hover:before:translate-x-0 before:transition-all before:duration-500 hover:scale-102 hover:bg-gradient-to-r hover:from-primary-400 hover:via-primary-400 hover:to-primary-300"
               role="button"
               aria-label="Book a workshop"

@@ -207,7 +207,8 @@ export default component$(() => {
     }
   });
 
-  const handleBookClick = $(async () => {
+  const handleBookClick = $(async (event: Event) => {
+    event.preventDefault();
     didClickSig.value = true;
     if (!bookButtonRef.value) return;
 
@@ -222,8 +223,8 @@ export default component$(() => {
       origin: { x, y },
     });
 
-    await new Promise((resolve) => setTimeout(resolve, 3000));
-    window.location.href = "https://www-1562q.bookeo.com/bookeo/b_earthenvessels_start.html?ctlsrc2=EjHpdqQ7gHCdolqaOg29kaDObVPz%2FLbyB4LaSA8fiEI%3D&src=02h&type=41562UHUKUC196793426E6";
+    await new Promise((resolve) => setTimeout(resolve, 500));
+    window.open("https://bookeo.com/earthenvessels", "_blank", "noopener,noreferrer");
   });
 
   // Show loading or error state
@@ -397,6 +398,8 @@ export default component$(() => {
             <a
               ref={bookButtonRef}
               href="https://bookeo.com/earthenvessels"
+              target="_blank"
+              rel="noopener noreferrer"
               onClick$={handleBookClick}
               class="group relative inline-flex items-center justify-center px-8 py-3 text-lg font-semibold text-white bg-gradient-to-r from-secondary-800 via-tertiary-600 to-secondary-700 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 overflow-hidden"
             >
