@@ -11,7 +11,6 @@ export const newsletters: Post[] = [
   publishDate: new Date("2025-12-21"),
   tags: ["newsletter", "update"],
   content: `
-Season’s Greetings & Happy New Year!
 
 Wishing all a peace-filled season.
 
@@ -43,6 +42,7 @@ New Ventures at earthen vessels
 
 As we continue to grow, listen, learn, and be inspired by our community and partners, we’re thrilled to expand our offerings—and we can’t wait to share what’s ahead. Alongside our ongoing workshops and community partnerships, we’re excited to deepen our connections and reach even further through:
 
+ ![December at earthen vessels](/images/decembergroup.jpeg)
 
 
 Corporate Events
@@ -58,7 +58,6 @@ Private Groups
 We’ve also had a lot of fun welcoming groups looking to celebrate life's special moments. Gather around our large creative table to celebrate one another, play, and make something beautiful together. Think about hosting your next birthday, book club, family gathering or evening out with friends at earthen vessels. Contact us to discuss the opportunities.
 
 
- ![December at earthen vessels](/images/decembergroup.jpeg)
 
 
 
@@ -66,6 +65,7 @@ New 4-Week Courses
 
 In addition to our ongoing workshops, we are introducing a new 4-week Course, Mugs and Bowls.  Join us for a four-week clay journey creating functional mugs and bowls in the gentle rhythm of our zen studio. Each week in this nurturing space, you’ll be invited to slow down, settle into your hands, and discover the quiet creativity that rises when we shape clay with intention.  Classes will be kept small - sign up now!
 
+![December at earthen vessels](/images/decembermugs.jpeg)
 
 
 From our Hands to Yours
@@ -74,7 +74,6 @@ From our Hands to Yours
 
 You asked, we answered. Visitors are often drawn to the handmade clay pieces that live around the studio, wondering if they’re available to take home. We’re happy to say some are! We’re now set up for retail sales, so if something catches your eye—like these one-of-a-kind doodle mugs—just ask.
 
-![December at earthen vessels](/images/decembermugs.jpeg)
 
  
 Still looking for that last minute gift?  Why not a gift certificate for a workshop or course? [Gift Cards](https://www-1562p.bookeo.com/bookeo/b_earthenvessels_start.html?buyvoucher=true&ctlsrc2=esawWcIqNsU0S6BN4cezLWxxt77vOhWV2SonYB8TO9c%3D&src=02k)
