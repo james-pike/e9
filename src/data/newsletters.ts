@@ -76,7 +76,7 @@ You asked, we answered. Visitors are often drawn to the handmade clay pieces tha
 
 
  
-Still looking for that last minute gift?  Why not a gift certificate for a workshop or course? [Gift Cards](https://www-1562p.bookeo.com/bookeo/b_earthenvessels_start.html?buyvoucher=true&ctlsrc2=esawWcIqNsU0S6BN4cezLWxxt77vOhWV2SonYB8TO9c%3D&src=02k)
+Still looking for that last minute gift?  Why not a gift certificate for a workshop or course? [Gift Cards](https://bookeo.com/earthenvessels/buyvoucher)
 
 
 
