@@ -74,7 +74,7 @@ export const onStaticGenerate: StaticGenerateHandler = async () => {
 export const head: DocumentHead = ({ resolveValue }) => {
   const post = resolveValue(useGetPostBySlug);
   return {
-    title: post ? `${post.title} — Qwind` : "Newsletter — Qwind",
+    title: post ? `${post.title} — Newsletter` : "Newsletter",
     meta: [
       {
         name: "description",

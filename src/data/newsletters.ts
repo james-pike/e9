@@ -2,7 +2,98 @@
 import type { Post } from "~/components/types";
 
 export const newsletters: Post[] = [
-  
+{
+  id: "newsletter-3",
+  slug: "december",
+  title: "Season’s Greetings & Happy New Year",
+  image: "/images/december.jpeg",
+  excerpt: "Wishing all a peace-filled season",
+  publishDate: new Date("2025-12-21"),
+  tags: ["newsletter", "update"],
+  content: `
+Season’s Greetings & Happy New Year!
+
+Wishing all a peace-filled season.
+
+
+We’re ending this year with full hearts shaped by clay, curiosity, and community. We created with gratitude and shaped more than objects; we shaped moments and connections!
+
+This year, we were grateful to open our doors to organizations doing meaningful work in our wider community: Soul Space, supporting front-line workers of street outreach; Parkdale Food Centre, feeding neighbors in need; CODE, an international organization advancing literacy for children around the world; and PLEO, supporting parents navigating mental health and addiction challenges in Eastern Ontario.
+
+These gatherings echo something simple and grounding: we all come from the Earth, we’re shaped by our experiences, and we’re stronger when we support one another.
+
+We are looking forward to more gatherings and connections in the New Year!
+
+![December at earthen vessels](/images/decembergroup.png)
+
+
+
+
+Creating a Clay Quilt with Soul Space
+
+
+
+Like a quilt, a community is stitched together from many pieces. Each person brings their own story, their own care, and their own love. Joined together, they become a shared source of warmth and support.  We thoroughly enjoyed welcoming Soul Space to earthen vessels this past month to create a clay quilt to be brought back to their space as a reminder of the gift and strength of community.
+
+
+ 
+New Ventures at earthen vessels
+
+
+
+As we continue to grow, listen, learn, and be inspired by our community and partners, we’re thrilled to expand our offerings—and we can’t wait to share what’s ahead. Alongside our ongoing workshops and community partnerships, we’re excited to deepen our connections and reach even further through:
+
+
+
+Corporate Events
+
+We have enjoyed offering creative, hands-on clay experiences designed to foster connection, reflection, and collaboration. Perfect for corporate retreats or staff appreciation gatherings. Contact us to discuss what might work for your group.
+
+
+
+Private Groups
+
+
+
+We’ve also had a lot of fun welcoming groups looking to celebrate life's special moments. Gather around our large creative table to celebrate one another, play, and make something beautiful together. Think about hosting your next birthday, book club, family gathering or evening out with friends at earthen vessels. Contact us to discuss the opportunities.
+
+
+ ![December at earthen vessels](/images/decembergroup.jpeg)
+
+
+
+New 4-Week Courses
+
+In addition to our ongoing workshops, we are introducing a new 4-week Course, Mugs and Bowls.  Join us for a four-week clay journey creating functional mugs and bowls in the gentle rhythm of our zen studio. Each week in this nurturing space, you’ll be invited to slow down, settle into your hands, and discover the quiet creativity that rises when we shape clay with intention.  Classes will be kept small - sign up now!
+
+
+
+From our Hands to Yours
+
+
+
+You asked, we answered. Visitors are often drawn to the handmade clay pieces that live around the studio, wondering if they’re available to take home. We’re happy to say some are! We’re now set up for retail sales, so if something catches your eye—like these one-of-a-kind doodle mugs—just ask.
+
+![December at earthen vessels](/images/decembermugs.jpeg)
+
+ 
+Still looking for that last minute gift?  Why not a gift certificate for a workshop or course? [Gift Cards](https://www-1562p.bookeo.com/bookeo/b_earthenvessels_start.html?buyvoucher=true&ctlsrc2=esawWcIqNsU0S6BN4cezLWxxt77vOhWV2SonYB8TO9c%3D&src=02k)
+
+
+
+
+
+
+Thank you for being part of our community!  Keep in touch!
+
+
+
+    `,
+    draft: false,
+    metadata: {
+      description: "December Newsletter - Season’s Greetings and Happy New Year.",
+    },
+  },
   {
     id: "newsletter-2",
     slug: "october",
