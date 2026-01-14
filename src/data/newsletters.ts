@@ -8,7 +8,7 @@ export const newsletters: Post[] = [
   title: "Welcome to 2026!",
   image: "/images/jan26.jpg",
   excerpt: "Hello Friends of earthen vessels! Join us for our January-March offerings",
-  publishDate: new Date("2026-01-14"),
+  publishDate: new Date("2026-01-03"),
   tags: ["newsletter", "update"],
   content: `
 Hello Friends of earthen vessels!
