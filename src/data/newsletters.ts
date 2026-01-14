@@ -3,6 +3,55 @@ import type { Post } from "~/components/types";
 
 export const newsletters: Post[] = [
 {
+  id: "newsletter-4",
+  slug: "january-2026",
+  title: "Welcome to 2026!",
+  image: "/images/jan26.jpg",
+  excerpt: "Hello Friends of earthen vessels! Join us for our Jan-Mar offerings",
+  publishDate: new Date("2026-01-14"),
+  tags: ["newsletter", "update"],
+  content: `
+Hello Friends of earthen vessels!
+
+We wanted to share our Jan-Mar offerings to help welcome in this new year.
+
+NEW Courses in 2026 - join us for a four-week clay journey creating functional mugs and bowls in the gentle rhythm of our zen studio.
+
+## Upcoming Dates
+
+### Workshops (2-2.5 hours):
+
+**Hug in a Mug** - Sun, Jan 18 10am; Tues, Jan 20, 6pm; Fri Feb 6, 6:30pm; Fri Feb 13, 6:30pm; or Fri Feb 27, 6:30pm
+
+**Open Like a Bowl** - Mon Jan 19, 1pm; Fri Jan 30, 6:30pm
+
+**Lanterns** - Fri Jan 23, 6:30pm; Sun Jan 25, 10am; Tues Jan 27, 6pm; Fri Feb 20, 6:30pm
+
+### Courses (4 weeks):
+
+**Mugs and Bowls** - 4 weeks
+
+Sun Feb 1, 8, 15 and Mar 1st at 10am
+
+Wed Feb 11, 18, 25, and Mar 8th at 1pm
+
+Thurs Feb 5, 12, 19 and Mar 5 at 1pm
+
+Sun Mar 15, 22, 29, and Apr 12 at 10am
+
+Wed Mar 18, 25, Apr 1 and 15, at 1pm
+
+Thurs Mar 12, 19, 26 and Apr 9, at 1pm
+
+We hope to see you soon!
+
+  `,
+  draft: false,
+  metadata: {
+    description: "January 2026 Newsletter - Welcome to 2026 with our Jan-Mar offerings.",
+  },
+},
+{
   id: "newsletter-3",
   slug: "december",
   title: "Season’s Greetings & Happy New Year",
