@@ -7,13 +7,13 @@ export const newsletters: Post[] = [
   slug: "january-2026",
   title: "Welcome to 2026!",
   image: "/images/jan26.jpg",
-  excerpt: "Hello Friends of earthen vessels! Join us for our Jan-Mar offerings",
+  excerpt: "Hello Friends of earthen vessels! Join us for our January-March offerings",
   publishDate: new Date("2026-01-14"),
   tags: ["newsletter", "update"],
   content: `
 Hello Friends of earthen vessels!
 
-We wanted to share our Jan-Mar offerings to help welcome in this new year.
+We wanted to share our January-March offerings to help welcome in this new year.
 
 NEW Courses in 2026 - join us for a four-week clay journey creating functional mugs and bowls in the gentle rhythm of our zen studio.
 
