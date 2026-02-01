@@ -3,6 +3,50 @@ import type { Post } from "~/components/types";
 
 export const newsletters: Post[] = [
 {
+  id: "newsletter-5",
+  slug: "february-2026",
+  title: "Valentine's Day, Books & Clay, and New Courses",
+  image: "/images/feb.png",
+  excerpt: "Three offerings coming up at the studio that invite connection, creativity, and time well spent with clay.",
+  publishDate: new Date("2026-01-26"),
+  tags: ["newsletter", "update"],
+  content: `
+Hello friends,
+
+We have three offerings coming up at the studio that invite connection, creativity, and time well spent with clay. We'd love to share them with you.
+
+## Valentine's with Your Bestie 💗
+
+This Valentine's Day, we're inviting you to celebrate love in all its forms. Celebrate friends and close relationships, the people who know you best.
+
+Join us on **Saturday, February 14, 1:30pm**, for a warm, creative afternoon of clay-making designed for the besties in your life! Come together to play and make side-by-side, and leave having made a beautiful mug to treasure.
+
+## Books & Clay Series
+
+We're delighted to welcome Canadian author **Michael Saver** for a special Book & Clay event at the studio on **Saturday, March 7th, 10am**.
+
+*The Lost Village* is Michael's debut novel—a murder mystery set against the opening of the St. Lawrence Seaway near Cornwall. It explores young people coming into their identities, and a community grappling with relocation and loss as a village is forever changed.
+
+The event will include a reading and conversation with the author, followed by hands-on clay time where we'll make bowls that reflect themes of place, identity, and transition in our own lives.
+
+**Cost:** $75 per person (includes book which can be picked up at the studio once you register online.)
+
+## Mugs & Bowls (NEW Four-Week Course)
+
+Our upcoming four-week course focuses on hand-building mugs and bowls while exploring rhythm, form, and daily ritual.
+
+This is a slower, deeper dive into clay—ideal for those who want to build skills, refine their touch, and create unique pieces, intended for everyday use.
+
+We hope one (or more!) of these offerings meets you right where you are.
+
+As always, clay is waiting.
+  `,
+  draft: false,
+  metadata: {
+    description: "February 2026 Newsletter - Valentine's Day, Books & Clay, and New Courses.",
+  },
+},
+{
   id: "newsletter-4",
   slug: "january-2026",
   title: "Welcome to 2026!",
