@@ -209,9 +209,7 @@ export default component$(() => {
     <img
       src="/images/private.jpeg"
       alt="Private Events"
-      class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105
-             /* ← This line does exactly what you asked for */
-             md:object-top lg:object-top"
+      class="w-full h-full object-cover object-top transition-transform duration-300 group-hover:scale-105"
     />
   </div>
 
