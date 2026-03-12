@@ -3,6 +3,56 @@ import type { Post } from "~/components/types";
 
 export const newsletters: Post[] = [
 {
+  id: "newsletter-6",
+  slug: "february-2026-wheels",
+  title: "Wheels are Ready to Spin & Private Events",
+  image: "/images/space.jpeg",
+  excerpt: "The wheels are ready to spin at earthen vessels! Plus, a new class and private event bookings.",
+  publishDate: new Date("2026-02-22"),
+  tags: ["newsletter", "update"],
+  content: `
+Hello friends,
+
+A couple of exciting updates to share:
+
+## NEW CLASS: Way of the Wheel: A Guided Journey in Clay
+
+The Wheels are Ready to SPIN at earthen vessels! Forget the pressure of the "perfect pot" and join us for an experience of tactile meditation. Way of the Wheel is a workshop designed to shift your focus from the final product to the transformative power of the process.
+
+In this class, we trade perfectionism for presence. You'll learn the fundamentals of the pottery wheel not as a chore, but as a practice in grounding and centering. By synchronizing your breath with the rhythm of the spinning wheel, you'll find a unique connection to the clay beneath your hands.
+
+### What to Expect:
+
+**Mindful Movement:** Guided techniques to help you relax your shoulders, steady your breath, and find your physical center.
+
+**Tactile Exploration:** Experience the raw joy of "throwing" clay—feeling its weight, its resistance, and its fluid transformation.
+
+**Process over Product:** This is a space to play and explore. The goal isn't to fill a shelf, but to leave feeling more connected and calm than when you walked in.
+
+Whether you've never touched a wheel or are looking to rediscover your "flow state," come get your hands dirty and find your center. Sign up here or visit earthenvessels.ca
+
+## Private Events Booking
+
+Looking for a different way to celebrate special events?
+
+Gather your people and get your hands in clay!
+
+Our studio is available for private events: birthdays, milestone celebrations, and small group gatherings. Whether you choose wheel time or a guided creative session at the table, we offer a welcoming space where connection happens naturally and everyone leaves with something handmade.
+
+If you're looking for a celebration that feels meaningful, we'd love to host you. Email us and we'll talk about what might work for you and yours, hello@earthenvessels.ca.
+
+As always, clay is waiting.
+
+With warmth,
+
+earthen vessels
+  `,
+  draft: false,
+  metadata: {
+    description: "February 22, 2026 Newsletter - Wheels are ready to spin and private events booking.",
+  },
+},
+{
   id: "newsletter-5",
   slug: "february-2026",
   title: "Valentine's Day, Books & Clay, and New Courses",
