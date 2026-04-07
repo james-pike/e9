@@ -6,7 +6,7 @@ export const newsletters: Post[] = [
   id: "newsletter-7",
   slug: "march-2026",
   title: "Happy Spring!",
-  image: "/images/space.jpeg",
+  image: "/images/march-newsletter.png",
   excerpt: "With the arrival of the spring equinox, we find ourselves at a gentle turning point—where light begins to linger a little longer and the earth slowly awakens beneath our feet.",
   publishDate: new Date("2026-03-22"),
   tags: ["newsletter", "update"],
