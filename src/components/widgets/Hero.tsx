@@ -44,25 +44,29 @@ export default component$(() => {
         </div>
 
         {/* Mobile Image (Below Buttons) */}
-        <div class="md:hidden px-6 pb-10 -mt-6 order-2">
+        <div class="md:hidden px-6 pb-10 -mt-6 order-2 relative">
           <Image
             src="/images/hero.webp"
             alt="earthen vessels Pottery"
             class="w-full max-h-64 object-contain rounded-lg shadow-xl border-half border-primary-300"
           />
+          <div class="absolute inset-0 rounded-lg pointer-events-none" style={{ boxShadow: "inset 0 0 30px 15px rgba(227, 231, 227, 0.8)" }} aria-hidden="true" />
         </div>
 
         {/* Desktop Right Column: Image */}
         <div class="hidden md:block relative order-3 md:order-2 py-12 pr-12">
-          <Image
-            src="/images/hero.webp"
-            alt="earthen vessels Pottery"
-            widths={[400, 800, 1200, 1600]}
-            layout="constrained"
-            class="w-full object-contain rounded-2xl shadow-xl border-2 border-primary-300"
-            placeholder="blur"
-            blurDataURL="/images/hero.webp?blur=10&w=20" // Optional low-res blur for instant preview
-          />
+          <div class="relative">
+            <Image
+              src="/images/hero.webp"
+              alt="earthen vessels Pottery"
+              widths={[400, 800, 1200, 1600]}
+              layout="constrained"
+              class="w-full object-contain rounded-2xl shadow-xl border-2 border-primary-300"
+              placeholder="blur"
+              blurDataURL="/images/hero.webp?blur=10&w=20"
+            />
+            <div class="absolute inset-0 rounded-2xl pointer-events-none" style={{ boxShadow: "inset 0 0 50px 25px rgba(227, 231, 227, 0.8)" }} aria-hidden="true" />
+          </div>
         </div>
       </div>
     </section>

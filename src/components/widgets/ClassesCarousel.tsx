@@ -18,7 +18,7 @@ export default component$(() => {
   const slidesPerViewSig = useSignal(4); // Start with 4 for desktop to avoid flash
   const loc = useLocation();
 
-  // Fetch workshops data client-side
+  // Fetch workshops data eagerly on document ready so content doesn't disappear on scroll
   useVisibleTask$(async () => {
     try {
       const response = await fetch('/api/classes');
@@ -29,7 +29,7 @@ export default component$(() => {
     } catch (error) {
       console.error('Error fetching classes:', error);
     }
-  });
+  }, { strategy: 'document-ready' });
 
   // Handle hash navigation
   useTask$(({ track }) => {
@@ -62,7 +62,7 @@ export default component$(() => {
     cleanup(() => {
       window.removeEventListener('resize', updateSlidesPerView);
     });
-  });
+  }, { strategy: 'document-ready' });
 
   const handleMouseEnter$ = $(() => {
     isPlaying.value = false;
@@ -161,6 +161,51 @@ export default component$(() => {
             </div>
           </Carousel.Root>
         )}
+
+        {/* Calendar Section */}
+        <div class="text-center mt-12 mb-28">
+          <p class="text-xl md:text-2xl text-primary-700 dark:text-primary-300 max-w-3xl mx-auto mb-8">
+            Monthly Calendars
+          </p>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {/* April Calendar */}
+            <a
+              href="https://www.canva.com/design/DAHEnBTXyro/KOyqIVe30cNE6pHjpxc_lg/view?utm_content=DAHEnBTXyro&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h13a06ffc8c"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="group backdrop-blur-sm border-2 rounded-2xl transition-all duration-300 ease-in-out shadow-md hover:shadow-xl hover:border-secondary-200 hover:bg-white/45 cursor-pointer bg-white/35 border-primary-200 dark:border-secondary-700 overflow-hidden"
+            >
+              <div class="w-full aspect-video overflow-hidden relative bg-white">
+                <iframe
+                  src="https://www.canva.com/design/DAHEnBTXyro/KOyqIVe30cNE6pHjpxc_lg/view?embed"
+                  class="absolute border-0 pointer-events-none"
+                  style={{ top: "-8%", left: "0%", width: "100%", height: "118%" }}
+                  loading="lazy"
+                  title="April Calendar"
+                />
+              </div>
+            </a>
+
+            {/* May Calendar */}
+            <a
+              href="https://www.canva.com/design/DAHEnPMGSqw/x2-ZOAC3cIeQDhmEWG4lQQ/view?utm_content=DAHEnPMGSqw&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h6c01bb36b0"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="group backdrop-blur-sm border-2 rounded-2xl transition-all duration-300 ease-in-out shadow-md hover:shadow-xl hover:border-secondary-200 hover:bg-white/45 cursor-pointer bg-white/35 border-primary-200 dark:border-secondary-700 overflow-hidden"
+            >
+              <div class="w-full aspect-video overflow-hidden relative bg-white">
+                <iframe
+                  src="https://www.canva.com/design/DAHEnPMGSqw/x2-ZOAC3cIeQDhmEWG4lQQ/view?embed"
+                  class="absolute border-0 pointer-events-none"
+                  style={{ top: "-8%", left: "0%", width: "100%", height: "118%" }}
+                  loading="lazy"
+                  title="May Calendar"
+                />
+              </div>
+            </a>
+          </div>
+        </div>
 
         {/* Events Section */}
         <div id="events" class="text-center mt-12 mb-12">

@@ -13,6 +13,14 @@
     border-width: 0.5px;
   }
 
+/* GPU-promote background layers to prevent scroll repaints */
+.bg-layer-fixed {
+  will-change: auto;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  contain: strict;
+}
+
 /* Watercolor texture with enhanced noise */
 .bg-watercolor-texture {
   background-image: 
@@ -63,6 +71,9 @@
 
 .animate-float {
   animation: float 6s ease-in-out infinite;
+  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
 }
 
 @layer base {

@@ -21,7 +21,7 @@ export default component$(() => {
   const location = useLocation();
   const isHomePage = location.url.pathname === "/";
 
-  // Fetch reviews data client-side
+  // Fetch reviews data eagerly so content doesn't disappear on scroll
   useVisibleTask$(async () => {
     try {
       const response = await fetch('/api/reviews');
@@ -32,7 +32,7 @@ export default component$(() => {
     } catch (error) {
       console.error('Error fetching reviews:', error);
     }
-  });
+  }, { strategy: 'document-ready' });
 
   // Detect which reviews are overflowing and need expand button
   useVisibleTask$(({ track }) => {
@@ -88,7 +88,7 @@ export default component$(() => {
     cleanup(() => {
       window.removeEventListener('resize', updateSlidesPerView);
     });
-  });
+  }, { strategy: 'document-ready' });
 
   useStyles$(`
     .review-content-wrapper {

@@ -57,8 +57,8 @@ export const Headline = component$((props: Props) => {
       {highlight && (
         <p
           class={twMerge(
-            "text-base text-primary font-bold tracking-wide uppercase opacity-0", // Always start hidden
-            isVisible.value && "animate-[fadeSlideUp_0.5s_ease-out_0s_forwards]"
+            "text-base text-primary font-bold tracking-wide uppercase",
+            isVisible.value ? "animate-[fadeSlideUp_0.5s_ease-out_0s_forwards]" : ""
           )}
           dangerouslySetInnerHTML={highlight}
         />
@@ -66,9 +66,9 @@ export const Headline = component$((props: Props) => {
       {title && (
         <h2
           class={twMerge(
-            "font-bold leading-tighter tracking-tighter  font-heading text-heading opacity-0", // Always start hidden
+            "font-bold leading-tighter tracking-tighter font-heading text-heading",
             titleClass,
-            isVisible.value && "animate-[fadeSlideUp_0.5s_ease-out_0.1s_forwards]"
+            isVisible.value ? "animate-[fadeSlideUp_0.5s_ease-out_0.1s_forwards]" : ""
           )}
           dangerouslySetInnerHTML={title}
         />
@@ -76,9 +76,9 @@ export const Headline = component$((props: Props) => {
       {subtitle && (
         <p
           class={twMerge(
-            "mt-4 text-muted-foreground text-balance opacity-0", // Always start hidden
+            "mt-4 text-muted-foreground text-balance",
             subtitleClass,
-            isVisible.value && "animate-[fadeSlideUp_0.5s_ease-out_0.2s_forwards]"
+            isVisible.value ? "animate-[fadeSlideUp_0.5s_ease-out_0.2s_forwards]" : ""
           )}
           dangerouslySetInnerHTML={subtitle}
         />

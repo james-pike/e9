@@ -59,7 +59,7 @@ export const ItemGrid = component$((props: Props) => {
               panelClass,
               itemClasses?.panel,
               "transition-all duration-500 ease-out rounded-base p-4",
-              isVisible.value ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+              isVisible.value ? "opacity-100 translate-y-0" : ""
             )}
             style={{ transitionDelay: `${index * 100}ms` }}
           >

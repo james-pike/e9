@@ -117,7 +117,7 @@ export default component$(() => {
           class={`
             bg-primary-200/70 max-w-7xl md:mx-auto px-0.5
              shadow-sm
-            transition-all duration-100 ease-in-out
+            transition-[height,padding,opacity] duration-150 ease-in-out
             ${store.showBanner ? 'h-auto py-0.5 opacity-100' : 'h-0 py-0 opacity-0 overflow-hidden'}
           `}
         >
@@ -217,12 +217,14 @@ export default component$(() => {
         id="header"
         class={`
           sticky top-0 z-40 flex-none mx-auto max-w-7xl border-primary-200 shadow-sm
-          transition-all duration-300 ease-in-out
+          md:backdrop-blur-sm
+          transition-[background-color] duration-300 ease-in-out
           ${store.isScrolling
-            ? "bg-primary-100/95 md:bg-primary-100/80 dark:bg-primary-900/80 md:backdrop-blur-sm"
+            ? "bg-primary-100/95 md:bg-primary-100/80 dark:bg-primary-900/80"
             : "bg-primary-100/95"
           }
         `}
+        style={{ willChange: "auto", transform: "translateZ(0)", backfaceVisibility: "hidden" }}
         window:onScroll$={() => {
           const scrollY = window.scrollY;
 

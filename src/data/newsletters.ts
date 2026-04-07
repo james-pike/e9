@@ -3,6 +3,75 @@ import type { Post } from "~/components/types";
 
 export const newsletters: Post[] = [
 {
+  id: "newsletter-7",
+  slug: "march-2026",
+  title: "Happy Spring!",
+  image: "/images/space.jpeg",
+  excerpt: "With the arrival of the spring equinox, we find ourselves at a gentle turning point—where light begins to linger a little longer and the earth slowly awakens beneath our feet.",
+  publishDate: new Date("2026-03-22"),
+  tags: ["newsletter", "update"],
+  content: `
+Happy Spring!
+
+With the arrival of the spring equinox, we find ourselves at a gentle turning point—where light begins to linger a little longer and the earth slowly awakens beneath our feet. There's a quiet sense of renewal in the air, an invitation to begin again, to soften, and to notice what is ready to grow.
+
+## March Books and Clay Club
+
+Our first book club event Lost Village with author Michael Saver was a wonderful success. It was a rich and engaging gathering, with meaningful conversation sparked by Michael's reading and shared reflections. Afterward, we gathered around the worktable to create clay vessels, each one a quiet response to the experience of the book. We're so grateful to all who came out to participate and help make it such a memorable gathering.
+
+Here's a google review one of the participants shared:
+
+*"I had a wonderful class involving a book reading and discussion, followed by building a handmade bowl. Very unique experience, and I absolutely loved the instructors and space. I will be back to take more classes."*  Rina
+
+## Our Spring Offerings
+
+**Way of the Wheel - (Fridays 6:30-8:30)**
+
+You have to check this one out! A zen experience - our wheel workshops have a max of 4 people in them. Remove the stress and expectation and what do you get? A very lovely pot and feeling of satisfaction.
+
+**Handbuilding Courses - (Start Dates: Wed. Mar 25th; Sun Apr 19; Wed. May 6)**
+
+Our four-week handbuilding courses are thoughtfully designed and held in our calm, studio space. With a gentle pace and an atmosphere that inspires creativity, you will sink into the joys of exploring with clay.
+
+**Turtle Workshop (Thurs. April 16; Sun April 25)**
+
+They're back! These sweet little gems are here to make an impression.  This one-time workshop is sure to bring a smile as you create your own turtle from clay—perfect for a shelf, nestled into a planter, or tucked into your garden as a small, meaningful presence.
+
+**Planters (April 4, 2-4:00; Thurs April 23, 6:30-8:30)**
+
+Spring is just beneath the snow, with little buds quietly preparing to emerge.
+Join us to create your own unique planter—a creative pot to cradle your plants, perfect for brightening a step, shelf, or garden space.
+
+**Mother's Day - Mom, Me and Tea - (May 9th and May 10th,  2:00-4:00)**
+
+May, Mother's Day month, is just around the corner. Join us for "Mom, Me & Tea," a gentle and creative gathering where you'll create a beautiful handmade planter to enjoy or gift—paired with a warm cup of tea and time to connect.
+
+**Lanterns - (Tues April 7; Thurs May 7, 6:30-8:30)**
+
+Our lantern workshop invites you to shape your own gentle light—creating a handmade piece that brings warmth, calm, and a quiet glow to your space.
+
+**Mugs - (Tues April 14; Tues May 12, 6:30-8:30)**
+
+Our mug workshop offers a chance to create a piece that fits perfectly in your hands—simple, personal, and made to hold the quiet comfort of your daily rituals.
+
+**Open Like a Bowl - (Thurs April 30; Thurs May 21)**
+
+In a gentle and creative gathering, bring your story to life in a clay bowl that only you could design! Maybe you want to capture your vacation on the ocean in a bowl! The ideas are endless and the fun of making is rewarding.
+
+We hope one (or more!) of these offerings meets you right where you are.
+
+As always, clay is waiting.
+
+With warmth,
+
+earthen vessels
+  `,
+  draft: false,
+  metadata: {
+    description: "March 22, 2026 Newsletter - Happy Spring! Spring offerings and calendar of events.",
+  },
+},
+{
   id: "newsletter-6",
   slug: "february-2026-wheels",
   title: "Wheels are Ready to Spin & Private Events",
