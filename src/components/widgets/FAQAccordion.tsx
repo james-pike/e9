@@ -131,7 +131,7 @@ export default component$(() => {
                 </div>
               </div>
             ) : (
-              <div class="flex flex-col lg:flex-row lg:gap-8">
+              <div class="flex flex-col md:flex-row md:gap-8">
                 <div class="flex-1 flex flex-col gap-4">
                   {leftColumn.map((item) => (
                     <div key={item.id} class="group mb-0 break-inside-avoid">

@@ -7,7 +7,7 @@ import { newsletters } from "~/data/newsletters";
 
 export default component$(() => {
   return (
-    <section class="px-6 sm:px-6 py-12 sm:py-16 lg:py-20 mx-auto max-w-3xl bg-white/20">
+    <section class="px-6 sm:px-6 py-12 sm:py-16 lg:py-20 mx-auto max-w-3xl md:max-w-4xl bg-white/20">
       <header>
         <h1 class="text-center xdxd !text-5xl md:text-6xl font-bold leading-tighter tracking-tighter mb-10 md:mb-16 font-heading">
            <span class="bg-gradient-to-r from-primary-600 via-tertiary-600 to-primary-700 bg-clip-text text-transparent">
@@ -15,11 +15,11 @@ export default component$(() => {
             </span>
         </h1>
       </header>
-      <ul>
+      <ul class="md:grid md:grid-cols-2 md:gap-8 lg:block">
         {newsletters.map((post: Post) => (
-          <li key={post.slug} class="mb-10 md:mb-16">
+          <li key={post.slug} class="mb-10 md:mb-0 lg:mb-16">
             <article
-              class={`max-w-md mx-auto lg:max-w-none grid gap-6 lg:gap-8 ${post.image ? "lg:grid-cols-2" : ""}`}
+              class={`max-w-md mx-auto md:max-w-none grid gap-6 md:gap-8 ${post.image ? "lg:grid-cols-2" : ""}`}
             >
               {post.image && (
                 <a class="relative block group" href={`/newsletter/${post.slug}`}>

@@ -91,6 +91,7 @@ export default component$(() => {
 
   const lgColumns = 4;
   const columns = distributePartners(COMMUNITY_PARTNERS, lgColumns);
+  const tabletColumns = distributePartners(COMMUNITY_PARTNERS, 3);
 
   return (
     <section class="relative overflow-hidden py-12 md:py-16">
@@ -112,74 +113,86 @@ export default component$(() => {
         </div>
 
         {/* Flexbox Layout for Columns */}
-        <div class="flex flex-col sm:flex-row sm:[&>*:nth-child(n+3)]:hidden lg:[&>*:nth-child(n+3)]:flex gap-5">
-          {columns.map((columnPartners, index) => (
+        {(() => {
+          const renderCard = (partner: Partner) => (
             <div
-              key={index}
-              class="flex-1 flex flex-col gap-5"
-              style={{ minWidth: "0" }}
+              key={partner.name}
+              class={[
+                "group backdrop-blur-sm border-2 pt-4 rounded-2xl transition-all duration-500 ease-in-out",
+                "hover:shadow-xl hover:border-secondary-200 hover:bg-white/45",
+                expandedPartner.value === partner.name
+                  ? "bg-white/40 border-secondary-200 z-10"
+                  : "bg-white/35 border-primary-200 dark:border-secondary-700",
+              ]}
+              style={{
+                transitionProperty:
+                  "transform, box-shadow, background-color, border-color",
+                transform:
+                  expandedPartner.value === partner.name
+                    ? "scale(1.02)"
+                    : "scale(1)",
+                minHeight: "200px",
+              }}
+              role="button"
+              tabIndex={0}
+              aria-expanded={expandedPartner.value === partner.name}
             >
-              {columnPartners.map((partner) => (
+              {partner.image && (
                 <div
-                  key={partner.name}
-                  class={[
-                    "group backdrop-blur-sm border-2 pt-4 rounded-2xl transition-all duration-500 ease-in-out",
-                    "hover:shadow-xl hover:border-secondary-200 hover:bg-white/45",
-                    expandedPartner.value === partner.name
-                      ? "bg-white/40 border-secondary-200 z-10"
-                      : "bg-white/35 border-primary-200 dark:border-secondary-700",
-                  ]}
-                  style={{
-                    transitionProperty:
-                      "transform, box-shadow, background-color, border-color",
-                    transform:
-                      expandedPartner.value === partner.name
-                        ? "scale(1.02)"
-                        : "scale(1)",
-                    minHeight: "200px",
-                  }}
-                  role="button"
-                  tabIndex={0}
-                  aria-expanded={expandedPartner.value === partner.name}
-                >
-                  {/* Image */}
-                  {partner.image && (
-                    <div
-                      class="h-32 sm:h-40 w-full bg-center bg-contain bg-no-repeat rounded-t-2xl"
-                      style={{ backgroundImage: `url('${partner.image}')` }}
-                    />
-                  )}
-
-                  {/* Info */}
-                  <div class="flex flex-col items-center p-3 pt-2">
-                    <div class="relative w-full flex flex-col items-center justify-center mb-2 group/link">
-                      <a
-                        href={partner.website}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        aria-label={`Visit ${partner.name} website`}
-                        class="flex items-center gap-2 group/link"
-                      >
-                        <h3 class="text-lg font-semibold text-primary-800 dark:text-primary-200 transition-colors duration-200 ease-in-out">
-                          {partner.name}
-                        </h3>
-
-                      </a>
-                      <a
-                        href={partner.website}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        class="text-sm text-primary-600 dark:text-primary-400 mt-1 transition-all duration-200 ease-in-out group-hover:text-secondary-800 dark:group-hover:text-secondary-800 group-hover:underline group-hover:decoration-2 group-hover:underline-offset-4"
-                      >
-                        {getDomain(partner.website)}
-                      </a>
-                    </div>
-                  </div>
+                  class="h-32 sm:h-40 w-full bg-center bg-contain bg-no-repeat rounded-t-2xl"
+                  style={{ backgroundImage: `url('${partner.image}')` }}
+                />
+              )}
+              <div class="flex flex-col items-center p-3 pt-2">
+                <div class="relative w-full flex flex-col items-center justify-center mb-2 group/link">
+                  <a
+                    href={partner.website}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`Visit ${partner.name} website`}
+                    class="flex items-center gap-2 group/link"
+                  >
+                    <h3 class="text-lg font-semibold text-primary-800 dark:text-primary-200 transition-colors duration-200 ease-in-out">
+                      {partner.name}
+                    </h3>
+                  </a>
+                  <a
+                    href={partner.website}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="text-sm text-primary-600 dark:text-primary-400 mt-1 transition-all duration-200 ease-in-out group-hover:text-secondary-800 dark:group-hover:text-secondary-800 group-hover:underline group-hover:decoration-2 group-hover:underline-offset-4"
+                  >
+                    {getDomain(partner.website)}
+                  </a>
                 </div>
-              ))}
+              </div>
             </div>
-          ))}
-        </div>
+          );
+
+          const renderColumnGroup = (cols: Partner[][]) =>
+            cols.map((columnPartners, index) => (
+              <div
+                key={index}
+                class="flex-1 flex flex-col gap-5"
+                style={{ minWidth: "0" }}
+              >
+                {columnPartners.map(renderCard)}
+              </div>
+            ));
+
+          return (
+            <>
+              {/* Mobile / Small / Desktop: 4-column distribution */}
+              <div class="flex flex-col sm:flex-row sm:[&>*:nth-child(n+3)]:hidden md:hidden lg:flex lg:[&>*:nth-child(n+3)]:flex gap-5">
+                {renderColumnGroup(columns)}
+              </div>
+              {/* Tablet only: 3-column distribution */}
+              <div class="hidden md:flex lg:hidden flex-row gap-5">
+                {renderColumnGroup(tabletColumns)}
+              </div>
+            </>
+          );
+        })()}
       </div>
     </section>
   );
