@@ -82,9 +82,8 @@ export default component$(() => {
 With skilled hands and creative  presence, our facilitators bring expertise and passion, and infuse meaning to every experience.           </p>
         </div>
 
-        {/* 🧱 MASONRY COLUMN LAYOUT */}
-        <div class="columns-1 sm:columns-2 lg:columns-3 gap-5 space-y-4">
-          {TEAM_MEMBERS.map((member) => (
+        {(() => {
+          const renderCard = (member: TeamMember) => (
             <div
               key={member.name}
               class={[
@@ -95,7 +94,7 @@ With skilled hands and creative  presence, our facilitators bring expertise and 
                   : "bg-white/35 border-primary-200 dark:border-secondary-700",
               ]}
               style={{
-                minHeight: "300px", // Ensures consistent height for collapsed states
+                minHeight: "300px",
                 transitionProperty: "transform, opacity, margin, box-shadow, background-color, border-color",
                 transform: expandedMember.value === member.name ? "scale(1.02)" : "scale(1)",
               }}
@@ -130,7 +129,7 @@ With skilled hands and creative  presence, our facilitators bring expertise and 
                       : "transition-all duration-300 ease-in-out line-clamp-3",
                   ]}
                   style={{
-                    maxHeight: expandedMember.value === member.name ? "1000px" : "4.5em", // Adjust max-height for smooth expansion
+                    maxHeight: expandedMember.value === member.name ? "1000px" : "4.5em",
                     overflow: "hidden",
                     transitionProperty: "max-height",
                   }}
@@ -153,8 +152,30 @@ With skilled hands and creative  presence, our facilitators bring expertise and 
                 </div>
               </div>
             </div>
-          ))}
-        </div>
+          );
+
+          const byName = (n: string) => TEAM_MEMBERS.find((m) => m.name === n)!;
+          const tabletLeft = ["Ginger", "Michelle", "Diane"].map(byName);
+          const tabletRight = ["Mary", "Natalie", "Kandis"].map(byName);
+
+          return (
+            <>
+              {/* Mobile / Desktop: CSS multi-column masonry */}
+              <div class="columns-1 sm:columns-2 md:hidden lg:block lg:columns-3 gap-5 space-y-4">
+                {TEAM_MEMBERS.map(renderCard)}
+              </div>
+              {/* Tablet only: explicit 2-column flex with Mary first in right */}
+              <div class="hidden md:flex lg:hidden gap-5">
+                <div class="flex-1 flex flex-col gap-5" style={{ minWidth: "0" }}>
+                  {tabletLeft.map(renderCard)}
+                </div>
+                <div class="flex-1 flex flex-col gap-5" style={{ minWidth: "0" }}>
+                  {tabletRight.map(renderCard)}
+                </div>
+              </div>
+            </>
+          );
+        })()}
 
 {/* Logo section */}
 <div id="logo" class="scroll-mt-20 mt-5 md:mt-2 flex  p-5 py-6 flex-col bg-white/30 rounded-xl md:flex-row items-center md:items-start gap-6">
