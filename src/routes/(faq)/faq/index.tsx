@@ -110,7 +110,7 @@ export default component$(() => {
         </div>
 
         {/* FAQ Accordion */}
-        <div class="flex flex-col md:flex-row md:gap-8">
+        <div class="flex flex-col lg:flex-row lg:gap-8">
           {/* Left Column */}
           <div class="flex-1 flex flex-col gap-4">
             {leftColumn.map((item) => (
@@ -167,7 +167,7 @@ export default component$(() => {
           </div>
 
           {/* Right Column */}
-          <div class="flex-1 flex flex-col gap-4 mt-4 md:mt-0">
+          <div class="flex-1 flex flex-col gap-4 mt-4 lg:mt-0">
             {rightColumn.map((item) => (
               <div key={item.id} class="group">
                 <div class="bg-gradient-to-br from-white/50 via-primary-50/30 to-secondary-50/30 dark:from-gray-800/90 rounded-2xl border shadow-lg hover:shadow-xl transition-all duration-300">

@@ -157,6 +157,7 @@ export default component$(() => {
       hasSubmenu: true,
       subitems: [
         { title: "Classes & Workshops", href: "/offerings" },
+                { title: "Monthly Calendars", href: "/offerings#calendars" },
                 { title: "Corporate Events", href: "/offerings#events" },
                                 { title: "Private Events", href: "/offerings#private-events" },
 

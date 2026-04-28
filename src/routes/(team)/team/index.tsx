@@ -168,7 +168,7 @@ With skilled hands and creative  presence, our facilitators bring expertise and 
   </div>
 
   {/* Right: Text (3/4 width on md+) */}
-  <div class="w-full md:w-3/4 md:-ml-6s text-primary-800 dark:text-primary-200 text-lg">
+  <div class="w-full md:w-3/4 text-primary-800 dark:text-primary-200 text-lg">
     Our facilitators and friends gathered to share their creative vision for earthen vessels.  
     Diane Black worked with these visions to create our rich logo.  
     Together from our shared imaginations, Diane designed a pinch pot holding water to remind us  

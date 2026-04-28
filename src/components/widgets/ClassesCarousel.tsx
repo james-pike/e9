@@ -80,7 +80,7 @@ export default component$(() => {
 
   return (
     <>
-      <div class="p-5 -mt-1.5 md:px-16 bg-white/20  max-w-7xl md:mx-auto">
+      <div class="p-5 -mt-1.5 md:px-8 lg:px-16 bg-white/20  max-w-7xl md:mx-auto">
         {/* Header */}
         <div class="text-center mt-14 mb-10">
           <h1 class="!text-4xl md:!text-4.5xl font-bold mb-4">
@@ -95,7 +95,7 @@ export default component$(() => {
 
         {/* Carousel */}
         {workshops.value.length === 0 ? (
-          <div class="text-center py-12">
+          <div class="flex items-center justify-center min-h-[440px]">
             <p class="text-primary-700 dark:text-primary-300 text-lg">Loading classes...</p>
           </div>
         ) : (
@@ -163,30 +163,12 @@ export default component$(() => {
         )}
 
         {/* Calendar Section */}
-        <div class="text-center mt-12 mb-28">
+        <div id="calendars" class="text-center mt-12 mb-28 scroll-mt-24">
           <p class="text-xl md:text-2xl text-primary-700 dark:text-primary-300 max-w-3xl mx-auto mb-8">
             Monthly Calendars
           </p>
 
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {/* April Calendar */}
-            <a
-              href="https://www.canva.com/design/DAHEnBTXyro/KOyqIVe30cNE6pHjpxc_lg/view?utm_content=DAHEnBTXyro&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h13a06ffc8c"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="group backdrop-blur-sm border-2 rounded-2xl transition-all duration-300 ease-in-out shadow-md hover:shadow-xl hover:border-secondary-200 hover:bg-white/45 cursor-pointer bg-white/35 border-primary-200 dark:border-secondary-700 overflow-hidden"
-            >
-              <div class="w-full aspect-video overflow-hidden relative bg-white">
-                <iframe
-                  src="https://www.canva.com/design/DAHEnBTXyro/KOyqIVe30cNE6pHjpxc_lg/view?embed"
-                  class="absolute border-0 pointer-events-none"
-                  style={{ top: "-8%", left: "0%", width: "100%", height: "118%" }}
-                  loading="lazy"
-                  title="April Calendar"
-                />
-              </div>
-            </a>
-
             {/* May Calendar */}
             <a
               href="https://www.canva.com/design/DAHEnPMGSqw/x2-ZOAC3cIeQDhmEWG4lQQ/view?utm_content=DAHEnPMGSqw&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h6c01bb36b0"
@@ -195,12 +177,28 @@ export default component$(() => {
               class="group backdrop-blur-sm border-2 rounded-2xl transition-all duration-300 ease-in-out shadow-md hover:shadow-xl hover:border-secondary-200 hover:bg-white/45 cursor-pointer bg-white/35 border-primary-200 dark:border-secondary-700 overflow-hidden"
             >
               <div class="w-full aspect-video overflow-hidden relative bg-white">
-                <iframe
-                  src="https://www.canva.com/design/DAHEnPMGSqw/x2-ZOAC3cIeQDhmEWG4lQQ/view?embed"
-                  class="absolute border-0 pointer-events-none"
-                  style={{ top: "-8%", left: "0%", width: "100%", height: "118%" }}
+                <img
+                  src="/images/May.png"
+                  alt="May Calendar"
+                  class="w-full h-full object-cover"
                   loading="lazy"
-                  title="May Calendar"
+                />
+              </div>
+            </a>
+
+            {/* June Calendar */}
+            <a
+              href="https://www.canva.com/design/DAHIFrXd8Ls/lI_TOEkMqXS5qoGtEDXUCA/view?utm_content=DAHIFrXd8Ls&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=hfcc2acfba1"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="group backdrop-blur-sm border-2 rounded-2xl transition-all duration-300 ease-in-out shadow-md hover:shadow-xl hover:border-secondary-200 hover:bg-white/45 cursor-pointer bg-white/35 border-primary-200 dark:border-secondary-700 overflow-hidden"
+            >
+              <div class="w-full aspect-video overflow-hidden relative bg-white">
+                <img
+                  src="/images/June.png"
+                  alt="June Calendar"
+                  class="w-full h-full object-cover"
+                  loading="lazy"
                 />
               </div>
             </a>

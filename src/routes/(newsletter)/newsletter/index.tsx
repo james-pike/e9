@@ -19,11 +19,11 @@ export default component$(() => {
         {newsletters.map((post: Post) => (
           <li key={post.slug} class="mb-10 md:mb-16">
             <article
-              class={`max-w-md mx-auto md:max-w-none grid gap-6 md:gap-8 ${post.image ? "md:grid-cols-2" : ""}`}
+              class={`max-w-md mx-auto lg:max-w-none grid gap-6 lg:gap-8 ${post.image ? "lg:grid-cols-2" : ""}`}
             >
               {post.image && (
                 <a class="relative block group" href={`/newsletter/${post.slug}`}>
-                  <div class="relative h-0 pb-[56.25%] md:pb-[75%] md:h-80 lg:pb-[56.25%] overflow-hidden bg-gray-400 dark:bg-slate-700 rounded shadow-lg">
+                  <div class="relative h-0 pb-[56.25%] lg:pb-[75%] lg:h-80 xl:pb-[56.25%] overflow-hidden bg-gray-400 dark:bg-slate-700 rounded shadow-lg">
                     <img
                       src={post.image}
                       class="absolute inset-0 object-cover w-full h-full mb-6 rounded shadow-lg bg-gray-400 dark:bg-slate-700"

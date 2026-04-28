@@ -88,6 +88,7 @@ export default component$(() => {
         href: "/offerings",
         items: [
           { text: "Classes & Workshops", href: "/offerings", icon: LuCalendarDays },
+          { text: "Monthly Calendars", href: "/offerings#calendars", icon: LuCalendarDays },
           { text: "Corporate Events", href: "/offerings#events", icon: LuBuilding2 },
           { text: "Private Events", href: "/offerings#events", icon: LuPartyPopper },
           { text: "Gift Cards", href: "https://bookeo.com/earthenvessels/buyvoucher", icon: LuGift },
@@ -238,7 +239,7 @@ export default component$(() => {
         }}
       >
         <div class="absolute inset-0" aria-hidden="true"></div>
-        <div class="relative text-default py-1 pb-1.5 md:p-1 px-2 md:px-6 mx-auto w-full md:flex md:justify-between max-w-7xl">
+        <div class="relative text-default py-1 pb-1.5 lg:p-1 px-2 lg:px-6 mx-auto w-full lg:flex lg:justify-between max-w-7xl">
           <div class="mr-auto rtl:mr-0 rtl:ml-auto flex justify-between">
             <a class="flex items-center pb-1" href="/">
               <div style={{ width: "100px", height: "40px", position: "relative" }}>
@@ -279,16 +280,26 @@ export default component$(() => {
                 )}
               </div>
             </a>
-            <div class="flex items-center md:hidden gap-1">
+            <div class="flex items-center lg:hidden gap-2">
+              <a
+                href="https://bookeo.com/earthenvessels"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="hidden md:inline-flex bg-gradient-to-r from-primary-400 via-primary-500 to-primary-400 items-center justify-center px-3 py-1.5 text-sm font-semibold text-white rounded-lg shadow-md hover:shadow-lg transition-all duration-200"
+                role="button"
+                aria-label="Book a workshop"
+              >
+                Book a Class
+              </a>
               <MenuModal />
             </div>
           </div>
           <nav
-            class="items-center w-full md:w-auto hidden md:flex dark:text-white overflow-y-auto overflow-x-hidden md:overflow-y-visible md:overflow-x-auto md:mx-5 group"
+            class="items-center w-full lg:w-auto hidden lg:flex dark:text-white overflow-y-auto overflow-x-hidden lg:overflow-y-visible lg:overflow-x-auto lg:mx-5 group"
             aria-label="Main navigation"
           >
             {menu && menu.items ? (
-              <ul class="flex flex-col md:flex-row text-primary-600 md:self-center w-full md:w-auto text-xl md:text-xl tracking-[0.01rem] font-medium">
+              <ul class="flex flex-col lg:flex-row text-primary-600 lg:self-center w-full lg:w-auto text-xl lg:text-xl tracking-[0.01rem] font-medium">
                 {menu.items.map(({ text, href, items,  }, key) => {
                   const isActive = location.url.pathname === href;
                   return (
@@ -390,7 +401,7 @@ export default component$(() => {
                                         } else {
                                           const claySection = document.getElementById("clay");
                                           if (claySection) {
-                                            claySection.scrollIntoView({ behavior: "smooth" });
+                                            claySection.scrollIntoView({ behavior: "instant" });
                                           }
                                         }
                                       }
@@ -439,7 +450,7 @@ export default component$(() => {
             ) : null}
           </nav>
           {/* FIXED: Simplified button container - no more fixed/bottom positioning */}
-          <div class="hidden md:flex items-center justify-end space-x-2">
+          <div class="hidden lg:flex items-center justify-end space-x-2">
             <a
               href="https://bookeo.com/earthenvessels"
               target="_blank"

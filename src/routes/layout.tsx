@@ -30,7 +30,7 @@ export default component$(() => {
       setTimeout(() => {
         const element = document.getElementById(hash.substring(1));
         if (element) {
-          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          element.scrollIntoView({ behavior: 'instant', block: 'start' });
         }
       }, 300);
     }

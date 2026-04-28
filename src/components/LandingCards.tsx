@@ -25,7 +25,7 @@ We acknowledge that earthen vessels is on the traditional unceded territory of t
   return (
     <section class="relative overflow-hidden py-14 md:py-16 shadow-sm">
       
-      <div class="relative max-w-7xl mx-auto px-5 md:px-12">
+      <div class="relative max-w-7xl mx-auto px-5 md:px-8 lg:px-12">
          <h1 class="!text-4xl md:!text-5xl text-center xdxd font-bold mb-10">
             <span class="bg-gradient-to-r from-secondary-800 via-tertiary-600 to-primary-600 bg-clip-text text-transparent">
               All Are Welcome

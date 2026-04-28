@@ -25,7 +25,7 @@ export default function (opts: RenderToStreamOptions) {
     containerAttributes: {
       lang: "en",
       dir: "ltr",
-      class: "motion-safe:scroll-smooth 2xl:text-[20px]",
+      class: "2xl:text-[20px]",
       ...opts.containerAttributes,
     },
   });

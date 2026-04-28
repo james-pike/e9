@@ -89,7 +89,7 @@ export default component$(() => {
                 <Image
                   src="/images/space.jpeg"
                   alt="earthen vessels studio"
-                  class="w-full max-w-lg lg:max-w-none rounded-2xl object-cover shadow-lg"
+                  class="w-full max-w-lg md:max-w-none mx-auto rounded-2xl object-cover shadow-lg"
                 />
               </div>
             </div>
@@ -104,7 +104,7 @@ export default component$(() => {
                 <Image
                   src="/images/a2.webp"
                   alt="Workshops"
-                  class="w-full max-w-lg lg:max-w-none rounded-2xl object-cover shadow-lg"
+                  class="w-full max-w-lg md:max-w-none mx-auto rounded-2xl object-cover shadow-lg"
                 />
               </div>
               <div class="order-2 lg:order-2 self-start">
@@ -149,7 +149,7 @@ export default component$(() => {
                 <Image
                   src="/images/a3.jpg"
                   alt="Clay Experience"
-                  class="w-full max-w-lg lg:max-w-none rounded-2xl object-cover shadow-lg"
+                  class="w-full max-w-lg md:max-w-none mx-auto rounded-2xl object-cover shadow-lg"
                 />
               </div>
             </div>
