@@ -18,13 +18,6 @@ const TEAM_MEMBERS: TeamMember[] = [
   image: "/images/ginger.webp"
 },
   {
-    name: "Michelle",
-    role: "Facilitator",
-    description:
-      "Michelle’s journey with clay began in 2002, and since then, she has immersed herself in the craft—taking countless courses, working as a studio potter, and teaching at Hintonburg Pottery. Now, she brings her passion for clay to earthen vessels as a facilitator. With over 30 years in education as a teacher, guidance counselor, and school principal, Michelle has dedicated her career to supporting growth and well-being. She holds a Master’s Degree in Counselling from the University of Ottawa and a Certificate in Positive Psychology from Wilfrid Laurier University. Her experience leading wellness initiatives in schools, combined with her love of pottery, has led her to earthen vessels, where she shares the joy of clay as a source of grounding, meditation, renewal, and fun.",
-    image: "/images/michelle.webp",
-  },
-  {
     name: "Mary",
     role: "Facilitator",
     description:
@@ -32,11 +25,11 @@ const TEAM_MEMBERS: TeamMember[] = [
     image: "/images/mary.webp",
   },
   {
-    name: "Natalie",
+    name: "Michelle",
     role: "Facilitator",
     description:
-      "Natalie has been working with clay for over ten years. She was first drawn to pottery as a way to find tranquility and reconnect with herself amidst the busyness of raising a family. Through her journey with clay, she has discovered not only a creative outlet but also a deep sense of presence and grounding. Natalie spent 20 years working in the field of mental health. Her work took her beyond Canada, as she lived and served in communities in East Africa and Haiti, providing individual and group support, teaching, and fostering connection. Natalie is excited to bring together her love of pottery and facilitation experience to earthen vessels.",
-    image: "/images/natalie.webp",
+      "Michelle’s journey with clay began in 2002, and since then, she has immersed herself in the craft—taking countless courses, working as a studio potter, and teaching at Hintonburg Pottery. Now, she brings her passion for clay to earthen vessels as a facilitator. With over 30 years in education as a teacher, guidance counselor, and school principal, Michelle has dedicated her career to supporting growth and well-being. She holds a Master’s Degree in Counselling from the University of Ottawa and a Certificate in Positive Psychology from Wilfrid Laurier University. Her experience leading wellness initiatives in schools, combined with her love of pottery, has led her to earthen vessels, where she shares the joy of clay as a source of grounding, meditation, renewal, and fun.",
+    image: "/images/michelle.webp",
   },
   {
     name: "Diane",
@@ -45,13 +38,12 @@ const TEAM_MEMBERS: TeamMember[] = [
       "Diane Black is a Kingston artist who began her training in the field of book illustration and spent many years in the commercial art world. She now has a full time studio practice with a focus on figurative clay sculpture, painting, drawing and teaching. Diane’s work is exhibited in Galleries and shows throughout Ontario and can be found in private collections both in Canada and internationally. She teaches workshops in drawing, painting and sculpture and has coordinated art workshops which attract participants internationally. In addition to her regular studio practice, Diane runs an art program for adults with disabilities.",
     image: "/images/diane.webp",
   },
-
   {
-    name: "Kandis",
+    name: "Sydney",
     role: "Facilitator",
     description:
-      "Kandis is a Naturopathic Doctor and Embodiment Coach with over 15 years of experience guiding patients on their health journeys. Her approach goes beyond treating symptoms or prescribing supplements—she helps individuals uncover the deeper connections between their health and their life patterns, empowering them to create lasting transformations. As a recent addition to the earthen vessels facilitator team, Kandis is excited to bring her expertise in embodiment awareness into the clay workshops. By integrating her knowledge as a naturopathic doctor with her skills in embodiment coaching, she offers a unique and holistic approach to the creative process. Her ability to connect the wisdom of the body with hands-on exploration makes her a strong and insightful facilitator.",
-    image: "/images/kandis.webp",
+      "Sydney’s connection to clay began in childhood, when she took her first pottery class and instantly fell in love with the process. Since then, clay has remained a constant creative outlet—something she returns to for both expression and inspiration.\n\nShe is currently studying Community Design at Dalhousie University, where she explores the relationship between creativity, space, and community. Alongside her studies, she has taught the Kids Clay Camps at Hintonburg Pottery. Sydney now joins earthen vessels studio as a facilitator sharing her love of pottery with kids and helping them build confidence through hands-on making.\n\nBringing a thoughtful and creative approach to her work, Sydney is passionate about creating welcoming spaces where kids can explore, experiment, and enjoy the process of working with clay.",
+    image: "/images/Sydney.jpg",
   },
 ];
 
@@ -156,12 +148,12 @@ With skilled hands and creative  presence, our facilitators bring expertise and 
 
           const byName = (n: string) => TEAM_MEMBERS.find((m) => m.name === n)!;
           const tabletLeft = ["Ginger", "Michelle", "Diane"].map(byName);
-          const tabletRight = ["Mary", "Natalie", "Kandis"].map(byName);
+          const tabletRight = ["Mary", "Sydney"].map(byName);
 
           return (
             <>
-              {/* Mobile / Desktop: CSS multi-column masonry */}
-              <div class="columns-1 sm:columns-2 md:hidden lg:block lg:columns-3 gap-5 space-y-4">
+              {/* Mobile / Desktop: row-flow grid */}
+              <div class="grid grid-cols-1 sm:grid-cols-2 md:hidden lg:grid lg:grid-cols-3 gap-5">
                 {TEAM_MEMBERS.map(renderCard)}
               </div>
               {/* Tablet only: explicit 2-column flex with Mary first in right */}
@@ -178,7 +170,7 @@ With skilled hands and creative  presence, our facilitators bring expertise and 
         })()}
 
 {/* Logo section */}
-<div id="logo" class="scroll-mt-20 mt-5 md:mt-2 flex  p-5 py-6 flex-col bg-white/30 rounded-xl md:flex-row items-center md:items-start gap-6">
+<div id="logo" class="scroll-mt-20 mt-5 flex  p-5 py-6 flex-col bg-white/30 rounded-xl md:flex-row items-center md:items-start gap-6">
   {/* Left: Logo image (1/4 width on md+) */}
   <div class="w-full md:w-1/4 flex justify-center md:justify-start">
     <img
