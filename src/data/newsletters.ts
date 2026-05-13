@@ -3,6 +3,68 @@ import type { Post } from "~/components/types";
 
 export const newsletters: Post[] = [
 {
+  id: "newsletter-8",
+  slug: "april-2026",
+  title: "Something New is Taking Shape…",
+  image: "/images/May.jpeg",
+  excerpt: "If you pass by the studio in the coming weeks, you might catch something new unfolding on our outer wall.",
+  publishDate: new Date("2026-04-30"),
+  tags: ["newsletter", "update"],
+  content: `
+Something New is Taking Shape…
+
+If you pass by the studio in the coming weeks, you might catch something new unfolding on our outer wall. We're welcoming a mural, one that reflects the spirit of the work we do inside. Thoughtful, grounded… and yes, it includes turtles. The symbol of patience, persistence and resilience!
+
+## NEW Clay Pots for Your Plants
+
+We're opening our shop doors on Saturdays and Sundays in May from 12–5 pm (starting May 10th) and we will have artistically designed clay pots for your plants. A variety of sizes and prices. Whether you're welcoming new plants into your home or looking for something special to showcase a loved plant, or a gift for mom, we have a beautiful selection of handmade pots ready for you.
+
+## NEW Summer Camps for Kids
+
+Morning and afternoon week-long camps for kids ages 8-12 are ready to roll! These sessions will be playful, creative, and grounded in hands-on exploration with clay. We will emphasize a mindful approach to creating with clay. Our week-long camps will run throughout the summer. Visit our website for more information, dates and to book. Our class sizes will be small so make sure you get in as soon as you can!
+
+## NEW "I'm a Little Teapot…" Workshop
+
+Ever wanted to make your own teapot? This two evening workshop is a chance to explore form and function, creating a piece that pours warmth into everyday moments. Prior handbuilding experience is recommended.
+
+## Mother's Day: "Mom, Me & Tea" Workshop
+
+Join us for a gentle and meaningful Mother's Day experience. Together, you'll create with clay while sharing tea, an invitation to slow down, connect, and make something lasting together.
+
+## Father's Day: Build a Mug Workshop (June 21)
+
+Come spend time at the table with Dad, shaping clay into something both practical and personal. Make a mug together and add a new memory to share for years to come.
+
+## "That's My Mug" Workshops
+
+A new addition to our offerings—this hand-building class invites you to design a mug that feels unmistakably yours. Through texture, shape, and personal expression, you'll create something that fits just right in your hands. "That's my Mug!"
+
+## New!! Friday Night Wheel Classes: WOW – Way of the Wheel
+
+Our wheels continue to turn on Friday nights. "WOW" is an ongoing invitation to center, focus, and learn the rhythm of the wheel—whether you're just beginning or returning again.
+
+We hope to see you in the studio soon!
+
+And remember, we are still hosting private events for all!
+
+- [May Calendar of Events](https://www.canva.com/design/DAHEnPMGSqw/x2-ZOAC3cIeQDhmEWG4lQQ/view?utm_content=DAHEnPMGSqw&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h6c01bb36b0)
+- [June Calendar of Events](https://www.canva.com/design/DAHIFrXd8Ls/lI_TOEkMqXS5qoGtEDXUCA/view?utm_content=DAHIFrXd8Ls&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=hfcc2acfba1)
+- [July Calendar of Events](https://www.canva.com/design/DAHIFzM3AMA/prH1rxFJm1H_gSPZJRdyLw/view?utm_content=DAHIFzM3AMA&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h6a13d8db34)
+
+We hope one (or more!) of these offerings meets you right where you are.
+
+As always, clay is waiting.
+
+With warmth,
+
+earthen vessels
+  `,
+  draft: false,
+  metadata: {
+    description: "April 30, 2026 Newsletter - Something New is Taking Shape…",
+  },
+},
+{
   id: "newsletter-7",
   slug: "march-2026",
   title: "Happy Spring!",

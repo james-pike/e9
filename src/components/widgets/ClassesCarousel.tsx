@@ -168,7 +168,7 @@ export default component$(() => {
             Monthly Calendars
           </p>
 
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {/* May Calendar */}
             <a
               href="https://www.canva.com/design/DAHEnPMGSqw/x2-ZOAC3cIeQDhmEWG4lQQ/view?utm_content=DAHEnPMGSqw&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h6c01bb36b0"
@@ -197,6 +197,23 @@ export default component$(() => {
                 <img
                   src="/images/June.png"
                   alt="June Calendar"
+                  class="w-full h-full object-cover"
+                  loading="lazy"
+                />
+              </div>
+            </a>
+
+            {/* July Calendar */}
+            <a
+              href="https://www.canva.com/design/DAHIFzM3AMA/prH1rxFJm1H_gSPZJRdyLw/view?utm_content=DAHIFzM3AMA&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h6a13d8db34"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="group backdrop-blur-sm border-2 rounded-2xl transition-all duration-300 ease-in-out shadow-md hover:shadow-xl hover:border-secondary-200 hover:bg-white/45 cursor-pointer bg-white/35 border-primary-200 dark:border-secondary-700 overflow-hidden"
+            >
+              <div class="w-full aspect-video overflow-hidden relative bg-white">
+                <img
+                  src="/images/July.png"
+                  alt="July Calendar"
                   class="w-full h-full object-cover"
                   loading="lazy"
                 />
