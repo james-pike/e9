@@ -11,7 +11,7 @@ export const newsletters: Post[] = [
   publishDate: new Date("2026-06-02"),
   tags: ["newsletter", "update"],
   content: `
-## Studio News: Beautiful New Mural at earthen vessels 💥
+## 💥 Studio News: Beautiful New Mural at earthen vessels
 
 We are delighted to share that a stunning new mural has begun to grace the north wall of earthen vessels. Created by local mural artist [MartinFreundorfer.com](https://MartinFreundorfer.com), this large-scale artwork features a group of turtles basking together on a log floating in the water. Its size and beauty have already begun to draw attention, and we are thrilled to have this unique piece of art become part of our studio home.
 
