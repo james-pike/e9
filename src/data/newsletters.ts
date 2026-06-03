@@ -3,6 +3,66 @@ import type { Post } from "~/components/types";
 
 export const newsletters: Post[] = [
 {
+  id: "newsletter-9",
+  slug: "june-2026",
+  title: "A New Mural & A Summer of Creativity",
+  image: "/images/n2.jpeg",
+  excerpt: "A stunning new mural has begun to grace the north wall of earthen vessels—plus a season full of workshops, camps, and connection.",
+  publishDate: new Date("2026-06-02"),
+  tags: ["newsletter", "update"],
+  content: `
+## Studio News: Beautiful New Mural at earthen vessels 💥
+
+We are delighted to share that a stunning new mural has begun to grace the north wall of earthen vessels. Created by local mural artist [MartinFreundorfer.com](https://MartinFreundorfer.com), this large-scale artwork features a group of turtles basking together on a log floating in the water. Its size and beauty have already begun to draw attention, and we are thrilled to have this unique piece of art become part of our studio home.
+
+The turtles seem perfectly at home beside a place dedicated to creativity, patience, growth, and connection. If you're visiting the studio this summer, be sure to take a moment to stop and enjoy it.
+
+We have a number of opportunities coming up over the next few months, visit our website for more info or to book any of these…
+
+## Father's Day Mug-Making Workshops 🥳
+
+Looking for a meaningful Father's Day experience? Join us for our special Father's Day Mug-Making Workshops taking place Saturday and Sunday on Father's Day weekend. Create a handmade mug together and enjoy a memorable creative experience. Visit our website for details and registration.
+
+## Tea Pot Workshop! 🫖
+
+This week, only 2 spots left! Now's your chance to make a unique conversation pot for tea!!
+
+## Summer Kids' Camps 🐞
+
+Spaces available in our summer Kids' Clay Camps. Our camps are intentionally kept small, with only six participants per group, allowing for plenty of individual attention, creativity, and fun.
+
+Kids will have the opportunity to explore clay through hand-building projects, creative expression, and imaginative play in our supportive studio environment with our youthful potter Sydney!
+
+## Way of the Wheel – Friday Evenings 😀
+
+Interested in trying the pottery wheel? Way of the Wheel is designed for beginners and anyone curious about centering and wheel throwing.
+
+With only four participants per session, each person receives plenty of guidance and individual support, making for a very special learning experience.
+
+## Let us Create a Workshop just for you 🎶
+
+Did you know that we offer customized private workshops?
+
+Our large, open, and airy studio space is ideal for birthdays, team gatherings, family celebrations, community groups, special events, or just spending time together with friends. Workshops can be tailored to suit your group's interests and experience level.
+
+If you are interested in arranging a private workshop, simply send us an email and we will be happy to discuss options and help create an experience that meets your interests!
+
+## Thank you to our Volunteers 💗
+
+We want to give a special shout out to all of our volunteers who really stepped up to help deliver some amazing workshops this year! It's been a pleasure to work with you!
+
+## Wishing You a Wonderful Summer 🌻
+
+Thank you for being part of the earthen vessels community. We wish you a season filled with rest, creativity, connection, and joy.
+
+We hope to see you soon!
+  `,
+  draft: false,
+  metadata: {
+    description: "June 2, 2026 Newsletter - A new turtle mural at earthen vessels plus summer workshops, kids' camps, and more.",
+  },
+},
+{
   id: "newsletter-8",
   slug: "april-2026",
   title: "Something New is Taking Shape…",
