@@ -45,6 +45,13 @@ const TEAM_MEMBERS: TeamMember[] = [
       "Sydney’s connection to clay began in childhood, when she took her first pottery class and instantly fell in love with the process. Since then, clay has remained a constant creative outlet—something she returns to for both expression and inspiration.\n\nShe is currently studying Community Design at Dalhousie University, where she explores the relationship between creativity, space, and community. Alongside her studies, she has taught the Kids Clay Camps at Hintonburg Pottery. Sydney now joins earthen vessels studio as a facilitator sharing her love of pottery with kids and helping them build confidence through hands-on making.\n\nBringing a thoughtful and creative approach to her work, Sydney is passionate about creating welcoming spaces where kids can explore, experiment, and enjoy the process of working with clay.",
     image: "/images/Sydney.jpg",
   },
+  {
+    name: "Natalie",
+    role: "Facilitator",
+    description:
+      "With over 25 years of experience as an artist, educator, and professional dance performer, Natalie brings a unique blend of creativity, craftsmanship, and embodied wisdom to her work with clay.\n\nHer diverse background includes goldsmithing, yoga and dance instruction, international teaching and performance. She has inspired thousands of students through creative and movement-based education, teaching in more than 250 schools throughout the Ottawa region and leading workshops around the world.\n\nAs a certified life coach trained in the La Chiara Method of Energy Medicine and Somatic Healing, Natalie integrates mindfulness, personal transformation, and the mind-body connection into her artistic practice. For her, clay is more than a medium, it is a pathway to creativity, presence, and connection.\n\nThrough her artwork and teaching, Natalie creates a welcoming space where people can explore their creativity, develop new skills, and experience the grounding, transformative power of working with clay.",
+    image: "/images/Natalie.jpg",
+  },
 ];
 
 const ROLE_GRADIENTS: Record<string, string> = {
@@ -79,7 +86,7 @@ With skilled hands and creative  presence, our facilitators bring expertise and 
             <div
               key={member.name}
               class={[
-                "break-inside-avoid group backdrop-blur-sm border-2 rounded-2xl transition-all duration-300 ease-in-out",
+                "break-inside-avoid mb-5 group backdrop-blur-sm border-2 rounded-2xl transition-all duration-300 ease-in-out",
                 "hover:shadow-xl hover:border-secondary-200 hover:bg-white/45",
                 expandedMember.value === member.name
                   ? "bg-white/40 border-secondary-200"
@@ -147,21 +154,27 @@ With skilled hands and creative  presence, our facilitators bring expertise and 
           );
 
           const byName = (n: string) => TEAM_MEMBERS.find((m) => m.name === n)!;
+          // Column-first order so the masonry columns read Ginger / Mary / Michelle across the top row
+          const masonryOrder = ["Ginger", "Diane", "Mary", "Sydney", "Michelle", "Natalie"].map(byName);
           const tabletLeft = ["Ginger", "Michelle", "Diane"].map(byName);
-          const tabletRight = ["Mary", "Sydney"].map(byName);
+          const tabletRight = ["Mary", "Sydney", "Natalie"].map(byName);
 
           return (
             <>
-              {/* Mobile / Desktop: row-flow grid */}
-              <div class="grid grid-cols-1 sm:grid-cols-2 md:hidden lg:grid lg:grid-cols-3 gap-5">
+              {/* Mobile / small: natural order so Mary stays second */}
+              <div class="columns-1 sm:columns-2 md:hidden gap-5">
                 {TEAM_MEMBERS.map(renderCard)}
+              </div>
+              {/* Desktop: masonry columns, column-first order so an expanded card only pushes cards below it in the same column */}
+              <div class="hidden lg:block lg:columns-3 gap-5">
+                {masonryOrder.map(renderCard)}
               </div>
               {/* Tablet only: explicit 2-column flex with Mary first in right */}
               <div class="hidden md:flex lg:hidden gap-5">
-                <div class="flex-1 flex flex-col gap-5" style={{ minWidth: "0" }}>
+                <div class="flex-1 flex flex-col" style={{ minWidth: "0" }}>
                   {tabletLeft.map(renderCard)}
                 </div>
-                <div class="flex-1 flex flex-col gap-5" style={{ minWidth: "0" }}>
+                <div class="flex-1 flex flex-col" style={{ minWidth: "0" }}>
                   {tabletRight.map(renderCard)}
                 </div>
               </div>
