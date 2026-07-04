@@ -169,23 +169,6 @@ export default component$(() => {
           </p>
 
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
-            {/* June Calendar */}
-            <a
-              href="https://www.canva.com/design/DAHIFrXd8Ls/lI_TOEkMqXS5qoGtEDXUCA/view?utm_content=DAHIFrXd8Ls&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=hfcc2acfba1"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="group backdrop-blur-sm border-2 rounded-2xl transition-all duration-300 ease-in-out shadow-md hover:shadow-xl hover:border-secondary-200 hover:bg-white/45 cursor-pointer bg-white/35 border-primary-200 dark:border-secondary-700 overflow-hidden"
-            >
-              <div class="w-full aspect-video overflow-hidden relative bg-white">
-                <img
-                  src="/images/June.png"
-                  alt="June Calendar"
-                  class="w-full h-full object-cover"
-                  loading="lazy"
-                />
-              </div>
-            </a>
-
             {/* July Calendar */}
             <a
               href="https://www.canva.com/design/DAHIFzM3AMA/prH1rxFJm1H_gSPZJRdyLw/view?utm_content=DAHIFzM3AMA&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h6a13d8db34"
@@ -197,6 +180,23 @@ export default component$(() => {
                 <img
                   src="/images/July.png"
                   alt="July Calendar"
+                  class="w-full h-full object-cover"
+                  loading="lazy"
+                />
+              </div>
+            </a>
+
+            {/* August Calendar */}
+            <a
+              href="https://www.canva.com/design/DAHOEYgNB0A/67gmrlOizcyOjwVieS9TfA/view?utm_content=DAHOEYgNB0A&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h51844caf63"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="group backdrop-blur-sm border-2 rounded-2xl transition-all duration-300 ease-in-out shadow-md hover:shadow-xl hover:border-secondary-200 hover:bg-white/45 cursor-pointer bg-white/35 border-primary-200 dark:border-secondary-700 overflow-hidden"
+            >
+              <div class="w-full aspect-video overflow-hidden relative bg-white">
+                <img
+                  src="/images/August.png"
+                  alt="August Calendar"
                   class="w-full h-full object-cover"
                   loading="lazy"
                 />
