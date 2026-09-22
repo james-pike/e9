@@ -3,6 +3,36 @@ import type { Post } from "~/components/types";
 
 export const newsletters: Post[] = [
 {
+  id: "newsletter-10",
+  slug: "fall-2026",
+  title: "Fall Offerings",
+  image: "/images/fall-2026.png",
+  excerpt: "Our Fall offerings — Restorative Yoga & Clay, handbuilding and wheel workshops, a teapot course, and the magical new mural on our studio wall.",
+  publishDate: new Date("2026-09-21"),
+  tags: ["newsletter", "update"],
+  content: `
+## Restorative Yoga & Clay
+
+We still have two spots still available for our Restorative Yoga and Clay evening this Thursday, September 24. We are offering this unique experience again on October 15 and November 19.
+
+## Handbuilding Workshops
+
+Handbuilding workshops will be happening on Tuesday evenings throughout October and November. Make a new mug for sipping tea and getting cozy on these crisp Fall evenings, or maybe a bowl for enjoying a comforting harvest soup!
+
+## Wheel Workshops
+
+Friday evenings join us for Way of the Wheel – in this introductory workshop we trade perfectionism for presence and shift our focus from the final product to the transformative power of the process.
+
+## Teapot Course
+
+Create your own teapot in the gentle rhythm of our zen studio on Saturday mornings in October (building on the 10th and 17th; glazing on the 31st).
+
+And if you haven’t had a chance to see it yet, walk by our studio to see the magical transformation of our outdoor space by local artist and muralist Martin Freundorfer.
+
+We hope to see you soon!
+`,
+},
+{
   id: "newsletter-9",
   slug: "june-2026",
   title: "A New Mural & A Summer of Creativity",
