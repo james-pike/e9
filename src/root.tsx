@@ -50,6 +50,18 @@ export default component$(() => {
         <link rel="preload" href="/images/logo2-cropped.svg" as="image" type="image/svg+xml" />
       </head>
       <body class="bg-primary-50 dark:bg-primary-950 antialiased">
+        {/* Desktop-only gate (preview branch): the mobile/tablet layouts are
+            disabled for this client preview. Shown below the lg breakpoint
+            (<1024px) over everything; desktop (lg+) sees the site normally.
+            Remove this block before merging to production. */}
+        <div class="fixed inset-0 z-[9999] flex flex-col items-center justify-center gap-5 bg-primary-50 px-8 text-center dark:bg-primary-950 lg:hidden">
+          <img src="/images/logo22.svg" alt="earthen vessels" class="h-40 w-auto" width="240" height="160" />
+          <h1 class="font-serif text-2xl text-primary-800 dark:text-primary-100">Best viewed on desktop</h1>
+          <p class="max-w-sm text-primary-700 dark:text-primary-300">
+            This preview is optimized for desktop. Please open it on a larger
+            screen — the mobile &amp; tablet layouts are still being finished.
+          </p>
+        </div>
         <Header />
         <div class="relative md:border-x mx-auto max-w-7xl overflow-x-hidden" style={{ contain: "layout style" }}>
 
