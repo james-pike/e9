@@ -16,9 +16,7 @@ import {
   LuMail,
   LuQuote,
 } from "@qwikest/icons/lucide";
-import RetreatsCarousel from "~/components/widgets/RetreatsCarousel";
 import RetreatsSpotlight from "~/components/widgets/RetreatsSpotlight";
-import RetreatsShowcase from "~/components/widgets/RetreatsShowcase";
 
 // The Touchstones are the real practice that holds a Circle of Trust in the
 // Courage & Renewal tradition. Presented here as an invitation, not a checklist.
@@ -80,30 +78,6 @@ const waysToGather = [
   },
 ];
 
-// The unhurried rhythm of a retreat day.
-const dayRhythm = [
-  {
-    time: "Arriving",
-    text: "We gather slowly with something warm to drink, settle the circle, and set down the noise we carried in.",
-  },
-  {
-    time: "Opening the circle",
-    text: "A few words, a reading, a shared touchstone — the ground rules that make it safe to show up honestly.",
-  },
-  {
-    time: "Time with the clay",
-    text: "Hands to the wheel and the table. The clay becomes a third thing to think alongside while the deeper conversation settles.",
-  },
-  {
-    time: "Reflection & silence",
-    text: "Open questions, honest listening, and room to say nothing at all. Nothing is fixed here; everything is heard.",
-  },
-  {
-    time: "Carrying it home",
-    text: "We close gently, name what we're taking with us, and step back into the world a little more whole.",
-  },
-];
-
 const expectations = [
   {
     label: "A small circle",
@@ -128,21 +102,6 @@ const whoItsFor = [
   { icon: LuHeartHandshake, title: "Helpers & caregivers", text: "Nurses, teachers, clergy, therapists — those who give so much they forget to be filled." },
   { icon: LuUsers, title: "Teams & communities", text: "Groups longing to trust one another more honestly, and to work from a steadier centre." },
   { icon: LuLeaf, title: "Seekers of quiet", text: "Anyone simply weary of the noise, wanting a day that asks nothing but your presence." },
-];
-
-const reflections = [
-  {
-    text: "I came in carrying a hard year. I left lighter, and with a question worth living into. I did not expect a lump of clay to teach me that.",
-    who: "A recent participant",
-  },
-  {
-    text: "The circle asked nothing of me but honesty, and gave back more than I knew to ask for. I have carried the quiet home with me.",
-    who: "A recent participant",
-  },
-  {
-    text: "For one whole day no one needed anything from me. I remembered a self I had quietly set aside. That is a rare gift.",
-    who: "A day-retreat guest",
-  },
 ];
 
 const retreatFaqs = [
@@ -236,39 +195,13 @@ export default component$(() => {
           </div>
         </section>
 
-        {/* ─────────────────  UPCOMING (CAROUSEL)  ───────────────── */}
+        {/* ─────────────────  UPCOMING RETREATS  ───────────────── */}
         <section
           id="upcoming"
           class="relative scroll-mt-24 rounded-3xl border-2 border-primary-100 bg-white/40 p-5 backdrop-blur-sm dark:border-primary-800/50 dark:bg-gray-800/30 md:p-8"
         >
-          <RetreatsCarousel />
-          {/* Soft edge mask so the panel blends into the page */}
-          <div
-            class="pointer-events-none absolute inset-0 rounded-3xl"
-            style={{ boxShadow: "inset 0 0 50px 25px rgba(227, 231, 227, 0.8)" }}
-            aria-hidden="true"
-          ></div>
-        </section>
-
-        {/* ──────────  UPCOMING (ALT #1 · SPOTLIGHT)  ──────────
-            Alternative presentation for the client to compare. */}
-        <section
-          class="relative mt-4 scroll-mt-24 rounded-3xl border-2 border-primary-100 bg-white/40 p-5 backdrop-blur-sm dark:border-primary-800/50 dark:bg-gray-800/30 md:p-8"
-        >
           <RetreatsSpotlight />
-          <div
-            class="pointer-events-none absolute inset-0 rounded-3xl"
-            style={{ boxShadow: "inset 0 0 50px 25px rgba(227, 231, 227, 0.8)" }}
-            aria-hidden="true"
-          ></div>
-        </section>
-
-        {/* ──────────  UPCOMING (ALT #2 · SHOWCASE)  ──────────
-            Alternative presentation for the client to compare. */}
-        <section
-          class="relative mt-4 scroll-mt-24 rounded-3xl border-2 border-primary-100 bg-white/40 p-5 backdrop-blur-sm dark:border-primary-800/50 dark:bg-gray-800/30 md:p-8"
-        >
-          <RetreatsShowcase />
+          {/* Soft edge mask so the panel blends into the page */}
           <div
             class="pointer-events-none absolute inset-0 rounded-3xl"
             style={{ boxShadow: "inset 0 0 50px 25px rgba(227, 231, 227, 0.8)" }}
@@ -320,54 +253,6 @@ export default component$(() => {
           </ul>
         </section>
 
-        {/* ─────────────────  HELD AT OUR STUDIO  ───────────────── */}
-        <section
-          id="at-the-studio"
-          class="scroll-mt-24 grid items-center gap-10 py-14 md:py-20 lg:grid-cols-2 lg:gap-14"
-        >
-          <div class="relative order-2 lg:order-1">
-            <div class="absolute -inset-3 rotate-2 rounded-[2rem] bg-gradient-to-tr from-primary-200/50 to-tertiary-200/50 blur-md" aria-hidden="true"></div>
-            <div class="relative overflow-hidden rounded-[1.75rem] border-2 border-white/70 shadow-xl">
-              <Image
-                src="/images/soulspace.png"
-                alt="Inside the earthen vessels studio"
-                layout="constrained"
-                width={620}
-                height={480}
-                class="h-full w-full object-cover"
-              />
-            </div>
-          </div>
-          <div class="order-1 lg:order-2">
-            <p class="font-serif italic text-lg text-tertiary-600 dark:text-tertiary-300">
-              Held at our studio
-            </p>
-            <h2 class="mt-1 text-3xl font-bold tracking-tight md:text-4.5xl">
-              <span class={headingGradient}>A room made for slowing down</span>
-            </h2>
-            <p class="mt-5 text-lg leading-8 text-primary-700 dark:text-primary-200">
-              Our retreats are hosted right here, in the earthen vessels studio on a
-              quiet street in Ottawa. It is a warm, unhurried room — clay, light, and
-              good company — kept private for the circle so you can settle without an
-              audience.
-            </p>
-            <ul class="mt-7 space-y-3">
-              <li class="flex items-start gap-3 text-primary-700 dark:text-primary-200">
-                <LuMapPin class="mt-0.5 h-5 w-5 flex-shrink-0 text-secondary-500" />
-                <span>36 Rosemount Ave, Ottawa — easy to reach, quietly tucked away.</span>
-              </li>
-              <li class="flex items-start gap-3 text-primary-700 dark:text-primary-200">
-                <LuUsers class="mt-0.5 h-5 w-5 flex-shrink-0 text-secondary-500" />
-                <span>The studio is held privately for your circle — only participants and the facilitator.</span>
-              </li>
-              <li class="flex items-start gap-3 text-primary-700 dark:text-primary-200">
-                <LuSprout class="mt-0.5 h-5 w-5 flex-shrink-0 text-secondary-500" />
-                <span>Everything for the clay is provided. Come with nothing but yourself.</span>
-              </li>
-            </ul>
-          </div>
-        </section>
-
         {/* ─────────────────  THE APPROACH (TOUCHSTONES)  ───────────────── */}
         <section id="approach" class="scroll-mt-24 border-t border-primary-200/70 py-14 dark:border-primary-800/60 md:py-20">
           <div class="max-w-2xl">
@@ -397,37 +282,6 @@ export default component$(() => {
               </li>
             ))}
           </ul>
-        </section>
-
-        {/* ─────────────────  HOW A DAY UNFOLDS  ───────────────── */}
-        <section id="a-day" class="scroll-mt-24 border-t border-primary-200/70 py-14 dark:border-primary-800/60 md:py-20">
-          <div class="max-w-2xl">
-            <p class="font-serif italic text-lg text-tertiary-600 dark:text-tertiary-300">
-              How a day unfolds
-            </p>
-            <h2 class="mt-1 text-3xl font-bold tracking-tight md:text-4.5xl">
-              <span class={headingGradient}>An unhurried rhythm</span>
-            </h2>
-            <p class="mt-5 text-lg leading-8 text-primary-700 dark:text-primary-200">
-              No two retreats are the same, but each day breathes in a familiar
-              rhythm — spacious, gentle, and never rushed.
-            </p>
-          </div>
-
-          {/* Vertical timeline — a connecting line runs behind the numbered badges */}
-          <ol class="relative mt-10 space-y-5 before:absolute before:bottom-6 before:left-[1.375rem] before:top-6 before:w-0.5 before:bg-gradient-to-b before:from-secondary-300 before:via-tertiary-300 before:to-primary-300 before:content-[''] dark:before:from-secondary-700 dark:before:via-tertiary-700 dark:before:to-primary-700">
-            {dayRhythm.map((step, i) => (
-              <li key={step.time} class="relative flex gap-5">
-                <div class="relative z-10 flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-secondary-500 to-secondary-600 font-bold text-white shadow-md ring-4 ring-white dark:ring-gray-900">
-                  {i + 1}
-                </div>
-                <div class={`${card} flex-1 p-6`}>
-                  <h3 class="font-serif text-xl text-primary-800 dark:text-primary-100">{step.time}</h3>
-                  <p class="mt-1 leading-7 text-primary-600 dark:text-primary-300">{step.text}</p>
-                </div>
-              </li>
-            ))}
-          </ol>
         </section>
 
         {/* ─────────────────  WHY CLAY  ───────────────── */}
@@ -519,35 +373,6 @@ export default component$(() => {
           </ul>
         </section>
 
-        {/* ─────────────────  REFLECTIONS  ───────────────── */}
-        <section id="reflections" class="scroll-mt-24 border-t border-primary-200/70 py-14 dark:border-primary-800/60 md:py-20">
-          <div class="max-w-2xl">
-            <p class="font-serif italic text-lg text-tertiary-600 dark:text-tertiary-300">
-              Reflections
-            </p>
-            <h2 class="mt-1 text-3xl font-bold tracking-tight md:text-4.5xl">
-              <span class={headingGradient}>What people carry home</span>
-            </h2>
-          </div>
-
-          <div class="mt-10 grid gap-6 md:grid-cols-3">
-            {reflections.map((r) => (
-              <blockquote
-                key={r.who}
-                class="relative rounded-2xl bg-gradient-to-br from-primary-100/70 to-tertiary-100/50 p-7 dark:from-primary-900/30 dark:to-tertiary-900/20"
-              >
-                <LuQuote class="h-8 w-8 text-secondary-400/70" />
-                <p class="mt-3 font-serif text-lg leading-8 text-primary-800 dark:text-primary-100">
-                  {r.text}
-                </p>
-                <footer class="mt-4 text-sm font-medium text-primary-500 dark:text-primary-400">
-                  — {r.who}
-                </footer>
-              </blockquote>
-            ))}
-          </div>
-        </section>
-
         {/* ─────────────────  FAQ  ───────────────── */}
         <section id="faq" class="scroll-mt-24 border-t border-primary-200/70 py-14 dark:border-primary-800/60 md:py-20">
           <div class="max-w-2xl">
@@ -586,14 +411,14 @@ export default component$(() => {
             </p>
             <div class="relative mt-8 flex flex-wrap justify-center gap-4">
               <a
-                href="/courage-renewal/retreats"
+                href="/retreats/retreats"
                 class="inline-flex items-center gap-2 rounded-xl bg-white px-6 py-3 text-lg font-medium text-primary-800 shadow-md transition-all duration-300 hover:bg-primary-50 hover:shadow-lg"
               >
                 Upcoming retreats
                 <LuCalendarDays class="h-5 w-5" />
               </a>
               <a
-                href="/courage-renewal/register"
+                href="/retreats/register"
                 class="inline-flex items-center gap-2 rounded-xl border border-white/50 px-6 py-3 text-lg font-medium text-white transition-all duration-300 hover:bg-white/10"
               >
                 Ask a question

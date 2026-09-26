@@ -119,7 +119,7 @@ export default component$((props: { compact?: boolean }) => {
             one opens, and we will be in touch.
           </p>
           <a
-            href="/courage-renewal/register"
+            href="/retreats/register"
             class={`mt-6 inline-block ${bookButtonClass}`}
           >
             Ask to be notified
@@ -142,7 +142,7 @@ export default component$((props: { compact?: boolean }) => {
             {retreats.value.map((retreat) => (
               <Carousel.Slide key={retreat.id} class="h-auto">
                 <a
-                  href={retreat.url || "/courage-renewal/register"}
+                  href={retreat.url || "/retreats/register"}
                   target={retreat.url?.startsWith("http") ? "_blank" : undefined}
                   rel={retreat.url?.startsWith("http") ? "noopener noreferrer" : undefined}
                   class="group flex flex-col h-full backdrop-blur-sm border-2 rounded-2xl transition-all duration-300 ease-in-out shadow-md hover:shadow-xl hover:border-secondary-200 hover:bg-white/45 cursor-pointer bg-white/35 border-primary-200 dark:border-secondary-700 overflow-hidden block"
@@ -215,7 +215,7 @@ export default component$((props: { compact?: boolean }) => {
       {/* Footer link to the full list */}
       <div class="text-center mt-8">
         <a
-          href="/courage-renewal/retreats"
+          href="/retreats/retreats"
           class="inline-flex items-center gap-1.5 font-medium text-primary-700 dark:text-primary-200 underline-offset-4 hover:underline"
         >
           See all upcoming retreats

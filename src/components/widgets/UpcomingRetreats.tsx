@@ -64,7 +64,7 @@ export default component$(() => {
               one opens, and we will be in touch.
             </p>
             <a
-              href="/courage-renewal/register"
+              href="/retreats/register"
               class="mt-6 inline-flex items-center gap-2 rounded-xl bg-primary-600 px-6 py-3 font-medium text-white shadow-md transition-all duration-300 hover:bg-primary-700"
             >
               Ask to be notified
@@ -122,7 +122,7 @@ export default component$(() => {
 
                 <div class="mt-auto pt-5">
                   <a
-                    href={retreat.url || "/courage-renewal/register"}
+                    href={retreat.url || "/retreats/register"}
                     target={retreat.url?.startsWith("http") ? "_blank" : undefined}
                     rel={retreat.url?.startsWith("http") ? "noopener noreferrer" : undefined}
                     class="inline-flex items-center gap-2 rounded-xl bg-secondary-500 px-5 py-2.5 font-medium text-white shadow-sm transition-all duration-300 hover:bg-secondary-600 hover:shadow-md"

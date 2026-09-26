@@ -89,7 +89,7 @@ export default component$(() => {
             New dates are added through the seasons. Ask to be told when the next
             one opens, and we will be in touch.
           </p>
-          <a href="/courage-renewal/register" class={`mt-6 ${bookButtonClass}`}>
+          <a href="/retreats/register" class={`mt-6 ${bookButtonClass}`}>
             Ask to be notified
             <LuArrowRight class="h-4 w-4" />
           </a>
@@ -149,7 +149,7 @@ export default component$(() => {
                     </p>
                     <div class="mt-auto pt-6">
                       <a
-                        href={retreat.url || "/courage-renewal/register"}
+                        href={retreat.url || "/retreats/register"}
                         target={retreat.url?.startsWith("http") ? "_blank" : undefined}
                         rel={retreat.url?.startsWith("http") ? "noopener noreferrer" : undefined}
                         class={bookButtonClass}
