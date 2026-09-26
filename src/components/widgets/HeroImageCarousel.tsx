@@ -9,9 +9,9 @@ interface HeroImage {
 // A quiet, auto-rotating set of studio moments for the homepage hero.
 const images: HeroImage[] = [
   { src: '/images/hero.webp', alt: 'A group gathered around the table at earthen vessels', contain: true },
-  { src: '/images/decembergroup.jpeg', alt: 'A workshop group with their creations' },
-  { src: '/images/space.jpeg', alt: 'The earthen vessels studio, set with a circle of chairs' },
-  { src: '/images/g6.jpeg', alt: 'Finished pieces from a workshop' },
+  { src: '/images/decembergroup.webp', alt: 'A workshop group with their creations' },
+  { src: '/images/space.webp', alt: 'The earthen vessels studio, set with a circle of chairs' },
+  { src: '/images/g6.webp', alt: 'Finished pieces from a workshop' },
 ];
 
 // A soft cross-fade carousel: slides are stacked and blended via opacity rather

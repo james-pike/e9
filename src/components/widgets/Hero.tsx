@@ -96,10 +96,10 @@ export default component$(() => {
           the background above and into the section that follows below. */}
       <div class="pointer-events-none relative z-10 w-full">
         <img
-          src="/turtle.png"
+          src="/turtle.webp"
           alt="Hand-painted turtle mural"
-          width="2048"
-          height="1536"
+          width="1920"
+          height="1440"
           class="h-56 w-full object-cover sm:h-64 lg:h-[24rem]"
           style={{
             // Bias the crop upward so the lead turtle's head isn't clipped.
@@ -107,7 +107,7 @@ export default component$(() => {
             maskImage: "linear-gradient(to bottom, transparent 0%, black 18%, black 82%, transparent 100%)",
             WebkitMaskImage: "linear-gradient(to bottom, transparent 0%, black 18%, black 82%, transparent 100%)",
           }}
-          loading="lazy"
+          loading="eager"
           decoding="async"
         />
       </div>
