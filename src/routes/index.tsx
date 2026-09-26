@@ -28,17 +28,10 @@ export default component$(() => {
         {/* ClassesCarousel now fetches its own data client-side */}
         <ClassesCarousel />
 
-        {/* Upcoming retreats — same lighter-shade container as the rest of the cover */}
+        {/* Upcoming retreats — RetreatsSpotlight renders its own card, so no extra
+            wrapper bubble here; just the section spacing. */}
         <div class="relative z-10 p-5 md:px-8 lg:px-16 max-w-7xl md:mx-auto">
-          <div class="relative rounded-3xl border-2 border-primary-100 bg-white/40 p-5 pt-10 backdrop-blur-sm dark:border-primary-800/50 dark:bg-gray-800/30 md:p-8 md:pt-14">
-            <RetreatsSpotlight />
-            {/* Soft edge mask so the panel blends into the page */}
-            <div
-              class="pointer-events-none absolute inset-0 rounded-3xl"
-              style={{ boxShadow: "inset 0 0 50px 25px rgba(227, 231, 227, 0.8)" }}
-              aria-hidden="true"
-            ></div>
-          </div>
+          <RetreatsSpotlight />
         </div>
 
         {/* Book Private & Corporate Events — now below Upcoming Retreats */}

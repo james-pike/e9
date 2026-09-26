@@ -115,13 +115,13 @@ export default component$(() => {
       <div class="p-5 mt-6 lg:mt-8 md:px-8 lg:px-16 max-w-7xl md:mx-auto">
        <div class="relative rounded-3xl border-2 border-primary-100 bg-white/40 p-5 backdrop-blur-sm dark:border-primary-800/50 dark:bg-gray-800/30 md:p-8">
         {/* Header */}
-        <div class="mt-0 mb-8">
+        <div class="mt-0 mb-8 text-center">
           <h2 class="!text-4xl md:!text-4.5xl font-bold">
             <span class="bg-gradient-to-r from-primary-600 via-tertiary-600 to-primary-700 bg-clip-text text-transparent">
               Our Offerings
             </span>
           </h2>
-          <p class="mt-3 text-xl md:text-2xl text-primary-700 dark:text-primary-300 max-w-3xl">
+          <p class="mt-3 text-xl md:text-2xl text-primary-700 dark:text-primary-300 max-w-3xl mx-auto">
             Explore our Classes &amp; Workshops
           </p>
         </div>
