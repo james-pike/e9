@@ -134,7 +134,7 @@ export default component$(() => {
     "rounded-2xl border-2 border-primary-200 dark:border-primary-800/60 bg-white/40 dark:bg-gray-800/40 backdrop-blur-sm shadow-md transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl hover:border-secondary-300 hover:bg-white/60";
 
   return (
-    <div class="relative overflow-hidden bg-gradient-to-b from-secondary-50/70 via-white to-primary-50/60 dark:from-gray-900 dark:via-gray-900 dark:to-gray-950">
+    <div class="relative overflow-hidden">
       {/* Ambient floating shapes, echoing the homepage */}
       <div class="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
         <div class="absolute -top-16 left-[8%] h-72 w-72 rounded-full bg-secondary-200/30 blur-3xl animate-float"></div>
