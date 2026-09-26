@@ -39,6 +39,62 @@ export async function getClasses() {
     ];
   }
 }
+export async function getRetreats() {
+  try {
+    console.log('Attempting to query retreats table...');
+    const result = await turso.execute('SELECT * FROM retreats ORDER BY position ASC');
+    console.log('Query successful, found', result.rows.length, 'retreats');
+    return result.rows;
+  } catch (error) {
+    console.error('Database error:', error);
+    console.log('Falling back to mock retreat data');
+    return [
+      {
+        id: 1,
+        title: 'Let Your Life Speak: An Autumn Circle of Trust',
+        subtitle: 'A weekend retreat in the Courage & Renewal tradition',
+        description:
+          'A quiet weekend of reflection, honest questions, and time with the clay. We gather in a small circle to listen — to our own inner teacher and to one another — with no fixing, no advising, no setting each other straight.',
+        location: 'earthen vessels studio, Ottawa',
+        date: '2025-11-14',
+        dateLabel: 'November 14–16, 2025',
+        image: '/images/space.jpeg',
+        url: 'https://bookeo.com/earthenvessels',
+        isActive: 1,
+        position: 1,
+      },
+      {
+        id: 2,
+        title: 'The Undivided Life: A Day of Renewal for Caregivers',
+        subtitle: 'A one-day retreat for helping professionals',
+        description:
+          'For those who spend their days holding space for others. A slow day to set down the work, return to what matters, and remember why you began.',
+        location: 'earthen vessels studio, Ottawa',
+        date: '2026-01-24',
+        dateLabel: 'January 24, 2026',
+        image: '/images/space.jpeg',
+        url: 'https://bookeo.com/earthenvessels',
+        isActive: 1,
+        position: 2,
+      },
+      {
+        id: 3,
+        title: 'Winter Stillness: An Evening Circle of Trust',
+        subtitle: 'A guided evening of reflection and clay',
+        description:
+          'A gentle way to begin. One quiet evening at the wheel and the table — an introduction to the circle, with time to listen inward and let the clay do its slow work.',
+        location: 'earthen vessels studio, Ottawa',
+        date: '2026-02-20',
+        dateLabel: 'February 20, 2026',
+        image: '/images/space.jpeg',
+        url: 'https://bookeo.com/earthenvessels',
+        isActive: 1,
+        position: 3,
+      },
+    ];
+  }
+}
+
 export async function getClassById(classId: number) {
   try {
     const result = await turso.execute({

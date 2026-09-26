@@ -14,8 +14,13 @@ import {
   LuBuilding2,
   LuPartyPopper,
   LuGift,
-  
+  LuLeaf,
+  LuCompass,
+  LuQuote,
+  LuMail,
   LuCuboid,
+  LuSprout,
+  LuHeartHandshake,
 } from "@qwikest/icons/lucide";
 
 export default component$(() => {
@@ -67,6 +72,7 @@ export default component$(() => {
         items: [
           { text: "Facilitators", href: "/team", icon: LuUsers },
           { text: "Our Logo", href: "/team#logo", icon: LuImage },
+          { text: "Contact", href: "/contact", icon: LuMail },
         ]
       },
       //
@@ -88,10 +94,29 @@ export default component$(() => {
         href: "/offerings",
         items: [
           { text: "Classes & Workshops", href: "/offerings", icon: LuCalendarDays },
-          { text: "Monthly Calendars", href: "/offerings#calendars", icon: LuCalendarDays },
+          // Monthly Calendars hidden for now
+          // { text: "Monthly Calendars", href: "/offerings#calendars", icon: LuCalendarDays },
           { text: "Corporate Events", href: "/offerings#events", icon: LuBuilding2 },
           { text: "Private Events", href: "/offerings#events", icon: LuPartyPopper },
           { text: "Gift Cards", href: "https://bookeo.com/earthenvessels/buyvoucher", icon: LuGift },
+        ],
+      },
+      {
+        text: "Retreats",
+        href: "/courage-renewal",
+        items: [
+          { text: "Overview", href: "/courage-renewal", icon: LuLeaf },
+          { text: "Ways To Gather", href: "/courage-renewal#ways-to-gather", icon: LuUsers },
+          { text: "Upcoming Retreats", href: "/courage-renewal/retreats", icon: LuCalendarDays },
+          { text: "Held At Our Studio", href: "/courage-renewal#at-the-studio", icon: LuBuilding2 },
+          { text: "The Approach", href: "/courage-renewal#approach", icon: LuCompass },
+          { text: "How A Day Unfolds", href: "/courage-renewal#a-day", icon: LuNewspaper },
+          { text: "Why Clay", href: "/courage-renewal#the-clay", icon: LuSprout },
+          { text: "What To Expect", href: "/courage-renewal#what-to-expect", icon: LuEye },
+          { text: "Who It's For", href: "/courage-renewal#who-its-for", icon: LuHeartHandshake },
+          { text: "Reflections", href: "/courage-renewal#reflections", icon: LuQuote },
+          { text: "Questions", href: "/courage-renewal#faq", icon: LuHelpCircle },
+          { text: "Ask About A Retreat", href: "/courage-renewal/register", icon: LuMail },
         ],
       },
          {
@@ -104,9 +129,6 @@ export default component$(() => {
         ],
       },
             { text: "Community", href: "/community" },
-
-    
-      { text: "Contact", href: "/contact" },
     ],
   };
 
@@ -281,16 +303,6 @@ export default component$(() => {
               </div>
             </a>
             <div class="flex items-center lg:hidden gap-2">
-              <a
-                href="https://bookeo.com/earthenvessels"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="hidden md:inline-flex bg-gradient-to-r from-primary-400 via-primary-500 to-primary-400 items-center justify-center px-3 py-1.5 text-sm font-semibold text-white rounded-lg shadow-md hover:shadow-lg transition-all duration-200"
-                role="button"
-                aria-label="Book a workshop"
-              >
-                Book a Class
-              </a>
               <MenuModal />
             </div>
           </div>
@@ -353,7 +365,7 @@ export default component$(() => {
                               pl-4 md:pl-0
                               md:hidden
                               font-medium
-                              md:bg-white/80
+                              md:bg-white/95
                               md:min-w-[200px]
                               drop-shadow-xl
                               py-2
@@ -449,26 +461,6 @@ export default component$(() => {
               </ul>
             ) : null}
           </nav>
-          {/* FIXED: Simplified button container - no more fixed/bottom positioning */}
-          <div class="hidden lg:flex items-center justify-end space-x-2">
-            <a
-              href="https://bookeo.com/earthenvessels"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="bg-gradient-to-r from-primary-400 via-primary-500 to-primary-400 group relative inline-flex items-center justify-center px-3 pl-5 py-2.5 text-xl font-semibold text-white rounded-xl shadow-lg hover:shadow-[0_0_12px_rgba(255,255,255,0.4)] transition-all duration-300 overflow-hidden focus:outline-none focus:ring-2 focus:ring-secondary-600 before:content-[''] before:absolute before:bottom-0 before:left-0 before:h-0.5 before:w-full before:bg-white before:opacity-0 before:transform before:-translate-x-full group-hover:before:opacity-100 group-hover:before:translate-x-0 before:transition-all before:duration-500 hover:scale-102 hover:bg-gradient-to-r hover:from-primary-400 hover:via-primary-400 hover:to-primary-300"
-              role="button"
-              aria-label="Book a workshop"
-            >
-              <span class="relative z-10 flex items-center gap-1">
-                Book a Class
-                <svg class="w-5 h-5 -ml-0.5 transform group-hover:translate-x-0.75 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                </svg>
-              </span>
-              <div class="absolute inset-0 bg-white/15 opacity-0 group-hover:opacity-25 transition-opacity duration-300"></div>
-              <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/45 to-transparent opacity-0 group-hover:opacity-90 transform group-hover:translate-x-full transition-all duration-500"></div>
-            </a>
-          </div>
         </div>
       </header>
     </>

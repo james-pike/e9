@@ -12,10 +12,40 @@ interface Workshop {
   isActive?: boolean;
 }
 
+// TEMP (local dev only): the Turso DB isn't reachable on localhost, so the API
+// returns just the dev sample. These hardcoded renewal events give the offerings
+// list something to display. Remove once real classes load.
+const RENEWAL_EVENTS: Workshop[] = [
+  {
+    id: 'renewal-1',
+    name: 'Let Your Life Speak: An Autumn Circle of Trust',
+    description:
+      'A quiet weekend of reflection, honest questions, and time with the clay. We gather in a small circle to listen — to our own inner teacher and to one another — with no fixing, no advising, no setting each other straight.',
+    image: '/images/space.jpeg',
+    url: 'https://bookeo.com/earthenvessels',
+  },
+  {
+    id: 'renewal-2',
+    name: 'The Undivided Life: A Day of Renewal for Caregivers',
+    description:
+      'For those who spend their days holding space for others. A slow day to set down the work, return to what matters, and remember why you began.',
+    image: '/images/space.jpeg',
+    url: 'https://bookeo.com/earthenvessels',
+  },
+  {
+    id: 'renewal-3',
+    name: 'Winter Stillness: An Evening Circle of Trust',
+    description:
+      'A gentle way to begin. One quiet evening at the wheel and the table — an introduction to the circle, with time to listen inward and let the clay do its slow work.',
+    image: '/images/space.jpeg',
+    url: 'https://bookeo.com/earthenvessels',
+  },
+];
+
 export default component$(() => {
   const workshops = useSignal<Workshop[]>([]);
   const isPlaying = useSignal<boolean>(false);
-  const slidesPerViewSig = useSignal(4); // Start with 4 for desktop to avoid flash
+  const slidesPerViewSig = useSignal(3); // Start with 3 for desktop to avoid flash
   const loc = useLocation();
 
   // Fetch workshops data eagerly on document ready so content doesn't disappear on scroll
@@ -24,7 +54,9 @@ export default component$(() => {
       const response = await fetch('/api/classes');
       if (response.ok) {
         const data = await response.json();
-        workshops.value = data;
+        // TEMP: when only the dev sample comes back (no real DB on localhost),
+        // append the hardcoded renewal events so there's content to view.
+        workshops.value = data.length <= 1 ? [...data, ...RENEWAL_EVENTS] : data;
       }
     } catch (error) {
       console.error('Error fetching classes:', error);
@@ -49,7 +81,7 @@ export default component$(() => {
 
     const updateSlidesPerView = () => {
       if (window.matchMedia('(min-width: 1024px)').matches) {
-        slidesPerViewSig.value = 4; // Desktop and up: 4 per row
+        slidesPerViewSig.value = 3; // Desktop and up: 3 per row
       } else if (window.matchMedia('(min-width: 768px)').matches) {
         slidesPerViewSig.value = 2; // Tablet: 2 per row
       } else {
@@ -80,16 +112,17 @@ export default component$(() => {
 
   return (
     <>
-      <div class="p-5 -mt-1.5 md:px-8 lg:px-16 bg-white/20  max-w-7xl md:mx-auto">
+      <div class="p-5 mt-6 lg:mt-8 md:px-8 lg:px-16 max-w-7xl md:mx-auto">
+       <div class="relative rounded-3xl border-2 border-primary-100 bg-white/40 p-5 backdrop-blur-sm dark:border-primary-800/50 dark:bg-gray-800/30 md:p-8">
         {/* Header */}
-        <div class="text-center mt-14 mb-10">
-          <h1 class="!text-4xl md:!text-4.5xl font-bold mb-4">
+        <div class="mt-0 mb-8">
+          <h2 class="!text-4xl md:!text-4.5xl font-bold">
             <span class="bg-gradient-to-r from-primary-600 via-tertiary-600 to-primary-700 bg-clip-text text-transparent">
               Our Offerings
             </span>
-          </h1>
-          <p class="text-xl md:text-2xl text-primary-700 dark:text-primary-300 max-w-3xl mx-auto">
-            Explore our Classes & Workshops
+          </h2>
+          <p class="mt-3 text-xl md:text-2xl text-primary-700 dark:text-primary-300 max-w-3xl">
+            Explore our Classes &amp; Workshops
           </p>
         </div>
 
@@ -161,9 +194,16 @@ export default component$(() => {
             </div>
           </Carousel.Root>
         )}
+        {/* Soft edge mask so the panel blends into the page */}
+        <div
+          class="pointer-events-none absolute inset-0 rounded-3xl"
+          style={{ boxShadow: "inset 0 0 50px 25px rgba(227, 231, 227, 0.8)" }}
+          aria-hidden="true"
+        ></div>
+        </div>
 
-        {/* Calendar Section */}
-        <div id="calendars" class="text-center mt-12 mb-28 scroll-mt-24">
+        {/* Calendar Section — hidden for now */}
+        <div id="calendars" class="hidden text-center mt-12 mb-28 scroll-mt-24">
           <p class="text-xl md:text-2xl text-primary-700 dark:text-primary-300 max-w-3xl mx-auto mb-8">
             Monthly Calendars
           </p>
@@ -185,74 +225,6 @@ export default component$(() => {
                 />
               </div>
             </a>
-          </div>
-        </div>
-
-        {/* Events Section */}
-        <div id="events" class="text-center mt-12 mb-12">
-          <p class="text-xl md:text-2xl text-primary-700 dark:text-primary-300 max-w-3xl mx-auto mb-8">
-            Book Private & Corporate Events
-          </p>
-
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-            {/* Corporate */}
-            <a
-              href="mailto:hello@earthenvessels.ca"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="group flex flex-col backdrop-blur-sm border-2 rounded-2xl transition-all duration-300 ease-in-out shadow-md hover:shadow-xl hover:border-secondary-200 hover:bg-white/45 cursor-pointer bg-white/35 border-primary-200 dark:border-secondary-700 overflow-hidden"
-            >
-              <div class="h-48 w-full overflow-hidden">
-                <img
-                  src="/images/corporate.webp"
-                  alt="Corporate Events"
-                  class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-                />
-              </div>
-              <div class="flex flex-col flex-1 p-5">
-                <div class="flex items-center justify-between mb-2">
-                  <h3 class="text-lg font-bold text-secondary-900 dark:text-secondary-100 flex-1 pr-3">
-                    Corporate Events
-                  </h3>
-                  <span class={bookButtonClass}>
-                    Book
-                  </span>
-                </div>
-                <p class="text-sm md:text-base text-primary-700 dark:text-primary-300 line-clamp-4">
-                  We offer creative, hands-on clay experiences designed to foster connection, reflection, and collaboration. Perfect for corporate retreats or staff appreciation gatherings. Contact us to discuss what might work for your group.
-                </p>
-              </div>
-            </a>
-
-            {/* Private */}
-      <a
-  href="mailto:hello@earthenvessels.ca"
-  target="_blank"
-  rel="noopener noreferrer"
-  class="group flex flex-col backdrop-blur-sm border-2 rounded-2xl transition-all duration-300 ease-in-out shadow-md hover:shadow-xl hover:border-secondary-200 hover:bg-white/45 cursor-pointer bg-white/35 border-primary-200 dark:border-secondary-700 overflow-hidden"
->
-  <div class="h-48 w-full overflow-hidden">
-    <img
-      src="/images/private.jpeg"
-      alt="Private Events"
-      class="w-full h-full object-cover object-top transition-transform duration-300 group-hover:scale-105"
-    />
-  </div>
-
-  <div class="flex flex-col flex-1 p-5">
-    <div class="flex items-center justify-between mb-2">
-      <h3 class="text-lg font-bold text-secondary-900 dark:text-secondary-100 flex-1 pr-3">
-        Private Events
-      </h3>
-      <span class={bookButtonClass}>
-        Book
-      </span>
-    </div>
-    <p class="text-sm md:text-base text-primary-700 dark:text-primary-300 line-clamp-4">
-      Celebrate life's special moments. Gather around our large creative table to celebrate one another, play, and make something beautiful together. Think about hosting your next birthday, book club, family gathering or evening out with friends at earthen vessels. Contact us to discuss the opportunities!
-    </p>
-  </div>
-</a>
           </div>
         </div>
       </div>

@@ -133,6 +133,7 @@ export default component$(() => {
       subitems: [
         { title: "Facilitators", href: "/team" },
             { title: "Our Logo", href: "/team#logo", badge: null },
+        { title: "Contact", href: "/contact/", badge: null },
 
       ],
     },
@@ -157,7 +158,8 @@ export default component$(() => {
       hasSubmenu: true,
       subitems: [
         { title: "Classes & Workshops", href: "/offerings" },
-                { title: "Monthly Calendars", href: "/offerings#calendars" },
+                // Monthly Calendars hidden for now
+                // { title: "Monthly Calendars", href: "/offerings#calendars" },
                 { title: "Corporate Events", href: "/offerings#events" },
                                 { title: "Private Events", href: "/offerings#private-events" },
 
@@ -179,7 +181,25 @@ export default component$(() => {
     },
         { title: "Community", href: "/community/", badge: null },
 
-        { title: "Contact", href: "/contact/", badge: null },
+    {
+      title: "Who Are Us",
+      href: "/courage-renewal/",
+      hasSubmenu: true,
+      subitems: [
+        { title: "Overview", href: "/courage-renewal/" },
+        { title: "Ways To Gather", href: "/courage-renewal#ways-to-gather" },
+        { title: "Upcoming Retreats", href: "/courage-renewal/retreats/" },
+        { title: "Held At Our Studio", href: "/courage-renewal#at-the-studio" },
+        { title: "The Approach", href: "/courage-renewal#approach" },
+        { title: "How A Day Unfolds", href: "/courage-renewal#a-day" },
+        { title: "Why Clay", href: "/courage-renewal#the-clay" },
+        { title: "What To Expect", href: "/courage-renewal#what-to-expect" },
+        { title: "Who It's For", href: "/courage-renewal#who-its-for" },
+        { title: "Reflections", href: "/courage-renewal#reflections" },
+        { title: "Questions", href: "/courage-renewal#faq" },
+        { title: "Ask About A Retreat", href: "/courage-renewal/register/" },
+      ],
+    },
 
   ];
 

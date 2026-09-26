@@ -49,7 +49,7 @@ export default component$(() => {
 
         <link rel="preload" href="/images/logo2-cropped.svg" as="image" type="image/svg+xml" />
       </head>
-      <body class=" antialiased ">
+      <body class="bg-primary-50 dark:bg-primary-950 antialiased">
         <Header />
         <div class="relative md:border-x mx-auto max-w-7xl overflow-x-hidden" style={{ contain: "layout style" }}>
 

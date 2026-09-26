@@ -16,6 +16,9 @@ module.exports = {
       spacing: {
         '0.75': '0.1875rem', // 3px (since 1rem = 16px, 3/16 = 0.1875rem)
       },
+      maxWidth: {
+        '8xl': '88rem', // 1408px
+      },
         gridTemplateColumns: {
         '7/4': 'repeat(4, minmax(0, 1.75fr))', // Approx 7/4 columns
       },

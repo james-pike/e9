@@ -16,7 +16,7 @@ export default async function handler(req, res) {
     const { table, id, data } = req.body;
 
     // Validate table name
-    const validTables = ['classes', 'faqs', 'images', 'reviews'];
+    const validTables = ['classes', 'faqs', 'images', 'reviews', 'retreats'];
     if (!validTables.includes(table)) {
       return res.status(400).json({ error: 'Invalid table name' });
     }
@@ -42,6 +42,10 @@ export default async function handler(req, res) {
         // Placeholder: Adjust with actual columns from your image
         sql = 'INSERT OR REPLACE INTO reviews (id, rating, comment) VALUES (?, ?, ?)';
         args = [id, data.rating, data.comment];
+        break;
+      case 'retreats':
+        sql = 'INSERT OR REPLACE INTO retreats (id, title, subtitle, description, location, date, dateLabel, image, url, isActive, position) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
+        args = [id, data.title, data.subtitle, data.description, data.location, data.date, data.dateLabel, data.image, data.url, data.isActive, data.position];
         break;
     }
 
