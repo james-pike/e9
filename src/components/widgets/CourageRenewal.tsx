@@ -78,24 +78,6 @@ const waysToGather = [
   },
 ];
 
-const expectations = [
-  {
-    label: "A small circle",
-    text: "Retreats are kept intentionally small, so every person has room to be seen and heard.",
-  },
-  {
-    label: "Time with the clay",
-    text: "The wheel and the table become a third thing — a place to think with your hands while the deeper conversation settles.",
-  },
-  {
-    label: "No experience needed",
-    text: "You need bring nothing but yourself. There is no skill to master here, in clay or in reflection.",
-  },
-  {
-    label: "Nothing shared leaves the room",
-    text: "Confidentiality is held with care. What is spoken in the circle stays in the circle.",
-  },
-];
 
 const whoItsFor = [
   { icon: LuCompass, title: "Anyone at a threshold", text: "A change of season in your work or life, and a decision worth listening your way into." },
@@ -318,31 +300,6 @@ export default component$(() => {
               />
             </div>
           </div>
-        </section>
-
-        {/* ─────────────────  WHAT TO EXPECT  ───────────────── */}
-        <section id="what-to-expect" class="scroll-mt-24 grid items-start gap-10 border-t border-primary-200/70 py-14 dark:border-primary-800/60 md:py-20 lg:grid-cols-2 lg:gap-14">
-          <div class="lg:sticky lg:top-24">
-            <p class="font-serif italic text-lg text-tertiary-600 dark:text-tertiary-300">
-              What to expect
-            </p>
-            <h2 class="mt-1 text-3xl font-bold tracking-tight md:text-4.5xl">
-              <span class={headingGradient}>A few things hold true</span>
-            </h2>
-            <p class="mt-5 max-w-md text-lg leading-8 text-primary-700 dark:text-primary-200">
-              However a retreat is shaped, these are the promises we make to every
-              circle that gathers here.
-            </p>
-          </div>
-
-          <dl class="space-y-4">
-            {expectations.map((e) => (
-              <div key={e.label} class={`${card} p-6`}>
-                <dt class="font-serif text-xl text-primary-800 dark:text-primary-100">{e.label}</dt>
-                <dd class="mt-1.5 leading-7 text-primary-600 dark:text-primary-300">{e.text}</dd>
-              </div>
-            ))}
-          </dl>
         </section>
 
         {/* ─────────────────  WHO IT'S FOR  ───────────────── */}

@@ -81,7 +81,6 @@ export default component$(() => {
         href: "/about",
         items: [
           { text: "Our Space", href: "/about", icon: LuHome },
-          { text: "What To Expect", href: "/about#what-to-expect", icon: LuEye },
                     { text: "Benefits Of Clay", href: "/about#benefits-of-clay", icon: LuCuboid },
 
           { text: "Newsletter", href: "/newsletter", icon: LuNewspaper },
@@ -110,7 +109,6 @@ export default component$(() => {
           { text: "Upcoming Retreats", href: "/retreats/retreats", icon: LuCalendarDays },
           { text: "The Approach", href: "/retreats#approach", icon: LuCompass },
           { text: "Why Clay", href: "/retreats#the-clay", icon: LuSprout },
-          { text: "What To Expect", href: "/retreats#what-to-expect", icon: LuEye },
           { text: "Who It's For", href: "/retreats#who-its-for", icon: LuHeartHandshake },
           { text: "Questions", href: "/retreats#faq", icon: LuHelpCircle },
           { text: "Ask About A Retreat", href: "/retreats/register", icon: LuMail },

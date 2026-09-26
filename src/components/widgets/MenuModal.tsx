@@ -143,7 +143,6 @@ export default component$(() => {
       hasSubmenu: true,
       subitems: [
         { title: "Our Space", href: "/about" },
-        { title: "What To Expect", href: "/about#what-to-expect" },
                 { title: "Benefits Of Clay", href: "/about#benefits-of-clay" },
 
         { title: "Newsletter", href: "/newsletter" },
@@ -191,7 +190,6 @@ export default component$(() => {
         { title: "Upcoming Retreats", href: "/retreats/retreats/" },
         { title: "The Approach", href: "/retreats#approach" },
         { title: "Why Clay", href: "/retreats#the-clay" },
-        { title: "What To Expect", href: "/retreats#what-to-expect" },
         { title: "Who It's For", href: "/retreats#who-its-for" },
         { title: "Questions", href: "/retreats#faq" },
         { title: "Ask About A Retreat", href: "/retreats/register/" },
