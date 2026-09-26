@@ -12,7 +12,6 @@ import {
   LuLeaf,
   LuBuilding2,
   LuCompass,
-  LuMapPin,
   LuMail,
   LuQuote,
 } from "@qwikest/icons/lucide";
